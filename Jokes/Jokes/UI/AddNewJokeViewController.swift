@@ -10,9 +10,11 @@ import UIKit
 
 class AddNewJokeViewController: UIViewController {
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+     
         // Do any additional setup after loading the view.
     }
 
@@ -20,6 +22,12 @@ class AddNewJokeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func cancelAddJoke(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
     
 
     /*

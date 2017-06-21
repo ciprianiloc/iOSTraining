@@ -28,7 +28,7 @@ class HomeViewController: UIViewController {
 
     @IBAction func allJokesAction(_ sender: Any) {
         let allJokesStoryboard = UIStoryboard(name: "AllJokes", bundle: nil)
-        let allJokesVC = allJokesStoryboard.instantiateViewController(withIdentifier: "AllJokesViewController")
+        let allJokesVC = allJokesStoryboard.instantiateViewController(withIdentifier: "AllJokesTableViewController")
         self.navigationController?.pushViewController(allJokesVC, animated: true)
     }
     
