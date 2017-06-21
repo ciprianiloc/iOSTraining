@@ -1,5 +1,5 @@
 //
-//  AllJokesViewController.swift
+//  AddNewJokeViewController.swift
 //  Jokes
 //
 //  Created by Cristian Banarescu on 6/21/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AllJokesViewController: UIViewController {
+class AddNewJokeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

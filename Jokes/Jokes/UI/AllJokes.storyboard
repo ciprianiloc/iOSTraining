@@ -9,32 +9,78 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--All Jokes View Controller-->
-        <scene sceneID="xvu-QQ-ZwA">
+        <!--All jokes-->
+        <scene sceneID="Yj2-fc-bAU">
             <objects>
-                <viewController restorationIdentifier="AllJokesViewController" storyboardIdentifier="AllJokesViewController" id="cAX-vg-t2h" customClass="AllJokesViewController" customModule="Jokes" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController restorationIdentifier="AllJokesViewController" storyboardIdentifier="AllJokesViewController" id="8Hi-s7-Fiv" customClass="AllJokesTableViewController" customModule="Jokes" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="kz3-Wi-kLn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="65" id="5jW-od-d90">
+                                <rect key="frame" x="0.0" y="28" width="375" height="65"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5jW-od-d90" id="ues-xt-ciR">
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="65"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8Hi-s7-Fiv" id="KWd-Xd-46N"/>
+                            <outlet property="delegate" destination="8Hi-s7-Fiv" id="hVu-cV-GDK"/>
+                        </connections>
+                    </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="All jokes" id="QgI-Ys-FMd">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="cjr-7Z-cd9">
+                            <connections>
+                                <action selector="addNewJokeButton:" destination="8Hi-s7-Fiv" id="JMs-Ap-2X0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JeK-Uh-29n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1052" y="-539"/>
+        </scene>
+        <!--Add New Joke View Controller-->
+        <scene sceneID="V6B-hd-dMv">
+            <objects>
+                <viewController restorationIdentifier="AddNewJokeViewController" storyboardIdentifier="AddNewJokeViewController" id="sZ9-i7-3S3" customClass="AddNewJokeViewController" customModule="Jokes" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="T1x-GF-6Vy"/>
-                        <viewControllerLayoutGuide type="bottom" id="GZg-Zz-sTf"/>
+                        <viewControllerLayoutGuide type="top" id="bVH-dn-B8p"/>
+                        <viewControllerLayoutGuide type="bottom" id="jm6-vF-HTL"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="5FA-Jw-7bt">
+                    <view key="view" contentMode="scaleToFill" id="TQa-xf-Be0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="All Jokes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3j-5I-iQw">
-                                <rect key="frame" x="98" y="185" width="179" height="74"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n9X-vn-g4G">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Add new Joke" id="maB-f0-VDs">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" style="done" id="ahT-CE-sqn">
+                                            <color key="tintColor" red="0.61306313451776651" green="0.33682382693925017" blue="0.30361715755781293" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Save" id="QL8-TB-0O6">
+                                            <color key="tintColor" red="0.61306313451776651" green="0.33682382693925017" blue="0.30361715755781293" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" red="0.61306313451776651" green="0.61306313451776651" blue="0.61306313451776651" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="y3c-KM-UOE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KfV-LZ-SkT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="21.600000000000001" y="41.829085457271368"/>
+            <point key="canvasLocation" x="-31.199999999999999" y="-481.70914542728639"/>
         </scene>
     </scenes>
 </document>
