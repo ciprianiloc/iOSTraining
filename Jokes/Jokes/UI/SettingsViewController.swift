@@ -40,10 +40,21 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         fontLabel.text = fontNames[row]
+        fontLabel?.font = UIFont(name: fontNames[row], size: 16)
     }
     
-
-    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var pickerLabel = view as? UILabel;
+        if(pickerLabel == nil) {
+            pickerLabel = UILabel()
+            
+            pickerLabel?.font = UIFont(name: fontNames[row], size: 16)
+            pickerLabel?.textAlignment = NSTextAlignment.center
+        }
+        pickerLabel?.text = fontNames[row]
+        
+        return pickerLabel!
+    }
   
    
     
