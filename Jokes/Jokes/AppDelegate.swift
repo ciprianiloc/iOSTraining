@@ -20,6 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    
+    
+    //TEST
+    
+    
 
     // MARK: - Core Data stack
     
