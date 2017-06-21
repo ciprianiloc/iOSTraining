@@ -8,16 +8,42 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    
+    @IBOutlet weak var pickerView: UIPickerView!
+    
+    
+    
+    @IBOutlet weak var fontLabel: UILabel!
+    
+  
+    let fonts = ["Arial", "Calibri", "Palatino", "Times New Roman", "Verdana"]
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return fonts[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return fonts.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        fontLabel.text = fonts[row]
+    }
+    
 
- @IBOutlet weak var fontPickerView: UIPickerView!
     
-    @IBOutlet weak var colorView: UIView!
+  
+   
     
-    @IBOutlet weak var fontSizeSlider: UISlider!
+    
     
     @IBAction func cancelButton(_ sender: Any) {
-        //self.dismiss(animated: true, completion: nil)
        
         self.navigationController?.popViewController(animated: true)
 
@@ -26,13 +52,20 @@ class SettingsViewController: UIViewController {
         
         self.navigationController?.popViewController(animated: true)
         
-        //let defaults = UserDefaults.standard
+//        let defaults = UserDefaults.standard
+//        defaults.set(fontPickerView, forKey: "Font")
+//        defaults.set(fontSizeSlider, forKey: "FontSize")
+//        defaults.set(colorView, forKey: "FontColor")
+//        defaults.set(imageView, forKey: "BackgroundImage")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
