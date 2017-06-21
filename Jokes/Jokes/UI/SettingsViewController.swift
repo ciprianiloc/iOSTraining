@@ -10,6 +10,25 @@ import UIKit
 
 class SettingsViewController: UIViewController {
 
+ @IBOutlet weak var fontPickerView: UIPickerView!
+    
+    @IBOutlet weak var colorView: UIView!
+    
+    @IBOutlet weak var fontSizeSlider: UISlider!
+    
+    @IBAction func cancelButton(_ sender: Any) {
+        //self.dismiss(animated: true, completion: nil)
+       
+        self.navigationController?.popViewController(animated: true)
+
+    }
+    @IBAction func saveButton(_ sender: Any) {
+        
+        self.navigationController?.popViewController(animated: true)
+        
+        //let defaults = UserDefaults.standard
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
