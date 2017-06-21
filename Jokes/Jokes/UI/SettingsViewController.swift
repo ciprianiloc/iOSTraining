@@ -18,22 +18,28 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var fontLabel: UILabel!
     
   
-    let fonts = ["Arial", "Calibri", "Palatino", "Times New Roman", "Verdana"]
+    
+   var fontFamilies = UIFont.familyNames
+    var fontNames = [String]()
+    var fontSizes = [String]()
+    
+   
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return fonts[row]
+        
+        return fontNames[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return fonts.count
+        return fontNames.count
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        fontLabel.text = fonts[row]
+        fontLabel.text = fontNames[row]
     }
     
 
@@ -63,7 +69,11 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        for familyName in fontFamilies {
+            //let names = UIFont.fontNames(forFamilyName: familyName )
+           
+            fontNames.append(familyName)
+        }
         
         
     }

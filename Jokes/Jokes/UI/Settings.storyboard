@@ -74,7 +74,7 @@
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.76862745099999996" green="0.76862745099999996" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="1" green="0.73866251924035131" blue="0.63061186708028472" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="phP-2b-ir0">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="kdu-yB-a6e">
@@ -90,6 +90,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="fontLabel" destination="QEy-xe-abb" id="Fwi-Ka-Ryt"/>
+                        <outlet property="pickerView" destination="fgl-cd-LwW" id="FAv-ol-M0Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hcl-4U-OOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
