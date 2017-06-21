@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA5158491EFA6C6E00C4EDE5 /* AllJokes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5158481EFA6C6E00C4EDE5 /* AllJokes.storyboard */; };
+		CA51584B1EFA6D0E00C4EDE5 /* AllJokesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51584A1EFA6D0E00C4EDE5 /* AllJokesViewController.swift */; };
 		F66BA2601EFA49F600463AB6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66BA25C1EFA49F600463AB6 /* HomeViewController.swift */; };
 		F66BA2611EFA49F600463AB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F66BA25D1EFA49F600463AB6 /* Main.storyboard */; };
 		F66BA2621EFA49F600463AB6 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F66BA25E1EFA49F600463AB6 /* Settings.storyboard */; };
@@ -41,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA5158481EFA6C6E00C4EDE5 /* AllJokes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AllJokes.storyboard; sourceTree = "<group>"; };
+		CA51584A1EFA6D0E00C4EDE5 /* AllJokesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllJokesViewController.swift; sourceTree = "<group>"; };
 		F66BA25C1EFA49F600463AB6 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F66BA25D1EFA49F600463AB6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F66BA25E1EFA49F600463AB6 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -119,6 +123,8 @@
 				F66BA25D1EFA49F600463AB6 /* Main.storyboard */,
 				F66BA25E1EFA49F600463AB6 /* Settings.storyboard */,
 				F66BA25F1EFA49F600463AB6 /* SettingsViewController.swift */,
+				CA5158481EFA6C6E00C4EDE5 /* AllJokes.storyboard */,
+				CA51584A1EFA6D0E00C4EDE5 /* AllJokesViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -299,6 +305,7 @@
 				F6840DE91EF94B5D0036F317 /* LaunchScreen.storyboard in Resources */,
 				F66BA2611EFA49F600463AB6 /* Main.storyboard in Resources */,
 				F6840DE61EF94B5D0036F317 /* Assets.xcassets in Resources */,
+				CA5158491EFA6C6E00C4EDE5 /* AllJokes.storyboard in Resources */,
 				F66BA2621EFA49F600463AB6 /* Settings.storyboard in Resources */,
 				F66BA2681EFA4A8300463AB6 /* JokeURLs.plist in Resources */,
 			);
@@ -328,6 +335,7 @@
 				F66BA2601EFA49F600463AB6 /* HomeViewController.swift in Sources */,
 				F66BA26A1EFA4B1000463AB6 /* DataManager.swift in Sources */,
 				F66BA2661EFA4A3900463AB6 /* Jokes.xcdatamodeld in Sources */,
+				CA51584B1EFA6D0E00C4EDE5 /* AllJokesViewController.swift in Sources */,
 				F66BA26C1EFA4B4100463AB6 /* RequestManager.swift in Sources */,
 				F66BA2711EFA4BAC00463AB6 /* Constants.swift in Sources */,
 				F6840DDC1EF94B5D0036F317 /* AppDelegate.swift in Sources */,
