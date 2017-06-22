@@ -11,9 +11,6 @@ import UIKit
 class AllJokesTableViewController: UITableViewController {
 
     
- 
-    
-    
     
     var myJokes : [String] = [String]()
     
@@ -23,8 +20,11 @@ class AllJokesTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewJokeButton(_:)))
         
-        for i in 1...10{
+        
+        
+        for i in 1...25{
             myJokes.append("Joke number \(i)")
         }
  
@@ -60,16 +60,12 @@ class AllJokesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
         
         let joke = myJokes[indexPath.row]
-        
-//        cell.textLabel?.text = joke
-//       // cell.imageView?.image = imageForRating(rating: Int(arc4random_uniform(6))
-//        cell.imageView?.image = imageForRating(rating: 3)
-//        
-//        
+      
+  
         cell.jokeLabel.text = joke
         cell.jokeImageView.image = imageForRating(rating: Int(arc4random_uniform(6)))
         
-        
+   
         
         return cell
     }
@@ -78,6 +74,8 @@ class AllJokesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailView = storyboard?.instantiateViewController(withIdentifier: "DetailJoke") as? DetailJokeViewController
         detailView?.selectedJoke = myJokes[indexPath.row]
+       
+    
         navigationController?.pushViewController(detailView!, animated: true)
     }
     
