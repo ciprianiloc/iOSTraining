@@ -10,8 +10,8 @@ import UIKit
 
 class AllJokesTableViewController: UITableViewController {
 
-    @IBOutlet weak var jokeLabel: UILabel!
-   
+    
+ 
     
     
     
@@ -57,12 +57,19 @@ class AllJokesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "JokesCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
         
         let joke = myJokes[indexPath.row]
         
-        cell.textLabel?.text = joke
-        cell.imageView?.image = imageForRating(rating: Int(arc4random_uniform(6)))
+//        cell.textLabel?.text = joke
+//       // cell.imageView?.image = imageForRating(rating: Int(arc4random_uniform(6))
+//        cell.imageView?.image = imageForRating(rating: 3)
+//        
+//        
+        cell.jokeLabel.text = joke
+        cell.jokeImageView.image = imageForRating(rating: Int(arc4random_uniform(6)))
+        
+        
         
         return cell
     }
