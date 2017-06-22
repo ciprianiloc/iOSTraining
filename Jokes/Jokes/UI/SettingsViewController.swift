@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIPopoverPresentationControllerDelegate {
     
     
     @IBOutlet weak var pickerView: UIPickerView!
@@ -18,6 +18,23 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var fontSizeLabel: UILabel!
   
     @IBOutlet weak var fontSlider: UISlider!
+    
+    @IBOutlet weak var fontColor: UIView!
+    
+    @IBAction func changeFontColor(_ sender: Any) {
+        let popoverVC = storyboard?.instantiateViewController(withIdentifier: "colorPickerPopover") as! ColorPickerViewController
+        popoverVC.modalPresentationStyle = .popover
+        popoverVC.preferredContentSize = CGSize(width: 284, height: 446)
+        if let popoverController = popoverVC.popoverPresentationController {
+            popoverController.sourceView = sender as? UIView
+            popoverController.sourceRect = CGRect(x: 0, y: 0, width: 85, height: 30)
+            popoverController.permittedArrowDirections = .any
+            popoverController.delegate = self
+            popoverVC.delegate = self
+        }
+        present(popoverVC, animated: true, completion: nil)
+    }
+    
     
     @IBAction func changeFontSize(_ sender: AnyObject) {
 
@@ -31,6 +48,18 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     var fontSizes = [String]()
     
    
+    // Override the iPhone behavior that presents a popover as fullscreen
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        // Return no adaptive presentation style, use default presentation behaviour
+        return .none
+    }
+
+    
+    func setLabelColor (_ color: UIColor) {
+       // fontColor.setTitleColor(color, for:UIControlState())
+        self.fontColor.backgroundColor = color
+    }
+
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -85,6 +114,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         // Do any additional setup after loading the view.
         for familyName in fontFamilies {
