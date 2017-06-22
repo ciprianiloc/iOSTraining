@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA3734181EFBD79000AE4408 /* DetailJokeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3734171EFBD79000AE4408 /* DetailJokeViewController.swift */; };
 		CA5158491EFA6C6E00C4EDE5 /* AllJokes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5158481EFA6C6E00C4EDE5 /* AllJokes.storyboard */; };
 		CA51584F1EFA8FDF00C4EDE5 /* AllJokesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51584E1EFA8FDF00C4EDE5 /* AllJokesTableViewController.swift */; };
 		CA5158511EFA909B00C4EDE5 /* AddNewJokeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5158501EFA909B00C4EDE5 /* AddNewJokeViewController.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA3734171EFBD79000AE4408 /* DetailJokeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailJokeViewController.swift; sourceTree = "<group>"; };
 		CA5158481EFA6C6E00C4EDE5 /* AllJokes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AllJokes.storyboard; sourceTree = "<group>"; };
 		CA51584E1EFA8FDF00C4EDE5 /* AllJokesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllJokesTableViewController.swift; sourceTree = "<group>"; };
 		CA5158501EFA909B00C4EDE5 /* AddNewJokeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewJokeViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				CA5158481EFA6C6E00C4EDE5 /* AllJokes.storyboard */,
 				CA51584E1EFA8FDF00C4EDE5 /* AllJokesTableViewController.swift */,
 				CA5158501EFA909B00C4EDE5 /* AddNewJokeViewController.swift */,
+				CA3734171EFBD79000AE4408 /* DetailJokeViewController.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				F66BA26C1EFA4B4100463AB6 /* RequestManager.swift in Sources */,
 				F66BA2711EFA4BAC00463AB6 /* Constants.swift in Sources */,
 				F6840DDC1EF94B5D0036F317 /* AppDelegate.swift in Sources */,
+				CA3734181EFBD79000AE4408 /* DetailJokeViewController.swift in Sources */,
 				F66BA2631EFA49F600463AB6 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

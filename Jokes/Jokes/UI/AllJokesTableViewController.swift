@@ -10,8 +10,25 @@ import UIKit
 
 class AllJokesTableViewController: UITableViewController {
 
+    @IBOutlet weak var jokeLabel: UILabel!
+   
+    
+    
+    
+    var myJokes : [String] = [String]()
+    
+   // @IBOutlet weak var jokeNameLabel: UILabel!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        for i in 1...10{
+            myJokes.append("Joke number \(i)")
+        }
+ 
+    
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -29,13 +46,34 @@ class AllJokesTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return myJokes.count
     }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "JokesCell", for: indexPath)
+        
+        let joke = myJokes[indexPath.row]
+        
+        cell.textLabel?.text = joke
+        cell.imageView?.image = imageForRating(rating: Int(arc4random_uniform(6)))
+        
+        return cell
+    }
+    
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailView = storyboard?.instantiateViewController(withIdentifier: "DetailJoke") as? DetailJokeViewController
+        detailView?.selectedJoke = myJokes[indexPath.row]
+        navigationController?.pushViewController(detailView!, animated: true)
+    }
+    
     
     @IBAction func addNewJokeButton(_ sender: Any) {
         let addJokeStoryboard = UIStoryboard(name: "AllJokes", bundle: nil)
@@ -43,61 +81,21 @@ class AllJokesTableViewController: UITableViewController {
         self.present(addJokeVC, animated: true, completion: nil)
     }
     
-    
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
+    func imageForRating(rating : Int) -> UIImage{
+        switch rating {
+        case 1:
+            return UIImage(named: "1StarSmall")!
+        case 2:
+            return UIImage(named: "2StarsSmall")!
+        case 3:
+            return UIImage(named: "3StarsSmall")!
+        case 4:
+            return UIImage(named: "4StarsSmall")!
+        case 5:
+            return UIImage(named: "5StarsSmall")!
+        default:
+            return UIImage(named: "1StarSmall")!
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+}
 
 }
