@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
   
@@ -24,6 +25,8 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
         super.viewDidLoad()
         
         pickerData = ["category1","category2","category3"]
+       
+        
      
         // Do any additional setup after loading the view.
     }
@@ -52,11 +55,6 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
     
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-       
-//        if let newCategory = newCategoryTextField.text{
-//            pickerData[row] = newCategory
-//        }
-        
         return pickerData[row]
     }
     
@@ -68,8 +66,9 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
 
     
     @IBAction func addNewCategory(_ sender: UIButton) {
-        if let newCategory = newCategoryTextField.text{
-            pickerData.append(newCategory)
+        let newCategory = newCategoryTextField.text
+        if newCategory != ""{
+            pickerData.append(newCategory!)
             jokePickerView.reloadAllComponents()
         }
     }
