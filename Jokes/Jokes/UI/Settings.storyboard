@@ -29,7 +29,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Font size:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eyn-y8-97v">
-                                <rect key="frame" x="16" y="303" width="118" height="21"/>
+                                <rect key="frame" x="16" y="303" width="163" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -47,9 +47,12 @@
                                     <outlet property="delegate" destination="3SP-eL-Czw" id="5pm-Qx-qhh"/>
                                 </connections>
                             </pickerView>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="Zva-Kh-YF6">
-                                <rect key="frame" x="149" y="294" width="212" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="17" minValue="10" maxValue="35" translatesAutoresizingMaskIntoConstraints="NO" id="Zva-Kh-YF6">
+                                <rect key="frame" x="185" y="294" width="176" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="changeFontSize:" destination="3SP-eL-Czw" eventType="valueChanged" id="KsM-jn-rQM"/>
+                                </connections>
                             </slider>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qan-7D-h8K">
                                 <rect key="frame" x="16" y="344" width="63" height="40"/>
@@ -90,6 +93,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="fontLabel" destination="QEy-xe-abb" id="Fwi-Ka-Ryt"/>
+                        <outlet property="fontSizeLabel" destination="Eyn-y8-97v" id="hHL-MQ-9r2"/>
+                        <outlet property="fontSlider" destination="Zva-Kh-YF6" id="PRQ-kn-fXW"/>
                         <outlet property="pickerView" destination="fgl-cd-LwW" id="FAv-ol-M0Y"/>
                     </connections>
                 </viewController>

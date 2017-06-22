@@ -13,11 +13,18 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBOutlet weak var pickerView: UIPickerView!
     
-    
-    
     @IBOutlet weak var fontLabel: UILabel!
     
+    @IBOutlet weak var fontSizeLabel: UILabel!
   
+    @IBOutlet weak var fontSlider: UISlider!
+    
+    @IBAction func changeFontSize(_ sender: AnyObject) {
+
+        let senderValue = CGFloat(fontSlider.value)
+        self.fontSizeLabel.text = "Font size: " + "\(Int(senderValue))"
+        fontSizeLabel?.font = UIFont(name: (fontSizeLabel?.font.fontName)!, size:senderValue)
+    }
     
    var fontFamilies = UIFont.familyNames
     var fontNames = [String]()
@@ -39,7 +46,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        fontLabel.text = fontNames[row]
+        //fontLabel.text = fontNames[row]
         fontLabel?.font = UIFont(name: fontNames[row], size: 16)
     }
     
