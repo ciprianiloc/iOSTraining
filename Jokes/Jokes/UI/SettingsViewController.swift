@@ -8,8 +8,9 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIPopoverPresentationControllerDelegate {
+class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIPopoverPresentationControllerDelegate, UIImagePickerControllerDelegate {
     
+    let imagePicker = UIImagePickerController()
     
     @IBOutlet weak var pickerView: UIPickerView!
     
@@ -20,6 +21,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var fontSlider: UISlider!
     
     @IBOutlet weak var fontColor: UIView!
+    
+    @IBOutlet weak var backgroundImage: UIImageView!
     
     @IBAction func changeFontColor(_ sender: Any) {
         let popoverVC = storyboard?.instantiateViewController(withIdentifier: "colorPickerPopover") as! ColorPickerViewController
@@ -42,6 +45,39 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         self.fontSizeLabel.text = "Font size: " + "\(Int(senderValue))"
         fontSizeLabel?.font = UIFont(name: (fontSizeLabel?.font.fontName)!, size:senderValue)
     }
+    
+    @IBAction func changeBackgroungImage(_ sender: Any) {
+        
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        
+        present(imagePicker, animated: true, completion: nil)
+        
+    }
+    
+
+    
+    // MARK: - UIImagePickerControllerDelegate Methods
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            backgroundImage.contentMode = .scaleAspectFit
+            backgroundImage.image = pickedImage
+        }
+        
+    
+        dismiss(animated: true, completion: nil)
+
+    }
+
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
     
    var fontFamilies = UIFont.familyNames
     var fontNames = [String]()
@@ -115,7 +151,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
 
         // Do any additional setup after loading the view.
         for familyName in fontFamilies {

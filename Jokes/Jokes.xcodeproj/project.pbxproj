@@ -18,6 +18,7 @@
 		667594421EFBEE2900E68F9E /* palette2.png in Resources */ = {isa = PBXBuildFile; fileRef = 667594411EFBEE2900E68F9E /* palette2.png */; };
 		667594431EFBF26E00E68F9E /* palette2.png in Resources */ = {isa = PBXBuildFile; fileRef = 667594411EFBEE2900E68F9E /* palette2.png */; };
 		667594441EFBF26F00E68F9E /* palette2.png in Resources */ = {isa = PBXBuildFile; fileRef = 667594411EFBEE2900E68F9E /* palette2.png */; };
+		667594461EFC0CF200E68F9E /* images.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 667594451EFC0CF200E68F9E /* images.jpeg */; };
 		CA5158491EFA6C6E00C4EDE5 /* AllJokes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5158481EFA6C6E00C4EDE5 /* AllJokes.storyboard */; };
 		CA51584F1EFA8FDF00C4EDE5 /* AllJokesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA51584E1EFA8FDF00C4EDE5 /* AllJokesTableViewController.swift */; };
 		CA5158511EFA909B00C4EDE5 /* AddNewJokeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5158501EFA909B00C4EDE5 /* AddNewJokeViewController.swift */; };
@@ -58,6 +59,7 @@
 		6675942C1EFBDBD200E68F9E /* colorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = colorPalette.plist; sourceTree = "<group>"; };
 		667594391EFBE35C00E68F9E /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		667594411EFBEE2900E68F9E /* palette2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = palette2.png; sourceTree = "<group>"; };
+		667594451EFC0CF200E68F9E /* images.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpeg; sourceTree = "<group>"; };
 		CA5158481EFA6C6E00C4EDE5 /* AllJokes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AllJokes.storyboard; sourceTree = "<group>"; };
 		CA51584E1EFA8FDF00C4EDE5 /* AllJokesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllJokesTableViewController.swift; sourceTree = "<group>"; };
 		CA5158501EFA909B00C4EDE5 /* AddNewJokeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewJokeViewController.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 		F66BA25A1EFA497000463AB6 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				667594451EFC0CF200E68F9E /* images.jpeg */,
 				667594411EFBEE2900E68F9E /* palette2.png */,
 				6675942C1EFBDBD200E68F9E /* colorPalette.plist */,
 				667594391EFBE35C00E68F9E /* ColorPickerViewController.swift */,
@@ -324,6 +327,7 @@
 			files = (
 				667594421EFBEE2900E68F9E /* palette2.png in Resources */,
 				F6840DE91EF94B5D0036F317 /* LaunchScreen.storyboard in Resources */,
+				667594461EFC0CF200E68F9E /* images.jpeg in Resources */,
 				F66BA2611EFA49F600463AB6 /* Main.storyboard in Resources */,
 				6675942D1EFBDBD200E68F9E /* colorPalette.plist in Resources */,
 				F6840DE61EF94B5D0036F317 /* Assets.xcassets in Resources */,
