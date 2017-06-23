@@ -74,7 +74,6 @@ class AllJokesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailView = storyboard?.instantiateViewController(withIdentifier: "DetailJoke") as? DetailJokeViewController
         detailView?.selectedJoke = myJokes[indexPath.row]
-       
     
         navigationController?.pushViewController(detailView!, animated: true)
     }
@@ -101,6 +100,7 @@ class AllJokesTableViewController: UITableViewController {
         default:
             return UIImage(named: "1StarSmall")!
     }
+    
 }
 
 }
