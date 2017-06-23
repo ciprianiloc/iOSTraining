@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		50708A918330CCE434B2AFD9 /* Pods_JokesUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70AC6869B01039D989F2A0A5 /* Pods_JokesUITests.framework */; };
-		5307865A69BDD8A784AA2218 /* Pods_JokesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F74DC5170530858FC57247AC /* Pods_JokesTests.framework */; };
-		89C44ED27444FF458E211ABC /* Pods_Jokes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D98523F41FF8876D6C894F99 /* Pods_Jokes.framework */; };
 		CA3734181EFBD79000AE4408 /* DetailJokeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3734171EFBD79000AE4408 /* DetailJokeViewController.swift */; };
 		CA3734451EFBF2EC00AE4408 /* JokeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3734441EFBF2EC00AE4408 /* JokeCell.swift */; };
 		CA5158491EFA6C6E00C4EDE5 /* AllJokes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5158481EFA6C6E00C4EDE5 /* AllJokes.storyboard */; };
@@ -49,19 +46,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03CFEFFC2977ECF5039A1FF8 /* Pods-Jokes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jokes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Jokes/Pods-Jokes.release.xcconfig"; sourceTree = "<group>"; };
-		5EE9E5A2D05DD9540512553B /* Pods-JokesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JokesUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JokesUITests/Pods-JokesUITests.release.xcconfig"; sourceTree = "<group>"; };
-		6428C9D2CF7D891EEDE92968 /* Pods-JokesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JokesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-JokesTests/Pods-JokesTests.release.xcconfig"; sourceTree = "<group>"; };
-		70AC6869B01039D989F2A0A5 /* Pods_JokesUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JokesUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		717339ED4B755E20F42515B6 /* Pods-JokesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JokesTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JokesTests/Pods-JokesTests.debug.xcconfig"; sourceTree = "<group>"; };
-		7B6F6F27646E50263867688C /* Pods-JokesUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JokesUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JokesUITests/Pods-JokesUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CA3734171EFBD79000AE4408 /* DetailJokeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailJokeViewController.swift; sourceTree = "<group>"; };
 		CA3734441EFBF2EC00AE4408 /* JokeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokeCell.swift; sourceTree = "<group>"; };
 		CA5158481EFA6C6E00C4EDE5 /* AllJokes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AllJokes.storyboard; sourceTree = "<group>"; };
 		CA51584E1EFA8FDF00C4EDE5 /* AllJokesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllJokesTableViewController.swift; sourceTree = "<group>"; };
 		CA5158501EFA909B00C4EDE5 /* AddNewJokeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewJokeViewController.swift; sourceTree = "<group>"; };
-		D98523F41FF8876D6C894F99 /* Pods_Jokes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Jokes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E669D6897C85F6245220E225 /* Pods-Jokes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Jokes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Jokes/Pods-Jokes.debug.xcconfig"; sourceTree = "<group>"; };
 		F66BA25C1EFA49F600463AB6 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F66BA25D1EFA49F600463AB6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F66BA25E1EFA49F600463AB6 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -82,7 +71,6 @@
 		F6840DFA1EF94B5D0036F317 /* JokesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JokesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6840DFE1EF94B5D0036F317 /* JokesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokesUITests.swift; sourceTree = "<group>"; };
 		F6840E001EF94B5D0036F317 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F74DC5170530858FC57247AC /* Pods_JokesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JokesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,7 +78,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89C44ED27444FF458E211ABC /* Pods_Jokes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +85,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5307865A69BDD8A784AA2218 /* Pods_JokesTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,36 +92,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50708A918330CCE434B2AFD9 /* Pods_JokesUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		08B037AD40799E37592C88FD /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				E669D6897C85F6245220E225 /* Pods-Jokes.debug.xcconfig */,
-				03CFEFFC2977ECF5039A1FF8 /* Pods-Jokes.release.xcconfig */,
-				717339ED4B755E20F42515B6 /* Pods-JokesTests.debug.xcconfig */,
-				6428C9D2CF7D891EEDE92968 /* Pods-JokesTests.release.xcconfig */,
-				7B6F6F27646E50263867688C /* Pods-JokesUITests.debug.xcconfig */,
-				5EE9E5A2D05DD9540512553B /* Pods-JokesUITests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		653A584E6E17C3DCE9A98FF8 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				D98523F41FF8876D6C894F99 /* Pods_Jokes.framework */,
-				F74DC5170530858FC57247AC /* Pods_JokesTests.framework */,
-				70AC6869B01039D989F2A0A5 /* Pods_JokesUITests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		F66BA2571EFA497000463AB6 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,8 +154,6 @@
 				F6840DF21EF94B5D0036F317 /* JokesTests */,
 				F6840DFD1EF94B5D0036F317 /* JokesUITests */,
 				F6840DD91EF94B5D0036F317 /* Products */,
-				08B037AD40799E37592C88FD /* Pods */,
-				653A584E6E17C3DCE9A98FF8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -682,7 +642,6 @@
 		};
 		F6840E041EF94B5D0036F317 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E669D6897C85F6245220E225 /* Pods-Jokes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AQ3995TM4X;
@@ -696,7 +655,6 @@
 		};
 		F6840E051EF94B5D0036F317 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03CFEFFC2977ECF5039A1FF8 /* Pods-Jokes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AQ3995TM4X;
@@ -710,7 +668,6 @@
 		};
 		F6840E071EF94B5D0036F317 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 717339ED4B755E20F42515B6 /* Pods-JokesTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -726,7 +683,6 @@
 		};
 		F6840E081EF94B5D0036F317 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6428C9D2CF7D891EEDE92968 /* Pods-JokesTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -742,7 +698,6 @@
 		};
 		F6840E0A1EF94B5D0036F317 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B6F6F27646E50263867688C /* Pods-JokesUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = AQ3995TM4X;
@@ -757,7 +712,6 @@
 		};
 		F6840E0B1EF94B5D0036F317 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5EE9E5A2D05DD9540512553B /* Pods-JokesUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = AQ3995TM4X;
