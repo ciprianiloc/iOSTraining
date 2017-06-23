@@ -14,6 +14,7 @@ class DetailJokeViewController: UIViewController {
     
     @IBOutlet var detailJokeView: UIView!
     
+    @IBOutlet weak var ratingView: CosmosView!
     
     @IBOutlet weak var detailLabel: UILabel!
     
@@ -29,11 +30,9 @@ class DetailJokeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      //  imageDetailView = myDetailRating?.jokeImageView
         detailLabel.text = selectedJoke
-       // detailImageView.image = selectedImage
         
-        // Do any additional setup after loading the view.
+       
     }
 
     override func didReceiveMemoryWarning() {
