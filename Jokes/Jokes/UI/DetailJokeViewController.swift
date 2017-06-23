@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class DetailJokeViewController: UIViewController {
 
     
@@ -21,6 +22,10 @@ class DetailJokeViewController: UIViewController {
     
     var selectedJoke : String?
     var selectedImage : UIImage?
+    
+    
+   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
