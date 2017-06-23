@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIPopoverPresentationControllerDelegate, UIImagePickerControllerDelegate {
+class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIPopoverPresentationControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let imagePicker = UIImagePickerController()
     
@@ -50,7 +50,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
-        
+        imagePicker.delegate = self
         present(imagePicker, animated: true, completion: nil)
         
     }
@@ -142,16 +142,16 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         self.navigationController?.popViewController(animated: true)
         
 //        let defaults = UserDefaults.standard
-//        defaults.set(fontPickerView, forKey: "Font")
-//        defaults.set(fontSizeSlider, forKey: "FontSize")
-//        defaults.set(colorView, forKey: "FontColor")
-//        defaults.set(imageView, forKey: "BackgroundImage")
+//        defaults.set(fontLabel, forKey: "Font")
+//        defaults.set(fontSizeLabel, forKey: "FontSize")
+//        defaults.set(fontColor, forKey: "FontColor")
+//        defaults.set(backgroundImage, forKey: "BackgroundImage")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        imagePicker.delegate = self
 
         // Do any additional setup after loading the view.
         for familyName in fontFamilies {
