@@ -57,6 +57,8 @@ class ColorPickerViewController: UIViewController, UICollectionViewDelegate, UIC
         cell.tag = tag
         tag = tag + 1
         
+        
+        
         return cell
     }
     

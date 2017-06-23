@@ -11,10 +11,13 @@ import UIKit
 class AllJokesTableViewController: UITableViewController {
 
     
+    @IBOutlet var allJokesTableView: UITableView!
     
     var myJokes : [String] = [String]()
+    var myTitle : String = ""
     
    // @IBOutlet weak var jokeNameLabel: UILabel!
+    
     
     
     
@@ -27,8 +30,8 @@ class AllJokesTableViewController: UITableViewController {
         for i in 1...25{
             myJokes.append("Joke number \(i)")
         }
- 
-    
+        
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -54,17 +57,72 @@ class AllJokesTableViewController: UITableViewController {
         return myJokes.count
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        myTitle = "Nerdy"
+        
+        
+        return myTitle
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let frame : CGRect = tableView.frame
+        
+        let title : UILabel = UILabel(frame:CGRect(x: 20, y: 0, width: 50, height: 20))
+        title.backgroundColor = UIColor.red
+        title.text = "Nerdy"
+        title.textColor = UIColor.white
+        
+        
+        let ratingButton : UIButton = UIButton(frame: CGRect(x: 200, y: 0, width: 60, height: 20))
+            ratingButton.setTitle("Rating",for:.normal)
+            ratingButton.backgroundColor = UIColor.red
+            ratingButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
+            ratingButton.addTarget(self, action: #selector(ratingButtonPressed), for: .touchUpInside)
+        
+        let dateButton : UIButton = UIButton(frame: CGRect(x: 290, y: 0, width: 100, height: 20))
+            dateButton.setTitle("Date added", for: .normal)
+            dateButton.backgroundColor = UIColor.red
+            dateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
+            dateButton.addTarget(self, action: #selector(dateButtonPressed), for: .touchUpInside)
+        
+        let ratingView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
+        ratingView.backgroundColor = UIColor.white
+        ratingView.addSubview(ratingButton)
+        ratingView.addSubview(dateButton)
+        ratingView.addSubview(title)
+        
+        
+        return ratingView
+    }
+    
+    
+    func ratingButtonPressed(sender : UIButton){
+        print("rating button pressed")
+    }
+    
+    func dateButtonPressed(sender : UIButton){
+        print("date sorting button pressed")
+    }
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
         
+     
         let joke = myJokes[indexPath.row]
       
   
         cell.jokeLabel.text = joke
-        cell.jokeImageView.image = imageForRating(rating: Int(arc4random_uniform(6)))
         
+        let random = Int(arc4random_uniform(6))
+        
+        if random > 0{
+            cell.ratingStarsView.rating = Double(random)
+        }else{
+            cell.ratingStarsView.rating = 1
+        }
    
         
         return cell

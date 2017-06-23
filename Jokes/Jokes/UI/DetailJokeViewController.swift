@@ -33,7 +33,6 @@ class DetailJokeViewController: UIViewController {
         
         
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(DetailJokeViewController.ratingLevelChanged), userInfo: nil, repeats: true)
-        
  
     }
     
