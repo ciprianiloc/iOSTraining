@@ -16,6 +16,7 @@ class AllJokesTableViewController: UITableViewController {
     var myJokes : [String] = [String]()
     var myTitle : String = ""
     var jokeCategory : [String] = ["nerdy","very lame","funniest"]
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +26,10 @@ class AllJokesTableViewController: UITableViewController {
         
         for i in 1...125{
             myJokes.append("joke number \(i)")
+           
         }
         
-        
-        
-    }
+            }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -110,7 +110,8 @@ class AllJokesTableViewController: UITableViewController {
         }else{
             cell.ratingStarsView.rating = 1
         }
-       
+        
+        
         
         return cell
     }
@@ -131,7 +132,7 @@ class AllJokesTableViewController: UITableViewController {
     
     
     func ratingButtonPressed(sender : UIButton){
-        print("rating  button pressed")
+        print("will sort things")
     }
     
     func dateButtonPressed(sender : UIButton){
