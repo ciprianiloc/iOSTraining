@@ -32,8 +32,8 @@ class DetailJokeViewController: UIViewController {
         
         
         
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(DetailJokeViewController.ratingLevelChanged), userInfo: nil, repeats: true)
- 
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(DetailJokeViewController.ratingLevelChanged), userInfo: nil, repeats: true)
+       // RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
     }
     
     override func didReceiveMemoryWarning() {
