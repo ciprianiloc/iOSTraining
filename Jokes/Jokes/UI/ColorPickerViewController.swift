@@ -51,12 +51,11 @@ class ColorPickerViewController: UIViewController, UICollectionViewDelegate, UIC
     // UICollectionViewDataSource Protocol:
     // Inilitializes the collection view cells
     internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
+     
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         cell.backgroundColor = UIColor.clear
         cell.tag = tag
         tag = tag + 1
-        
         
         
         return cell

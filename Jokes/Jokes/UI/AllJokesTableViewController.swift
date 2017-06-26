@@ -70,13 +70,21 @@ class AllJokesTableViewController: UITableViewController {
         
         let ratingButton : UIButton = UIButton(frame: CGRect(x: 240, y: 0, width: 60, height: 20))
             ratingButton.setTitle("Rating",for:.normal)
-            ratingButton.backgroundColor = UIColor.red
+            ratingButton.setTitleColor(UIColor.black, for: .normal)
+            ratingButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
+            ratingButton.layer.cornerRadius = 5
+            ratingButton.layer.borderWidth = 2
+            ratingButton.layer.borderColor = UIColor.black.cgColor
             ratingButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
             ratingButton.addTarget(self, action: #selector(ratingButtonPressed), for: .touchUpInside)
         
         let dateButton : UIButton = UIButton(frame: CGRect(x: 310, y: 0, width: 100, height: 20))
             dateButton.setTitle("Date added", for: .normal)
-            dateButton.backgroundColor = UIColor.red
+            dateButton.setTitleColor(UIColor.black, for: .normal)
+            dateButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
+            dateButton.layer.cornerRadius = 5
+            dateButton.layer.borderWidth = 2
+            dateButton.layer.borderColor = UIColor.black.cgColor
             dateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
             dateButton.addTarget(self, action: #selector(dateButtonPressed), for: .touchUpInside)
         
