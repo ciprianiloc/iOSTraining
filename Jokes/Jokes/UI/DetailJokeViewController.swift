@@ -17,10 +17,13 @@ class DetailJokeViewController: UIViewController {
     @IBOutlet weak var funnyLevelLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
     @IBOutlet weak var detailImageView: UIImageView!
+    @IBOutlet weak var jokeCategoryLabel: UILabel!
+    
     
     
     var selectedJoke : String?
     var selectedImage : UIImage?
+    var selectedCategory : String?
     
     
    
@@ -29,6 +32,7 @@ class DetailJokeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         detailLabel.text = selectedJoke
+        jokeCategoryLabel.text = selectedCategory
         
         
         

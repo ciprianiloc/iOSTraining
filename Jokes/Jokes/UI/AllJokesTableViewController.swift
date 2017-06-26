@@ -15,11 +15,7 @@ class AllJokesTableViewController: UITableViewController {
     
     var myJokes : [String] = [String]()
     var myTitle : String = ""
-    
-   // @IBOutlet weak var jokeNameLabel: UILabel!
-    
-    
-    
+    var jokeCategory : [String] = ["nerdy","very lame","funniest"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,17 +23,12 @@ class AllJokesTableViewController: UITableViewController {
         
         
         
-        for i in 1...25{
-            myJokes.append("Joke number \(i)")
+        for i in 1...125{
+            myJokes.append("joke number \(i)")
         }
         
         
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,37 +40,41 @@ class AllJokesTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 	jokeCategory.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return myJokes.count
+        return 50
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        myTitle = "Nerdy"
-        
-        
-        return myTitle
+        return self.jokeCategory[section]
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let frame : CGRect = tableView.frame
         
-        let title : UILabel = UILabel(frame:CGRect(x: 20, y: 0, width: 50, height: 20))
+        let title : UILabel = UILabel(frame:CGRect(x: 20, y: 0, width: 100, height: 20))
         title.backgroundColor = UIColor.red
-        title.text = "Nerdy"
+        title.text = self.jokeCategory[section]
         title.textColor = UIColor.white
+        title.textAlignment = .center
         
         
-        let ratingButton : UIButton = UIButton(frame: CGRect(x: 200, y: 0, width: 60, height: 20))
+        let sortBylabel : UILabel = UILabel(frame: CGRect(x: 160, y: 0, width: 70, height: 20))
+        sortBylabel.backgroundColor = UIColor.red
+        sortBylabel.text = "Sort By:"
+        sortBylabel.textColor = UIColor.white
+        
+        
+        let ratingButton : UIButton = UIButton(frame: CGRect(x: 240, y: 0, width: 60, height: 20))
             ratingButton.setTitle("Rating",for:.normal)
             ratingButton.backgroundColor = UIColor.red
-            ratingButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
+            ratingButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
             ratingButton.addTarget(self, action: #selector(ratingButtonPressed), for: .touchUpInside)
         
-        let dateButton : UIButton = UIButton(frame: CGRect(x: 290, y: 0, width: 100, height: 20))
+        let dateButton : UIButton = UIButton(frame: CGRect(x: 310, y: 0, width: 100, height: 20))
             dateButton.setTitle("Date added", for: .normal)
             dateButton.backgroundColor = UIColor.red
             dateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
@@ -90,18 +85,10 @@ class AllJokesTableViewController: UITableViewController {
         ratingView.addSubview(ratingButton)
         ratingView.addSubview(dateButton)
         ratingView.addSubview(title)
+        ratingView.addSubview(sortBylabel)
         
         
         return ratingView
-    }
-    
-    
-    func ratingButtonPressed(sender : UIButton){
-        print("rating button pressed")
-    }
-    
-    func dateButtonPressed(sender : UIButton){
-        print("date sorting button pressed")
     }
     
     
@@ -123,16 +110,15 @@ class AllJokesTableViewController: UITableViewController {
         }else{
             cell.ratingStarsView.rating = 1
         }
-   
+       
         
         return cell
     }
-    
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailView = storyboard?.instantiateViewController(withIdentifier: "DetailJoke") as? DetailJokeViewController
         detailView?.selectedJoke = myJokes[indexPath.row]
-    
+        detailView?.selectedCategory = jokeCategory[Int(arc4random_uniform(3))]
         navigationController?.pushViewController(detailView!, animated: true)
     }
     
@@ -142,6 +128,18 @@ class AllJokesTableViewController: UITableViewController {
         let addJokeVC = addJokeStoryboard.instantiateViewController(withIdentifier: "AddNewJokeViewController")
         self.present(addJokeVC, animated: true, completion: nil)
     }
+    
+    
+    func ratingButtonPressed(sender : UIButton){
+        print("rating  button pressed")
+    }
+    
+    func dateButtonPressed(sender : UIButton){
+        print("date sorting button pressed")
+    }
+    
+    
+    
     
     func imageForRating(rating : Int) -> UIImage{
         switch rating {
