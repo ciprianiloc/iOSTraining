@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,5 +32,7 @@ class HomeViewController: UIViewController {
         self.navigationController?.pushViewController(allJokesVC, animated: true)
     }
     
-}
+    
+    
+    }
 
