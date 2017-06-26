@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIPopoverPresentationControllerDelegate, UIImagePickerControllerDelegate {
+class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIPopoverPresentationControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let imagePicker = UIImagePickerController()
     
@@ -50,9 +50,81 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
         
-        present(imagePicker, animated: true, completion: nil)
         
+         let alert = UIAlertController(title: "Get Photos From:", message: nil, preferredStyle: .actionSheet)
+        
+        // Cancel button
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        
+        // Photo library button
+        let libraryAction = UIAlertAction(title: "Photo Library", style: .default) {
+            _ in
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }
+        alert.addAction(libraryAction)
+        
+        // Camera button
+        let cameraAction = UIAlertAction(title: "Camera", style: .default){
+             _ in
+                
+                self.imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+                
+                self.present(self.imagePicker, animated: true, completion: nil)
+            }
+        alert.addAction(cameraAction)
+        
+        // Get data from URL
+        func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+            URLSession.shared.dataTask(with: url) {
+                (data, response, error) in
+                completion(data, response, error)
+                }.resume()
+        }
+        
+        // Download image
+        func downloadImage(url: URL) {
+            print("Download Started")
+            getDataFromUrl(url: url) { (data, response, error)  in
+                guard let data = data, error == nil else {
+                    let alert = UIAlertController(title: "Unsafe URL", message: "The URL path you have chose does not start with HTTPS and it is not safe. Please choose an image with HTTPS URL prefix", preferredStyle: .alert)
+                    
+                    
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    alert.addAction(cancelAction)
+                    
+                    self.present(alert, animated: true, completion: nil)
+                    
+                    return }
+                print(response?.suggestedFilename ?? url.lastPathComponent)
+                print("Download Finished")
+                DispatchQueue.main.async() { () -> Void in
+                    self.backgroundImage.image = UIImage(data: data)
+                }
+            }
+        }
+        
+        
+        
+        // Internet button
+        let internetAction = UIAlertAction(title: "Upload from URL", style: .default) {
+           _ in
+            //self.imagePicker.sourceType = UIImagePickerControllerSourceType.
+            var urlPath = URL(string: "https://image.freepik.com/free-vector/orange-geometric-background-with-halftone-dots_1035-7243.jpg")
+            
+//            let urlPicker = UIAlertController(title: "Insert URL", message: nil, preferredStyle: .add) {
+//                _ in
+//                urlPath = URl(
+//            }
+            
+            downloadImage(url: urlPath!)
+        }
+        alert.addAction(internetAction)
+        
+        
+        present(alert, animated: true, completion: nil)
     }
     
 
@@ -139,19 +211,21 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     @IBAction func saveButton(_ sender: Any) {
         
-        self.navigationController?.popViewController(animated: true)
+        
         
 //        let defaults = UserDefaults.standard
-//        defaults.set(fontPickerView, forKey: "Font")
-//        defaults.set(fontSizeSlider, forKey: "FontSize")
-//        defaults.set(colorView, forKey: "FontColor")
-//        defaults.set(imageView, forKey: "BackgroundImage")
+//        defaults.set(fontLabel, forKey: "Font")
+//        defaults.set(fontSizeLabel, forKey: "FontSize")
+//        defaults.set(fontColor, forKey: "FontColor")
+//        defaults.set(backgroundImage, forKey: "BackgroundImage")
+        
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        imagePicker.delegate = self
 
         // Do any additional setup after loading the view.
         for familyName in fontFamilies {
