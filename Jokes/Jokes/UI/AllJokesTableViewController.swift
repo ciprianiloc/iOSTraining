@@ -29,6 +29,8 @@ class AllJokesTableViewController: UITableViewController {
            
         }
         
+        
+        
             }
 
     override func didReceiveMemoryWarning() {

@@ -11,16 +11,13 @@ import UIKit
 class HomeViewController: UIViewController{
 
     let URLApi = "http://api.icndb.com/jokes/random"
-    
     var jokesArray = [String]()
-    
     @IBOutlet weak var jokeLabel: UILabel!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getJsonFromUrl()
-        
     }
     
     func getJsonFromUrl(){
@@ -28,26 +25,24 @@ class HomeViewController: UIViewController{
         
         
         URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data,response,error) -> Void in
-        
+            
             if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary{
-                print(jsonObj!.value(forKeyPath: "value.joke")!)
-                self.jokesArray.append(jsonObj!.value(forKeyPath: "value.joke")! as! String)
+                let jsonResult = jsonObj!.value(forKeyPath: "value.joke")!
+                self.jokesArray.append(jsonResult as! String)
                 
                 OperationQueue.main.addOperation({
                     self.showJokes()
                 })
                 
             }
-        
+            
         }).resume()
     }
     
     func showJokes(){
-        for joke in jokesArray{
-            jokeLabel.text = jokeLabel.text! + joke + "\n"
-        }
+        jokeLabel.text = jokesArray.last
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -63,6 +58,10 @@ class HomeViewController: UIViewController{
         let allJokesStoryboard = UIStoryboard(name: "AllJokes", bundle: nil)
         let allJokesVC = allJokesStoryboard.instantiateViewController(withIdentifier: "AllJokesTableViewController")
         self.navigationController?.pushViewController(allJokesVC, animated: true)
+    }
+    
+    @IBAction func getRandomJoke(_ sender: UIButton) {
+        getJsonFromUrl()
     }
     
     
