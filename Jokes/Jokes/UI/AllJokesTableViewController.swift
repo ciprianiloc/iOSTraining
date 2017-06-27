@@ -15,14 +15,12 @@ class AllJokesTableViewController: UITableViewController {
     
     var myJokes : [String] = [String]()
     var myTitle : String = ""
-    var jokeCategory : [String] = ["nerdy","very lame","funniest"]
+    var jokeCategory : [String] = [String]()
    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewJokeButton(_:)))
-    
-        
             }
 
     override func didReceiveMemoryWarning() {
@@ -33,12 +31,11 @@ class AllJokesTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 	jokeCategory.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+       
         return myJokes.count
     }
     
@@ -144,22 +141,8 @@ class AllJokesTableViewController: UITableViewController {
     
     
     
-    func imageForRating(rating : Int) -> UIImage{
-        switch rating {
-        case 1:
-            return UIImage(named: "1StarSmall")!
-        case 2:
-            return UIImage(named: "2StarsSmall")!
-        case 3:
-            return UIImage(named: "3StarsSmall")!
-        case 4:
-            return UIImage(named: "4StarsSmall")!
-        case 5:
-            return UIImage(named: "5StarsSmall")!
-        default:
-            return UIImage(named: "1StarSmall")!
-    }
+   
     
 }
 
-}
+
