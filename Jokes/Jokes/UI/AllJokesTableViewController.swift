@@ -16,12 +16,13 @@ class AllJokesTableViewController: UITableViewController {
     var myJokes : [String] = [String]()
     var myTitle : String = ""
     var jokeCategory : [String] = [String]()
+    var selectedCategory : String = ""
    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewJokeButton(_:)))
-            }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -91,15 +92,18 @@ class AllJokesTableViewController: UITableViewController {
     }
     
     
+    
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
         
      
-        let joke = myJokes[indexPath.row]
-      
-  
+        let joke = myJokes[indexPath.section] //HERE
+       
+        
         cell.jokeLabel.text = joke
         
         let random = Int(arc4random_uniform(6))
@@ -109,8 +113,6 @@ class AllJokesTableViewController: UITableViewController {
         }else{
             cell.ratingStarsView.rating = 1
         }
-        
-        
         
         return cell
     }

@@ -250,7 +250,7 @@
                                     <outlet property="delegate" destination="sZ9-i7-3S3" id="8U1-Dy-hjV"/>
                                 </connections>
                             </pickerView>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n9X-vn-g4G">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n9X-vn-g4G">
                                 <rect key="frame" x="0.0" y="84" width="375" height="44"/>
                                 <color key="backgroundColor" red="0.11942240725897416" green="0.15356879280782193" blue="0.61306313451776651" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="barTintColor" red="0.9254191517829895" green="0.92553013563156128" blue="0.92538142204284668" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -283,7 +283,7 @@
                             <constraint firstItem="AdR-hy-xDA" firstAttribute="trailing" secondItem="n9X-vn-g4G" secondAttribute="trailing" id="EZw-t1-Oy8"/>
                             <constraint firstItem="wW0-wv-90l" firstAttribute="trailing" secondItem="2j4-ZC-yqR" secondAttribute="trailing" id="FYd-Ln-gFB"/>
                             <constraint firstItem="VWq-nf-PuA" firstAttribute="trailing" secondItem="POM-mV-Xrw" secondAttribute="trailing" id="Fb2-c6-5L6"/>
-                            <constraint firstItem="POM-mV-Xrw" firstAttribute="top" secondItem="n9X-vn-g4G" secondAttribute="bottom" constant="79" id="HXn-vz-IlE"/>
+                            <constraint firstItem="POM-mV-Xrw" firstAttribute="top" secondItem="n9X-vn-g4G" secondAttribute="bottom" constant="15" id="HXn-vz-IlE"/>
                             <constraint firstItem="n9X-vn-g4G" firstAttribute="leading" secondItem="TQa-xf-Be0" secondAttribute="leading" id="Ni4-4M-cfL"/>
                             <constraint firstItem="VWq-nf-PuA" firstAttribute="leading" secondItem="2j4-ZC-yqR" secondAttribute="leading" id="OQe-sk-Kwc"/>
                             <constraint firstAttribute="bottom" secondItem="VWq-nf-PuA" secondAttribute="bottom" constant="247" id="UT5-Cp-o3w"/>

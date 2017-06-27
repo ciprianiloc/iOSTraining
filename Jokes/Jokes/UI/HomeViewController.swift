@@ -14,7 +14,7 @@ class HomeViewController: UIViewController{
     var jokesArray = [String]()
     var jokeCategoryArray = [String]()
     @IBOutlet weak var jokeLabel: UILabel!
-    
+    var alljokesCategory : AllJokesTableViewController = AllJokesTableViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,37 +26,26 @@ class HomeViewController: UIViewController{
         
         
         URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data,response,error) -> Void in
-             //get RANDOM Joke
+             //get RANDOM Joke and category of joke
             if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary{
                 let jsonResult = jsonObj!.value(forKeyPath: "value.joke")!
                 let categoryResult = jsonObj?.value(forKeyPath: "value.categories") as! [String]
                 self.jokesArray.append(jsonResult as! String)
-                
-                
-             
-                
-                
                 
                 if categoryResult != []{
                     var auxCategory = String(describing: categoryResult)
                     auxCategory = auxCategory.replacingOccurrences(of: "[", with: "")
                     auxCategory = auxCategory.replacingOccurrences(of: "]", with: "")
                     auxCategory = auxCategory.replacingOccurrences(of: "\"", with: "")
-                    
-                   // print(auxCategory)
-                    
                     self.jokeCategoryArray.append(String(describing: auxCategory))
+                    self.alljokesCategory.selectedCategory = auxCategory
+                }else{
+                    self.jokeCategoryArray.append("Unknown")
+                    self.alljokesCategory.selectedCategory = "Unknown"
                 }
-                
-                //print(categoryResult)
-                
-                
-                
-                
                 
                 OperationQueue.main.addOperation({
                     self.showJokes()
-                  //  self.showJokeCategory()
                 })
                 
             }
@@ -65,18 +54,13 @@ class HomeViewController: UIViewController{
     }
     
     func showJokes(){
-        for joke in jokesArray{
-            //print(joke)
-        }
+//        for joke in jokesArray{
+//            print(joke)
+//        }
         jokeLabel.text = jokesArray.last
     }
     
-//    func showJokeCategory(){
-//        for category in jokeCategoryArray{
-//            print(category)
-//        }
-//    }
-//    
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -93,14 +77,14 @@ class HomeViewController: UIViewController{
         let allJokesVC = allJokesStoryboard.instantiateViewController(withIdentifier: "AllJokesTableViewController") as! AllJokesTableViewController
         allJokesVC.myJokes = jokesArray
         allJokesVC.jokeCategory = jokeCategoryArray
+        allJokesVC.selectedCategory = String(describing: alljokesCategory)
         self.navigationController?.pushViewController(allJokesVC, animated: true)
     }
     
     @IBAction func getRandomJoke(_ sender: UIButton) {
-        for _ in 1...100{
+        //for _ in 1...50{
              getJsonFromUrl()
-        }
-       
+        //}
     }
 
     
