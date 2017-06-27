@@ -70,11 +70,30 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         let cameraAction = UIAlertAction(title: "Camera", style: .default){
              _ in
                 
-                self.imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+            
+            
+            if !UIImagePickerController.isSourceTypeAvailable(.camera){
                 
-                self.present(self.imagePicker, animated: true, completion: nil)
+                let alertController = UIAlertController.init(title: nil, message: "Your device doesn't have a camera.", preferredStyle: .alert)
+                
+                let okAction = UIAlertAction.init(title: "Alright", style: .default, handler: {(alert: UIAlertAction!) in
+                })
+                
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+                
             }
-        alert.addAction(cameraAction)
+            else{
+                //other action
+                self.imagePicker.sourceType = UIImagePickerControllerSourceType.camera;
+                self.present(self.imagePicker, animated: true, completion: nil)
+               
+
+            }
+                
+            
+            }
+         alert.addAction(cameraAction)
         
         // Get data from URL
         func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
