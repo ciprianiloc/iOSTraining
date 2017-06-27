@@ -40,6 +40,9 @@ class HomeViewController: UIViewController{
     }
     
     func showJokes(){
+        for joke in jokesArray{
+            print(joke)
+        }
         jokeLabel.text = jokesArray.last
     }
     
@@ -56,15 +59,17 @@ class HomeViewController: UIViewController{
 
     @IBAction func allJokesAction(_ sender: Any) {
         let allJokesStoryboard = UIStoryboard(name: "AllJokes", bundle: nil)
-        let allJokesVC = allJokesStoryboard.instantiateViewController(withIdentifier: "AllJokesTableViewController")
+        let allJokesVC = allJokesStoryboard.instantiateViewController(withIdentifier: "AllJokesTableViewController") as! AllJokesTableViewController
+        allJokesVC.myJokes = jokesArray
         self.navigationController?.pushViewController(allJokesVC, animated: true)
     }
     
     @IBAction func getRandomJoke(_ sender: UIButton) {
         getJsonFromUrl()
     }
-    
-    
+
     
     }
+    
+    
 

@@ -21,15 +21,7 @@ class AllJokesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewJokeButton(_:)))
-        
-        
-        
-        for i in 1...125{
-            myJokes.append("joke number \(i)")
-           
-        }
-        
-        
+    
         
             }
 
@@ -47,7 +39,7 @@ class AllJokesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 50
+        return myJokes.count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
