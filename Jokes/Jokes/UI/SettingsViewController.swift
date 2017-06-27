@@ -131,7 +131,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         let internetAction = UIAlertAction(title: "Upload from URL", style: .default) {
            _ in
             //self.imagePicker.sourceType = UIImagePickerControllerSourceType.
-            var urlPath = URL(string: "https://image.freepik.com/free-vector/orange-geometric-background-with-halftone-dots_1035-7243.jpg")
+            let urlPath = URL(string: "https://image.freepik.com/free-vector/orange-geometric-background-with-halftone-dots_1035-7243.jpg")
             
 //            let urlPicker = UIAlertController(title: "Insert URL", message: nil, preferredStyle: .add) {
 //                _ in

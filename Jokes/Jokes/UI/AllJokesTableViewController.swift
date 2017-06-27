@@ -11,12 +11,12 @@ import UIKit
 class AllJokesTableViewController: UITableViewController {
 
     
+    @IBOutlet var allJokesTableView: UITableView!
     
     var myJokes : [String] = [String]()
-    
-   // @IBOutlet weak var jokeNameLabel: UILabel!
-    
-    
+    var myTitle : String = ""
+    var jokeCategory : [String] = ["nerdy","very lame","funniest"]
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,18 +24,12 @@ class AllJokesTableViewController: UITableViewController {
         
         
         
-        for i in 1...25{
-            myJokes.append("Joke number \(i)")
+        for i in 1...125{
+            myJokes.append("joke number \(i)")
+           
         }
- 
-    
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
+        
+            }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -46,36 +40,94 @@ class AllJokesTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 	jokeCategory.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return myJokes.count
+        return 50
     }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.jokeCategory[section]
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let frame : CGRect = tableView.frame
+        
+        let title : UILabel = UILabel(frame:CGRect(x: 20, y: 0, width: 100, height: 20))
+        title.backgroundColor = UIColor.red
+        title.text = self.jokeCategory[section]
+        title.textColor = UIColor.white
+        title.textAlignment = .center
+        
+        
+        let sortBylabel : UILabel = UILabel(frame: CGRect(x: 160, y: 0, width: 70, height: 20))
+        sortBylabel.backgroundColor = UIColor.red
+        sortBylabel.text = "Sort By:"
+        sortBylabel.textColor = UIColor.white
+        
+        
+        let ratingButton : UIButton = UIButton(frame: CGRect(x: 240, y: 0, width: 60, height: 20))
+            ratingButton.setTitle("Rating",for:.normal)
+            ratingButton.setTitleColor(UIColor.black, for: .normal)
+            ratingButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
+            ratingButton.layer.cornerRadius = 5
+            ratingButton.layer.borderWidth = 2
+            ratingButton.layer.borderColor = UIColor.black.cgColor
+            ratingButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
+            ratingButton.addTarget(self, action: #selector(ratingButtonPressed), for: .touchUpInside)
+        
+        let dateButton : UIButton = UIButton(frame: CGRect(x: 310, y: 0, width: 100, height: 20))
+            dateButton.setTitle("Date added", for: .normal)
+            dateButton.setTitleColor(UIColor.black, for: .normal)
+            dateButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
+            dateButton.layer.cornerRadius = 5
+            dateButton.layer.borderWidth = 2
+            dateButton.layer.borderColor = UIColor.black.cgColor
+            dateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
+            dateButton.addTarget(self, action: #selector(dateButtonPressed), for: .touchUpInside)
+        
+        let ratingView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
+        ratingView.backgroundColor = UIColor.white
+        ratingView.addSubview(ratingButton)
+        ratingView.addSubview(dateButton)
+        ratingView.addSubview(title)
+        ratingView.addSubview(sortBylabel)
+        
+        
+        return ratingView
+    }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
         
+     
         let joke = myJokes[indexPath.row]
       
   
         cell.jokeLabel.text = joke
-        cell.jokeImageView.image = imageForRating(rating: Int(arc4random_uniform(6)))
         
-   
+        let random = Int(arc4random_uniform(6))
+        
+        if random > 0{
+            cell.ratingStarsView.rating = Double(random)
+        }else{
+            cell.ratingStarsView.rating = 1
+        }
+        
+        
         
         return cell
     }
-    
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailView = storyboard?.instantiateViewController(withIdentifier: "DetailJoke") as? DetailJokeViewController
         detailView?.selectedJoke = myJokes[indexPath.row]
-       
-    
+        detailView?.selectedCategory = jokeCategory[Int(arc4random_uniform(3))]
         navigationController?.pushViewController(detailView!, animated: true)
     }
     
@@ -85,6 +137,18 @@ class AllJokesTableViewController: UITableViewController {
         let addJokeVC = addJokeStoryboard.instantiateViewController(withIdentifier: "AddNewJokeViewController")
         self.present(addJokeVC, animated: true, completion: nil)
     }
+    
+    
+    func ratingButtonPressed(sender : UIButton){
+        print("will sort things")
+    }
+    
+    func dateButtonPressed(sender : UIButton){
+        print("date sorting button pressed")
+    }
+    
+    
+    
     
     func imageForRating(rating : Int) -> UIImage{
         switch rating {
@@ -101,6 +165,7 @@ class AllJokesTableViewController: UITableViewController {
         default:
             return UIImage(named: "1StarSmall")!
     }
+    
 }
 
 }

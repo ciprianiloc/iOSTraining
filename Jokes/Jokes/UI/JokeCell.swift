@@ -12,6 +12,8 @@ class JokeCell: UITableViewCell {
 
     @IBOutlet weak var jokeLabel: UILabel!
     @IBOutlet weak var jokeImageView: UIImageView!
+    @IBOutlet weak var ratingStarsView: CosmosView!
+    var jokeCategory : String?
     
     
     

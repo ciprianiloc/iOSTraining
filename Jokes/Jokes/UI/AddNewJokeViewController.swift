@@ -13,7 +13,6 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
   
 
     @IBOutlet weak var jokePickerView: UIPickerView!
-//    @IBOutlet weak var jokeCategoryLabel: UILabel!
     @IBOutlet weak var jokeDescription: UITextView!
     @IBOutlet weak var newCategoryTextField: UITextField!
     
@@ -38,7 +37,6 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
     
     @IBAction func cancelAddJoke(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        
     }
     
     @IBAction func saveAddJoke(_ sender: UIBarButtonItem) {
