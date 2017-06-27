@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIPopoverPresentationControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let imagePicker = UIImagePickerController()
@@ -23,6 +24,50 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var fontColor: UIView!
     
     @IBOutlet weak var backgroundImage: UIImageView!
+    
+    
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        
+        // Image picker delegate
+        
+        imagePicker.delegate = self
+        
+        
+        // Get directory path
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0]
+        
+        
+        // Get image
+        
+        let fileManager = FileManager.default
+        let imagePAth = (documentsDirectory as NSString).appendingPathComponent("cucubau.jpg")
+        if fileManager.fileExists(atPath: imagePAth){
+            self.backgroundImage.image = UIImage(contentsOfFile: imagePAth)
+        }else{
+            print("Using default image")
+            backgroundImage.image = #imageLiteral(resourceName: "images.jpeg")
+        }
+        
+        
+        
+        // all fonts
+        for familyName in fontFamilies {
+            
+            fontNames.append(familyName)
+        }
+        
+        
+    }
+    
+    
+    
     
     @IBAction func changeFontColor(_ sender: Any) {
         let popoverVC = storyboard?.instantiateViewController(withIdentifier: "colorPickerPopover") as! ColorPickerViewController
@@ -128,22 +173,24 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         
         // Internet button
-        let internetAction = UIAlertAction(title: "Upload from URL", style: .default) {
+        let internetAction = UIAlertAction(title: "Saved images", style: .default) {
            _ in
-            //self.imagePicker.sourceType = UIImagePickerControllerSourceType.
+           
             let urlPath = URL(string: "https://image.freepik.com/free-vector/orange-geometric-background-with-halftone-dots_1035-7243.jpg")
-            
-//            let urlPicker = UIAlertController(title: "Insert URL", message: nil, preferredStyle: .add) {
-//                _ in
-//                urlPath = URl(
-//            }
-            
+          
+           
+
             downloadImage(url: urlPath!)
         }
         alert.addAction(internetAction)
         
         
         present(alert, animated: true, completion: nil)
+
+       
+        
+        
+        
     }
     
 
@@ -154,12 +201,15 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             backgroundImage.contentMode = .scaleAspectFit
             backgroundImage.image = pickedImage
-        }
-        
+            
+            
     
         dismiss(animated: true, completion: nil)
 
     }
+    }
+    
+    
 
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -183,7 +233,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 
     
     func setLabelColor (_ color: UIColor) {
-       // fontColor.setTitleColor(color, for:UIControlState())
+       
         self.fontColor.backgroundColor = color
     }
 
@@ -202,7 +252,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //fontLabel.text = fontNames[row]
+        
         fontLabel?.font = UIFont(name: fontNames[row], size: 16)
     }
     
@@ -230,31 +280,39 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     @IBAction func saveButton(_ sender: Any) {
         
+
+        
+//        let imageData = UIImageJPEGRepresentation(backgroundImage.image!, 100)!
+//        let directory = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
         
         
-//        let defaults = UserDefaults.standard
-//        defaults.set(fontLabel, forKey: "Font")
-//        defaults.set(fontSizeLabel, forKey: "FontSize")
-//        defaults.set(fontColor, forKey: "FontColor")
-//        defaults.set(backgroundImage, forKey: "BackgroundImage")
+        let fileManager = FileManager.default
+//        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("apple.jpg")
+//        let image = UIImage(named: "apple.jpg")
+//        print(paths)
+        let imageData = UIImageJPEGRepresentation(backgroundImage.image!, 0.5)
+        fileManager.createFile(atPath: "/documents/" as String, contents: imageData, attributes: nil)
+        
+        let path = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("cucubau.jpg")
+        do {
+            //Save image to Root
+            try imageData?.write(to: path, options:  .atomic)
+            print("Saved To Root")
+        } catch let error {
+            print(error)
+        }
+        
+        
+        
         
         self.navigationController?.popViewController(animated: true)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        imagePicker.delegate = self
-
-        // Do any additional setup after loading the view.
-        for familyName in fontFamilies {
-            //let names = UIFont.fontNames(forFamilyName: familyName )
-           
-            fontNames.append(familyName)
-        }
-        
-        
-    }
+   
+    
+    
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
