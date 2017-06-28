@@ -8,8 +8,16 @@
 
 import UIKit
 
+protocol SettingsDelegate: class {
+    func changeFont()
+    func changeBackground()
+    
+}
 
 class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIPopoverPresentationControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    // Delegate
+    var delegate:SettingsDelegate?
     
     let imagePicker = UIImagePickerController()
     
@@ -68,6 +76,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         let defaults = UserDefaults.standard
         let font = defaults.string(forKey: "font")
+    
         
         if (font != nil) {
         fontLabel.font = UIFont(name: font!, size: 17)
@@ -347,7 +356,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
         
 
-        
+        delegate?.changeFont()
+        delegate?.changeBackground()
         
         self.navigationController?.popViewController(animated: true)
     }

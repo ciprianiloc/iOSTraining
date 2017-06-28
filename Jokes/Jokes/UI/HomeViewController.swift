@@ -8,17 +8,36 @@
 
 import UIKit
 
+
+
+
+
 class HomeViewController: UIViewController{
+    
+    var settings:SettingsViewController?
 
     let URLApi = "http://api.icndb.com/jokes/random"
     var jokesArray = [String]()
     @IBOutlet weak var jokeLabel: UILabel!
     
+    @IBOutlet var homeView: UIView!
+    
+    @IBOutlet weak var backgroundImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getJsonFromUrl()
+    
+       
+        
     }
+    
+    
+//    func handleSettings() {
+//        delegate?.changeFont
+//    }
+    
+    
     
     func getJsonFromUrl(){
         let url = NSURL(string: URLApi)
@@ -53,7 +72,8 @@ class HomeViewController: UIViewController{
 
     @IBAction func settingsAction(_ sender: Any) {
         let settingsStoryboard = UIStoryboard(name: "Settings", bundle: nil)
-        let settingsVC = settingsStoryboard.instantiateViewController(withIdentifier: "SettingsViewController")
+        let settingsVC = settingsStoryboard.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
+        settingsVC.delegate = self
         self.navigationController?.pushViewController(settingsVC, animated: true)
     }
 
@@ -70,6 +90,58 @@ class HomeViewController: UIViewController{
 
     
     }
+
+
+extension HomeViewController: SettingsDelegate {
     
+    
+    
+    
+    func changeFont() {
+        let defaults = UserDefaults.standard
+        let font = defaults.string(forKey: "font")
+        let fontSize = defaults.integer(forKey: "fontSize")
+        
+        if (font != nil) {
+            jokeLabel.font = UIFont(name: font!, size: CGFloat(fontSize))
+            
+        } else {
+            jokeLabel.font = UIFont(name: "TimesNewRomanPSMT", size: 17)
+        }
+        
+        
+        let fontColorHex = defaults.string(forKey: "fontColor")
+        if fontColorHex != nil {
+            jokeLabel.textColor = UIColor(hex: (fontColorHex)!)
+        } else {
+            jokeLabel.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+        }
+
+    }
+    func changeBackground() {
+        
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0]
+        
+        let fileManager = FileManager.default
+        let imagePAth = (documentsDirectory as NSString).appendingPathComponent("cucubau.jpg")
+        
+        if fileManager.fileExists(atPath: imagePAth){
+           
+            self.backgroundImageView.image = UIImage(contentsOfFile: imagePAth)!
+            self.backgroundImageView.contentMode = UIViewContentMode.scaleAspectFit
+            self.backgroundImageView.contentMode = UIViewContentMode.center
+            
+            
+        } else {
+            print("Using default image")
+            self.backgroundImageView.image = UIImage(named: "images.jpg")
+            self.backgroundImageView.contentMode = UIViewContentMode.scaleAspectFit
+        }
+        
+    }
+        
+}
+
     
 
