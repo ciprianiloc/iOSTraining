@@ -24,7 +24,7 @@ class HomeViewController: UIViewController{
         super.viewDidLoad()
        // mainRequest.getJsonFromUrl()
     
-       
+       //make a request with a completion block - the completion block will change the text of the jokeLabel 
         
     }
     
