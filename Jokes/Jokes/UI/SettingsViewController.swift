@@ -25,8 +25,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     @IBOutlet weak var backgroundImage: UIImageView!
     
-    
-    
+
     
     
     override func viewDidLoad() {
@@ -72,29 +71,23 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         if (font != nil) {
         fontLabel.font = UIFont(name: font!, size: 17)
+        
         }
+        
+        let selectedRow = defaults.integer(forKey: "selectedRow")
+        pickerView.selectRow(selectedRow, inComponent: 0, animated: true)
+        
+        
         
         let fontSize = defaults.integer(forKey: "fontSize")
         fontSizeLabel.font = UIFont(name: self.fontNames[0], size: CGFloat(fontSize))
         fontSlider.setValue(Float(fontSize), animated: true)
         
-        
-        
-//        let decodedFont = NSKeyedUnarchiver.unarchiveObject(withFile: "font")
-//        let decodedFontColor = NSKeyedUnarchiver.unarchiveObject(withFile: "fontColor")
-//        let decodedFontSize = NSKeyedUnarchiver.unarchiveObject(withFile: "fontSize")
-//
-//        fontLabel.font = decodedFont as? UIFont
-//        fontColor.backgroundColor = decodedFontColor as? UIColor
-//        if (decodedFontSize != nil) {
-//            fontSizeLabel?.font = UIFont(name: (fontSizeLabel?.font.fontName)!, size:(decodedFontSize as? CGFloat)!)
-//        }
-        
-//        let defaults = UserDefaults.standard
-//        fontLabel.font = defaults.object(forKey: "font") as? UIFont
-//        fontColor.backgroundColor = defaults.object(forKey: "fontColor") as? UIColor
-//        fontSizeLabel.font = defaults.object(forKey: "fontSize") as? UIFont
-        
+        let fontColorHex = defaults.string(forKey: "fontColor")
+        if fontColorHex != nil {
+        fontColor.backgroundColor = UIColor(hex: (fontColorHex)!)
+        }
+      
         
         
         
@@ -256,8 +249,6 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     
     
-    
-    
    var fontFamilies = UIFont.familyNames
     var fontNames = [String]()
     var fontSizes = [String]()
@@ -292,6 +283,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         fontLabel?.font = UIFont(name: fontNames[row], size: 16)
+        pickerView.selectRow(row, inComponent: 0, animated: true)
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -337,14 +329,24 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         // User Defaults
         
-//        let encodedFont = NSKeyedArchiver.archivedData(withRootObject: fontLabel.font)
-////        let encodedFontColor = NSKeyedArchiver.archivedData(withRootObject: fontColor.backgroundColor ?? UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor)
-//        let encodedFontSize = NSKeyedArchiver.archivedData(withRootObject: fontSizeLabel.font.pointSize)
+
         
         let defaults = UserDefaults.standard
         defaults.set(fontLabel.font.fontName, forKey: "font")
-//        defaults.set(encodedFontColor, forKey: "fontColor")
+
         defaults.set(fontSizeLabel.font.pointSize, forKey: "fontSize")
+        
+        let hexFontColor = fontColor.backgroundColor?.toHexString
+        defaults.set(hexFontColor, forKey: "fontColor")
+        
+        
+        let row = pickerView.selectedRow(inComponent: 0)
+        defaults.set(row, forKey: "selectedRow")
+        
+
+    
+        
+
         
         
         self.navigationController?.popViewController(animated: true)
@@ -376,6 +378,49 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 
 
 
+// Function converting color to hex
+
+extension UIColor {
+    var toHexString: String {
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        
+        self.getRed(&r, green: &g, blue: &b, alpha: &a)
+        
+        return String(
+            format: "%02X%02X%02X",
+            Int(r * 0xff),
+            Int(g * 0xff),
+            Int(b * 0xff)
+        )
+    }
+}
+
+
+// Function converting hex to color
+
+extension UIColor {
+    convenience init(hex: String) {
+        let scanner = Scanner(string: hex)
+        scanner.scanLocation = 0
+        
+        var rgbValue: UInt64 = 0
+        
+        scanner.scanHexInt64(&rgbValue)
+        
+        let r = (rgbValue & 0xff0000) >> 16
+        let g = (rgbValue & 0xff00) >> 8
+        let b = rgbValue & 0xff
+        
+        self.init(
+            red: CGFloat(r) / 0xff,
+            green: CGFloat(g) / 0xff,
+            blue: CGFloat(b) / 0xff, alpha: 1
+        )
+    }
+}
 
 
 
