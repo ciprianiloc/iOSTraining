@@ -8,16 +8,18 @@
 
 import UIKit
 
+
+
 class AllJokesTableViewController: UITableViewController {
 
     
     @IBOutlet var allJokesTableView: UITableView!
     
-    var myJokes : [String] = [String]()
+    var myJokes :[String] = [String]()
     var myTitle : String = ""
     var jokeCategory : [String] = [String]()
     var selectedCategory : String = ""
-   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,12 +99,10 @@ class AllJokesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
+      
         let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
         
-     
-        let joke = myJokes[indexPath.section] //HERE
-       
+        let joke = myJokes[indexPath.row]
         
         cell.jokeLabel.text = joke
         
@@ -120,7 +120,7 @@ class AllJokesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailView = storyboard?.instantiateViewController(withIdentifier: "DetailJoke") as? DetailJokeViewController
         detailView?.selectedJoke = myJokes[indexPath.row]
-        detailView?.selectedCategory = jokeCategory[Int(arc4random_uniform(3))]
+        detailView?.selectedCategory = jokeCategory[indexPath.section]
         navigationController?.pushViewController(detailView!, animated: true)
     }
     

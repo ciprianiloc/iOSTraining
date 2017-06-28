@@ -12,9 +12,11 @@ class HomeViewController: UIViewController{
 
     let URLApi = "http://api.icndb.com/jokes/random"
     var jokesArray = [String]()
+    //var jokesDictionary = [String:String]()
     var jokeCategoryArray = [String]()
     @IBOutlet weak var jokeLabel: UILabel!
     var alljokesCategory : AllJokesTableViewController = AllJokesTableViewController()
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,33 +27,45 @@ class HomeViewController: UIViewController{
         let url = NSURL(string: URLApi)
         
         
+        
         URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data,response,error) -> Void in
              //get RANDOM Joke and category of joke
             if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary{
                 let jsonResult = jsonObj!.value(forKeyPath: "value.joke")!
                 let categoryResult = jsonObj?.value(forKeyPath: "value.categories") as! [String]
-                self.jokesArray.append(jsonResult as! String)
+                                //self.jokesDictionary[String(describing: categoryResult)] = String(describing: jsonResult)
                 
-                if categoryResult != []{
-                    var auxCategory = String(describing: categoryResult)
-                    auxCategory = auxCategory.replacingOccurrences(of: "[", with: "")
-                    auxCategory = auxCategory.replacingOccurrences(of: "]", with: "")
-                    auxCategory = auxCategory.replacingOccurrences(of: "\"", with: "")
-                    self.jokeCategoryArray.append(String(describing: auxCategory))
-                    self.alljokesCategory.selectedCategory = auxCategory
-                }else{
-                    self.jokeCategoryArray.append("Unknown")
-                    self.alljokesCategory.selectedCategory = "Unknown"
+                
+                if !self.jokesArray.contains(jsonResult as! String){
+                    self.jokesArray.append(jsonResult as! String)
                 }
-                
+              
+               
+                    if categoryResult.count >= 1{
+                         if !self.jokeCategoryArray.contains(String(describing: categoryResult)){
+                            var auxCategory = String(describing: categoryResult)
+                            auxCategory = auxCategory.replacingOccurrences(of: "[", with: "")
+                            auxCategory = auxCategory.replacingOccurrences(of: "]", with: "")
+                            auxCategory = auxCategory.replacingOccurrences(of: "\"", with: "")
+                            self.jokeCategoryArray.append(String(describing: auxCategory))
+                            self.alljokesCategory.selectedCategory = auxCategory
+                        }
+                    }
+                         else{
+                             if !self.jokeCategoryArray.contains("Unknown"){
+                                self.jokeCategoryArray.append("Unknown")
+                                self.alljokesCategory.selectedCategory = "Unknown"
+                            }
+                        }
+        
                 OperationQueue.main.addOperation({
                     self.showJokes()
                 })
                 
-            }
             
+            }
         }).resume()
-    }
+        }
     
     func showJokes(){
 //        for joke in jokesArray{
