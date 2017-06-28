@@ -65,23 +65,35 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         
         // font settings
-        //let defaults = UserDefaults.standard
+
         
-//        if let loadedStrings = NSKeyedUnarchiver.unarchiveObject(withFile: fullPathURL.absoluteString) as? [String] {
-//            savedArray = loadedStrings
+        let defaults = UserDefaults.standard
+        let font = defaults.string(forKey: "font")
+        
+        if (font != nil) {
+        fontLabel.font = UIFont(name: font!, size: 17)
+        }
+        
+        let fontSize = defaults.integer(forKey: "fontSize")
+        fontSizeLabel.font = UIFont(name: self.fontNames[0], size: CGFloat(fontSize))
+        fontSlider.setValue(Float(fontSize), animated: true)
+        
+        
+        
+//        let decodedFont = NSKeyedUnarchiver.unarchiveObject(withFile: "font")
+//        let decodedFontColor = NSKeyedUnarchiver.unarchiveObject(withFile: "fontColor")
+//        let decodedFontSize = NSKeyedUnarchiver.unarchiveObject(withFile: "fontSize")
+//
+//        fontLabel.font = decodedFont as? UIFont
+//        fontColor.backgroundColor = decodedFontColor as? UIColor
+//        if (decodedFontSize != nil) {
+//            fontSizeLabel?.font = UIFont(name: (fontSizeLabel?.font.fontName)!, size:(decodedFontSize as? CGFloat)!)
 //        }
         
-      
-        let randomFilename = UUID().uuidString
-        
-        let fullPath = (documentsDirectory as NSString).appendingPathComponent(randomFilename)
-        let fullPathURL = URL(string: fullPath)
-      
-    
-        if  let data = NSKeyedUnarchiver.unarchiveObject(withFile: (fullPathURL?.absoluteString)!) {
-            let savedFontString = data
-            fontLabel.font = savedFontString as! UIFont
-        }
+//        let defaults = UserDefaults.standard
+//        fontLabel.font = defaults.object(forKey: "font") as? UIFont
+//        fontColor.backgroundColor = defaults.object(forKey: "fontColor") as? UIColor
+//        fontSizeLabel.font = defaults.object(forKey: "fontSize") as? UIFont
         
         
         
@@ -309,13 +321,11 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 
         
         // File Manager
-        let fileManager = FileManager.default
+        
 
         let imageData = UIImageJPEGRepresentation(backgroundImage.image!, 0.5)
-        fileManager.createFile(atPath: "/documents/" as String, contents: imageData, attributes: nil)
-        
-        let path = URL(fileURLWithPath: NSHomeDirectory()).appendingPathComponent("cucubau.jpg")
         do {
+            let path = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("cucubau.jpg")
             //Save image to Root
             try imageData?.write(to: path, options:  .atomic)
             print("Saved To Root")
@@ -323,21 +333,18 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             print(error)
         }
         
+        
+        
         // User Defaults
         
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        let documentsDirectory = paths[0]
+//        let encodedFont = NSKeyedArchiver.archivedData(withRootObject: fontLabel.font)
+////        let encodedFontColor = NSKeyedArchiver.archivedData(withRootObject: fontColor.backgroundColor ?? UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor)
+//        let encodedFontSize = NSKeyedArchiver.archivedData(withRootObject: fontSizeLabel.font.pointSize)
         
-        let randomFilename = UUID().uuidString
-        let data = NSKeyedArchiver.archivedData(withRootObject: fontLabel.font)
-        let fullPath = (documentsDirectory as NSString).appendingPathComponent(randomFilename)
-        let fullPathURL = URL(string: fullPath)
-        
-        do {
-            try data.write(to: fullPathURL!)
-        } catch {
-            print("Could not write file (font)")
-        }
+        let defaults = UserDefaults.standard
+        defaults.set(fontLabel.font.fontName, forKey: "font")
+//        defaults.set(encodedFontColor, forKey: "fontColor")
+        defaults.set(fontSizeLabel.font.pointSize, forKey: "fontSize")
         
         
         self.navigationController?.popViewController(animated: true)
