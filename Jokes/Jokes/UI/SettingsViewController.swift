@@ -64,6 +64,28 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         }
         
         
+        // font settings
+        //let defaults = UserDefaults.standard
+        
+//        if let loadedStrings = NSKeyedUnarchiver.unarchiveObject(withFile: fullPathURL.absoluteString) as? [String] {
+//            savedArray = loadedStrings
+//        }
+        
+      
+        let randomFilename = UUID().uuidString
+        
+        let fullPath = (documentsDirectory as NSString).appendingPathComponent(randomFilename)
+        let fullPathURL = URL(string: fullPath)
+      
+    
+        if  let data = NSKeyedUnarchiver.unarchiveObject(withFile: (fullPathURL?.absoluteString)!) {
+            let savedFontString = data
+            fontLabel.font = savedFontString as! UIFont
+        }
+        
+        
+        
+        
     }
     
     
@@ -174,8 +196,12 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         // Internet button
         let internetAction = UIAlertAction(title: "Saved images", style: .default) {
-           _ in
+            (action) -> Void
+            in
            
+            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SavedImagesStoryboard")
+            self.present(viewController!, animated: true, completion: nil)
+            
             let urlPath = URL(string: "https://image.freepik.com/free-vector/orange-geometric-background-with-halftone-dots_1035-7243.jpg")
           
            
@@ -282,14 +308,9 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
 
         
-//        let imageData = UIImageJPEGRepresentation(backgroundImage.image!, 100)!
-//        let directory = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-        
-        
+        // File Manager
         let fileManager = FileManager.default
-//        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("apple.jpg")
-//        let image = UIImage(named: "apple.jpg")
-//        print(paths)
+
         let imageData = UIImageJPEGRepresentation(backgroundImage.image!, 0.5)
         fileManager.createFile(atPath: "/documents/" as String, contents: imageData, attributes: nil)
         
@@ -302,7 +323,21 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             print(error)
         }
         
+        // User Defaults
         
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0]
+        
+        let randomFilename = UUID().uuidString
+        let data = NSKeyedArchiver.archivedData(withRootObject: fontLabel.font)
+        let fullPath = (documentsDirectory as NSString).appendingPathComponent(randomFilename)
+        let fullPathURL = URL(string: fullPath)
+        
+        do {
+            try data.write(to: fullPathURL!)
+        } catch {
+            print("Could not write file (font)")
+        }
         
         
         self.navigationController?.popViewController(animated: true)
@@ -331,3 +366,9 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     */
 
 }
+
+
+
+
+
+
