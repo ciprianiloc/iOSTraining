@@ -14,7 +14,7 @@ import UIKit
 
 
 
-class HomeViewController: UIViewController{
+class HomeViewController: UIViewController {
     
     var settings:SettingsViewController?
 
@@ -28,12 +28,6 @@ class HomeViewController: UIViewController{
     var selectedJokeLabel : String?
     var jokes : [Joke] = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-       // mainRequest.getJsonFromUrl()
-    
-       //make a request with a completion block - the completion block will change the text of the jokeLabel 
-
     
     @IBOutlet var homeView: UIView!
     
@@ -41,35 +35,9 @@ class HomeViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getJsonFromUrl()
     
-
         changeFont()
         changeBackground()
-        
-        
-    }
-    
-    
-    
-    
-    
-    func getJsonFromUrl(){
-        let url = NSURL(string: URLApi)
-        
-
-
-    var alljokesCategory : AllJokesTableViewController = AllJokesTableViewController()
-    var selectedJokeLabel : String?
-    var jokes : [Joke] = []
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-       // mainRequest.getJsonFromUrl()
-    
-       //make a request with a completion block - the completion block will change the text of the jokeLabel 
-
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -116,19 +84,12 @@ class HomeViewController: UIViewController{
         mainRequest.getJsonFromUrl()
         getFirstJoke()
     }
-
-    
-    }
-
- var mainHomeVC = HomeViewController()
+}
 
 
 
 
 extension HomeViewController: SettingsDelegate {
-    
-    
-    
     
     func changeFont() {
         let defaults = UserDefaults.standard
@@ -218,10 +179,6 @@ extension UIImageView {
         imageView.contentMode = .scaleAspectFit
         imageView.contentMode = UIViewContentMode.center
     }
-
-
- var mainHomeVC = HomeViewController()
-
 
     
 }
