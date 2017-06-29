@@ -147,6 +147,7 @@ extension HomeViewController: SettingsDelegate {
             self.backgroundImageView.image = UIImage(contentsOfFile: imagePAth)!
             self.backgroundImageView.contentMode = UIViewContentMode.scaleAspectFit
             self.backgroundImageView.contentMode = UIViewContentMode.center
+            self.backgroundImageView.alpha = 0.8
             
             
         } else {
