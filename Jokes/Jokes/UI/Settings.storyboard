@@ -83,7 +83,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.90419684438173997" blue="0.87539599811229152" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="0.90140142732165951" blue="0.79956240544501289" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="phP-2b-ir0">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="kdu-yB-a6e">
@@ -1492,7 +1492,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.90419684440000003" blue="0.87539599810000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="0.90140142729999995" blue="0.79956240540000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8vF-Vu-EFV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1562,7 +1562,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.90419684440000003" blue="0.87539599810000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="1" green="0.90140142729999995" blue="0.79956240540000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="imageNameTextField" destination="Jg5-aG-ABV" id="XBY-WA-D5T"/>
