@@ -198,6 +198,9 @@ extension UIImageView {
         imageView.contentMode = UIViewContentMode.center
     }
 
-    
+
 }
+        
+        var mainHomeVC = HomeViewController()
+
 
