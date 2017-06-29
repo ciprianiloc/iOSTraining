@@ -16,7 +16,6 @@ import UIKit
 
 class HomeViewController: UIViewController{
 
-class HomeViewController: UIViewController {
     
     var settings:SettingsViewController?
 
@@ -48,12 +47,12 @@ class HomeViewController: UIViewController {
     
     
     
-    func getJsonFromUrl(){
-        let url = NSURL(string: URLApi)
-        
-
-
-    }
+//    func getJsonFromUrl(){
+//        let url = NSURL(string: URLApi)
+//        
+//
+//
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         getFirstJoke()
@@ -82,7 +81,7 @@ class HomeViewController: UIViewController {
     @IBAction func settingsAction(_ sender: Any) {
         let settingsStoryboard = UIStoryboard(name: "Settings", bundle: nil)
         let settingsVC = settingsStoryboard.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
-        settingsVC.delegate = self
+        settingsVC.delegate = self as! SettingsDelegate
         self.navigationController?.pushViewController(settingsVC, animated: true)
     }
 
@@ -102,7 +101,7 @@ class HomeViewController: UIViewController {
 
     
     }
-}
+
 
 
 
@@ -201,6 +200,6 @@ extension UIImageView {
 
 }
         
-        var mainHomeVC = HomeViewController()
+   //     var mainHomeVC = HomeViewController()
 
 
