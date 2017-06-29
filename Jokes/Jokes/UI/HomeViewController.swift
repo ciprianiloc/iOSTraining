@@ -11,6 +11,9 @@ import UIKit
 
 
 
+
+
+
 class HomeViewController: UIViewController{
     
     var settings:SettingsViewController?
@@ -19,6 +22,17 @@ class HomeViewController: UIViewController{
     var jokesArray = [Joke]()
     var jokeCategoryArray = [String]()
     @IBOutlet weak var jokeLabel: UILabel!
+
+
+    var alljokesCategory : AllJokesTableViewController = AllJokesTableViewController()
+    var selectedJokeLabel : String?
+    var jokes : [Joke] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+       // mainRequest.getJsonFromUrl()
+    
+       //make a request with a completion block - the completion block will change the text of the jokeLabel 
 
     
     @IBOutlet var homeView: UIView!
@@ -44,6 +58,7 @@ class HomeViewController: UIViewController{
         let url = NSURL(string: URLApi)
         
 
+
     var alljokesCategory : AllJokesTableViewController = AllJokesTableViewController()
     var selectedJokeLabel : String?
     var jokes : [Joke] = []
@@ -54,7 +69,7 @@ class HomeViewController: UIViewController{
     
        //make a request with a completion block - the completion block will change the text of the jokeLabel 
 
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,6 +119,9 @@ class HomeViewController: UIViewController{
 
     
     }
+
+ var mainHomeVC = HomeViewController()
+
 
 
 
@@ -193,7 +211,6 @@ extension UIFont {
     }
 }
 
-
 extension UIImageView {
     
     func defaultBackground(imageView: UIImageView) {
@@ -202,7 +219,9 @@ extension UIImageView {
         imageView.contentMode = UIViewContentMode.center
     }
 
+
  var mainHomeVC = HomeViewController()
+
 
     
 }
