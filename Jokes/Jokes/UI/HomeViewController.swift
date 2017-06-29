@@ -153,7 +153,7 @@ extension UIFont {
             let defaults = UserDefaults.standard
 //            let font = defaults.string(forKey: "font")
 //            let fontSize = defaults.string(forKey: "fontSize")
-            let fontColor = defaults.string(forKey: "fontColor")
+            //let fontColor = defaults.string(forKey: "fontColor")
             
 //            if font == nil && fontSize == nil{
             
@@ -170,7 +170,7 @@ extension UIFont {
 //            
 //             if fontColor == nil {
             
-                label.textColor = UIColor(hex: fontColor!)
+                label.textColor = UIColor.black
                 
 //              
 //            }
