@@ -20,6 +20,7 @@ class AllJokesTableViewController: UITableViewController {
     var jokeCategory : [String] = [String]()
     var selectedCategory : String = ""
     var jokes : [Joke] = []
+    var ratingFromDetailController : Int?
     
     
     
@@ -129,10 +130,11 @@ class AllJokesTableViewController: UITableViewController {
 //let cell = UITableViewCell()
         
         let joke = jokes[indexPath.row]
+         //let detailView = storyboard?.instantiateViewController(withIdentifier: "DetailJoke") as? DetailJokeViewController
         
         //cell.textLabel!.text = String(describing: joke.jokeDescription!)
         cell.jokeLabel.text = String(describing: joke.jokeDescription!)
-        cell.ratingStarsView.rating = 1
+        cell.ratingStarsView.rating = 3
       //  cell.ratingStarsView.rating = Double(joke.jokeRating)
         
         

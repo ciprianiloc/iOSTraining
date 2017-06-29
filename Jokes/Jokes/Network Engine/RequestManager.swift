@@ -44,8 +44,23 @@ class RequestManager: NSObject {
                     auxCategory = auxCategory.replacingOccurrences(of: "]", with: "")
                     auxCategory = auxCategory.replacingOccurrences(of: "\"", with: "")
                     joke.jokeCategory = String(describing: auxCategory)
+                    
+                    
+//                    let random = Int64(Int(arc4random_uniform(6)))
+//                    let cosmos = CosmosView()
+//                    
+////                        if random > 0 {
+////                        joke.jokeRating = random
+////                       
+////                        }else{
+////                            joke.jokeRating = 1
+////                        }
+//                        cosmos.rating = Double(joke.jokeRating)
+//                    
+//                    }
+//                
+                    
                 }
-                
                 
                 
                 

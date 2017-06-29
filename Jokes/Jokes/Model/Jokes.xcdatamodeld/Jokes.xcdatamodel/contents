@@ -4,7 +4,7 @@
         <attribute name="jokeCategory" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="jokeDateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="jokeDescription" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="jokeRating" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="jokeRating" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
         <element name="Joke" positionX="-63" positionY="-18" width="128" height="105"/>

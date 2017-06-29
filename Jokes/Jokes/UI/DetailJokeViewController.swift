@@ -24,9 +24,10 @@ class DetailJokeViewController: UIViewController {
     var selectedJoke : String?
     var selectedImage : UIImage?
     var selectedCategory : String?
+    var selectedRating : Double?
     
     
-   
+    
     
     
     override func viewDidLoad() {
@@ -34,10 +35,19 @@ class DetailJokeViewController: UIViewController {
         detailLabel.text = selectedJoke
         jokeCategoryLabel.text = selectedCategory
         
-        
+        ratingView.didTouchCosmos = { rating in
+            self.selectedRating = rating
+            print(rating)
+                   }
         
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(DetailJokeViewController.ratingLevelChanged), userInfo: nil, repeats: true)
        // RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
+        
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveJokeModification))
+        
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -65,6 +75,12 @@ class DetailJokeViewController: UIViewController {
         default:
             funnyLevelLabel.text = "1 level Funny"
         }
+    }
+    
+    func saveJokeModification(){
+        
+        
+        navigationController?.popViewController(animated: true)
     }
 
 
