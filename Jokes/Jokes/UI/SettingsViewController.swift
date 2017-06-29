@@ -8,16 +8,7 @@
 
 import UIKit
 
-protocol SettingsDelegate: class {
-    func changeFont()
-    func changeBackground()
-    
-}
-
 class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIPopoverPresentationControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    // Delegate
-    var delegate:SettingsDelegate?
     
     let imagePicker = UIImagePickerController()
     
@@ -32,78 +23,6 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var fontColor: UIView!
     
     @IBOutlet weak var backgroundImage: UIImageView!
-    
-
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-        
-        // Image picker delegate
-        
-        imagePicker.delegate = self
-        
-        
-        // Get directory path
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        let documentsDirectory = paths[0]
-        
-        
-        // Get image
-        
-        let fileManager = FileManager.default
-        let imagePAth = (documentsDirectory as NSString).appendingPathComponent("cucubau.jpg")
-        if fileManager.fileExists(atPath: imagePAth){
-            self.backgroundImage.image = UIImage(contentsOfFile: imagePAth)
-        }else{
-            print("Using default image")
-            backgroundImage.image = #imageLiteral(resourceName: "images.jpeg")
-        }
-        
-        
-        
-        // all fonts
-        for familyName in fontFamilies {
-            
-            fontNames.append(familyName)
-        }
-        
-        
-        // font settings
-
-        
-        let defaults = UserDefaults.standard
-        let font = defaults.string(forKey: "font")
-    
-        
-        if (font != nil) {
-        fontLabel.font = UIFont(name: font!, size: 17)
-        
-        }
-        
-        let selectedRow = defaults.integer(forKey: "selectedRow")
-        pickerView.selectRow(selectedRow, inComponent: 0, animated: true)
-        
-        
-        
-        let fontSize = defaults.integer(forKey: "fontSize")
-        fontSizeLabel.font = UIFont(name: self.fontNames[0], size: CGFloat(fontSize))
-        fontSlider.setValue(Float(fontSize), animated: true)
-        
-        let fontColorHex = defaults.string(forKey: "fontColor")
-        if fontColorHex != nil {
-        fontColor.backgroundColor = UIColor(hex: (fontColorHex)!)
-        }
-      
-        
-        
-        
-    }
-    
-    
-    
     
     @IBAction func changeFontColor(_ sender: Any) {
         let popoverVC = storyboard?.instantiateViewController(withIdentifier: "colorPickerPopover") as! ColorPickerViewController
@@ -209,28 +128,22 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         
         // Internet button
-        let internetAction = UIAlertAction(title: "Saved images", style: .default) {
-            (action) -> Void
-            in
-           
-            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SavedImagesStoryboard")
-            self.present(viewController!, animated: true, completion: nil)
-            
+        let internetAction = UIAlertAction(title: "Upload from URL", style: .default) {
+           _ in
+            //self.imagePicker.sourceType = UIImagePickerControllerSourceType.
             let urlPath = URL(string: "https://image.freepik.com/free-vector/orange-geometric-background-with-halftone-dots_1035-7243.jpg")
-          
-           
-
+            
+//            let urlPicker = UIAlertController(title: "Insert URL", message: nil, preferredStyle: .add) {
+//                _ in
+//                urlPath = URl(
+//            }
+            
             downloadImage(url: urlPath!)
         }
         alert.addAction(internetAction)
         
         
         present(alert, animated: true, completion: nil)
-
-       
-        
-        
-        
     }
     
 
@@ -241,20 +154,19 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             backgroundImage.contentMode = .scaleAspectFit
             backgroundImage.image = pickedImage
-            
-            
+        }
+        
     
         dismiss(animated: true, completion: nil)
 
     }
-    }
-    
-    
 
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
     
     
     
@@ -271,7 +183,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 
     
     func setLabelColor (_ color: UIColor) {
-       
+       // fontColor.setTitleColor(color, for:UIControlState())
         self.fontColor.backgroundColor = color
     }
 
@@ -290,9 +202,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
+        //fontLabel.text = fontNames[row]
         fontLabel?.font = UIFont(name: fontNames[row], size: 16)
-        pickerView.selectRow(row, inComponent: 0, animated: true)
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -319,54 +230,31 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     @IBAction func saveButton(_ sender: Any) {
         
-
-        
-        // File Manager
-        
-
-        let imageData = UIImageJPEGRepresentation(backgroundImage.image!, 0.5)
-        do {
-            let path = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("cucubau.jpg")
-            //Save image to Root
-            try imageData?.write(to: path, options:  .atomic)
-            print("Saved To Root")
-        } catch let error {
-            print(error)
-        }
         
         
-        
-        // User Defaults
-        
-
-        
-        let defaults = UserDefaults.standard
-        defaults.set(fontLabel.font.fontName, forKey: "font")
-
-        defaults.set(fontSizeLabel.font.pointSize, forKey: "fontSize")
-        
-        let hexFontColor = fontColor.backgroundColor?.toHexString
-        defaults.set(hexFontColor, forKey: "fontColor")
-        
-        
-        let row = pickerView.selectedRow(inComponent: 0)
-        defaults.set(row, forKey: "selectedRow")
-        
-
-    
-        
-
-        delegate?.changeFont()
-        delegate?.changeBackground()
+//        let defaults = UserDefaults.standard
+//        defaults.set(fontLabel, forKey: "Font")
+//        defaults.set(fontSizeLabel, forKey: "FontSize")
+//        defaults.set(fontColor, forKey: "FontColor")
+//        defaults.set(backgroundImage, forKey: "BackgroundImage")
         
         self.navigationController?.popViewController(animated: true)
     }
     
-   
-    
-    
-    
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        imagePicker.delegate = self
+
+        // Do any additional setup after loading the view.
+        for familyName in fontFamilies {
+            //let names = UIFont.fontNames(forFamilyName: familyName )
+           
+            fontNames.append(familyName)
+        }
+        
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -385,52 +273,3 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     */
 
 }
-
-
-
-// Function converting color to hex
-
-extension UIColor {
-    var toHexString: String {
-        var r: CGFloat = 0
-        var g: CGFloat = 0
-        var b: CGFloat = 0
-        var a: CGFloat = 0
-        
-        self.getRed(&r, green: &g, blue: &b, alpha: &a)
-        
-        return String(
-            format: "%02X%02X%02X",
-            Int(r * 0xff),
-            Int(g * 0xff),
-            Int(b * 0xff)
-        )
-    }
-}
-
-
-// Function converting hex to color
-
-extension UIColor {
-    convenience init(hex: String) {
-        let scanner = Scanner(string: hex)
-        scanner.scanLocation = 0
-        
-        var rgbValue: UInt64 = 0
-        
-        scanner.scanHexInt64(&rgbValue)
-        
-        let r = (rgbValue & 0xff0000) >> 16
-        let g = (rgbValue & 0xff00) >> 8
-        let b = rgbValue & 0xff
-        
-        self.init(
-            red: CGFloat(r) / 0xff,
-            green: CGFloat(g) / 0xff,
-            blue: CGFloat(b) / 0xff, alpha: 1
-        )
-    }
-}
-
-
-
