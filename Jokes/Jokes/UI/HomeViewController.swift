@@ -220,9 +220,9 @@ extension UIImageView {
     }
 
 
- var mainHomeVC = HomeViewController()
-
-
     
 }
+        
+        var mainHomeVC = HomeViewController()
+
 
