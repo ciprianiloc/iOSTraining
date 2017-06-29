@@ -14,6 +14,8 @@ class SavedImagedViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let tableView : SavedImagesTableViewController
+        
     }
 
     @IBAction func addImage(_ sender: Any) {
