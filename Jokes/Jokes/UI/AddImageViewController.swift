@@ -38,6 +38,9 @@ class AddImageViewController: UIViewController {
             
         }
         
+        
+        urlTextField.text = ""
+        
        // dismiss(animated: true, completion: nil)
         
     }
