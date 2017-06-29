@@ -9,11 +9,12 @@
 import UIKit
 import Foundation
 
-let topJokeURL = "http://api.icndb.com/random"
 
 class DataManager: NSObject {
     
-        
+    //var jokes : [Joke] = []
+    
+
 }
 
 
