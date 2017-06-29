@@ -28,14 +28,14 @@ class HomeViewController: UIViewController{
         super.viewDidLoad()
         getJsonFromUrl()
     
-       
+
+        changeFont()
+        changeBackground()
+        
         
     }
     
     
-//    func handleSettings() {
-//        delegate?.changeFont
-//    }
     
     
     
@@ -102,11 +102,14 @@ extension HomeViewController: SettingsDelegate {
         let font = defaults.string(forKey: "font")
         let fontSize = defaults.integer(forKey: "fontSize")
         
+        
+        
         if (font != nil) {
             jokeLabel.font = UIFont(name: font!, size: CGFloat(fontSize))
             
         } else {
-            jokeLabel.font = UIFont(name: "TimesNewRomanPSMT", size: 17)
+            
+            jokeLabel.font.verifyDefaults(label: jokeLabel)
         }
         
         
@@ -114,11 +117,13 @@ extension HomeViewController: SettingsDelegate {
         if fontColorHex != nil {
             jokeLabel.textColor = UIColor(hex: (fontColorHex)!)
         } else {
-            jokeLabel.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+            jokeLabel.font.verifyDefaults(label: jokeLabel)
         }
 
     }
     func changeBackground() {
+        
+        
         
         let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
         let documentsDirectory = paths[0]
@@ -134,14 +139,53 @@ extension HomeViewController: SettingsDelegate {
             
             
         } else {
-            print("Using default image")
-            self.backgroundImageView.image = UIImage(named: "images.jpg")
-            self.backgroundImageView.contentMode = UIViewContentMode.scaleAspectFit
+            backgroundImageView.defaultBackground(imageView: backgroundImageView)
         }
         
     }
         
 }
 
+extension UIFont {
     
+    
+        func verifyDefaults(label: UILabel)  {
+            let defaults = UserDefaults.standard
+//            let font = defaults.string(forKey: "font")
+//            let fontSize = defaults.string(forKey: "fontSize")
+            let fontColor = defaults.string(forKey: "fontColor")
+            
+//            if font == nil && fontSize == nil{
+            
+                label.font = UIFont(name: "TimesNewRomanPSMT", size: 17)
+                
+//            } else if font == nil && fontSize != nil {
+//                
+//                label.font = UIFont(name: "TimesNewRomanPSMT", size: CGFloat(Int(fontSize!)!))
+//                
+//            } else if font != nil && fontSize == nil {
+//                label.font = UIFont(name: font!, size: CGFloat(Int(fontSize!)!))
+//               
+//            }
+//            
+//             if fontColor == nil {
+            
+                label.textColor = UIColor(hex: fontColor!)
+                
+//              
+//            }
+//        }
+    }
+}
+
+
+extension UIImageView {
+    
+    func defaultBackground(imageView: UIImageView) {
+        imageView.image = UIImage(named: "images.jpg")
+        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = UIViewContentMode.center
+    }
+    
+}
 
