@@ -13,7 +13,10 @@ import UIKit
 
 
 
+
 class HomeViewController: UIViewController{
+
+class HomeViewController: UIViewController {
     
     var settings:SettingsViewController?
 
@@ -22,16 +25,11 @@ class HomeViewController: UIViewController{
     var jokeCategoryArray = [String]()
     @IBOutlet weak var jokeLabel: UILabel!
 
+
     var alljokesCategory : AllJokesTableViewController = AllJokesTableViewController()
     var selectedJokeLabel : String?
     var jokes : [Joke] = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-       // mainRequest.getJsonFromUrl()
-    
-       //make a request with a completion block - the completion block will change the text of the jokeLabel 
-
     
     @IBOutlet var homeView: UIView!
     
@@ -39,12 +37,10 @@ class HomeViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getJsonFromUrl()
     
-
         changeFont()
         changeBackground()
-        
+
         
     }
     
@@ -56,7 +52,7 @@ class HomeViewController: UIViewController{
         let url = NSURL(string: URLApi)
         
 
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,15 +102,12 @@ class HomeViewController: UIViewController{
 
     
     }
+}
 
- var mainHomeVC = HomeViewController()
 
 
 
 extension HomeViewController: SettingsDelegate {
-    
-    
-    
     
     func changeFont() {
         let defaults = UserDefaults.standard
@@ -172,7 +165,7 @@ extension UIFont {
             let defaults = UserDefaults.standard
 //            let font = defaults.string(forKey: "font")
 //            let fontSize = defaults.string(forKey: "fontSize")
-            let fontColor = defaults.string(forKey: "fontColor")
+            //let fontColor = defaults.string(forKey: "fontColor")
             
 //            if font == nil && fontSize == nil{
             
@@ -189,7 +182,7 @@ extension UIFont {
 //            
 //             if fontColor == nil {
             
-                label.textColor = UIColor(hex: fontColor!)
+                label.textColor = UIColor.black
                 
 //              
 //            }
