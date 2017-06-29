@@ -11,14 +11,15 @@ import UIKit
 
 
 
-
 class HomeViewController: UIViewController{
     
     var settings:SettingsViewController?
 
     let URLApi = "http://api.icndb.com/jokes/random"
-    var jokesArray = [String]()
+    var jokesArray = [Joke]()
+    var jokeCategoryArray = [String]()
     @IBOutlet weak var jokeLabel: UILabel!
+
     
     @IBOutlet var homeView: UIView!
     
@@ -42,29 +43,39 @@ class HomeViewController: UIViewController{
     func getJsonFromUrl(){
         let url = NSURL(string: URLApi)
         
+
+    var alljokesCategory : AllJokesTableViewController = AllJokesTableViewController()
+    var selectedJokeLabel : String?
+    var jokes : [Joke] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+       // mainRequest.getJsonFromUrl()
+    
+       //make a request with a completion block - the completion block will change the text of the jokeLabel 
+
         
-        URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data,response,error) -> Void in
-            
-            if let jsonObj = try? JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? NSDictionary{
-                let jsonResult = jsonObj!.value(forKeyPath: "value.joke")!
-                self.jokesArray.append(jsonResult as! String)
-                
-                OperationQueue.main.addOperation({
-                    self.showJokes()
-                })
-                
-            }
-            
-        }).resume()
     }
     
-    func showJokes(){
-        for joke in jokesArray{
-            print(joke)
+    override func viewWillAppear(_ animated: Bool) {
+        getFirstJoke()
+    }
+   
+   
+    
+    func getFirstJoke(){
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        do{
+            try jokes = context.fetch(Joke.fetchRequest())
+        }catch {
+            print("error while fetching data from CoreData")
         }
-        jokeLabel.text = jokesArray.last
+        
+        self.jokeLabel.text = jokes.last?.jokeDescription
+       // self.jokeLabel.text = selectedJokeLabel
+
     }
-    
+  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -80,16 +91,20 @@ class HomeViewController: UIViewController{
     @IBAction func allJokesAction(_ sender: Any) {
         let allJokesStoryboard = UIStoryboard(name: "AllJokes", bundle: nil)
         let allJokesVC = allJokesStoryboard.instantiateViewController(withIdentifier: "AllJokesTableViewController") as! AllJokesTableViewController
-        allJokesVC.myJokes = jokesArray
+        allJokesVC.jokes = jokesArray
         self.navigationController?.pushViewController(allJokesVC, animated: true)
     }
     
-    @IBAction func getRandomJoke(_ sender: UIButton) {
-        getJsonFromUrl()
+    @IBAction func getRandomJoke(_ sender: UIButton) { //tap button to add random joke to CoreData
+//        let requestJoke = RequestManager()
+//        requestJoke.getJsonFromUrl()
+        mainRequest.getJsonFromUrl()
+        getFirstJoke()
     }
 
     
     }
+
 
 
 extension HomeViewController: SettingsDelegate {
@@ -186,6 +201,9 @@ extension UIImageView {
         imageView.contentMode = .scaleAspectFit
         imageView.contentMode = UIViewContentMode.center
     }
+
+ var mainHomeVC = HomeViewController()
+
     
 }
 

@@ -8,22 +8,32 @@
 
 import UIKit
 
+
+
 class AllJokesTableViewController: UITableViewController {
 
     
     @IBOutlet var allJokesTableView: UITableView!
     
-    var myJokes : [String] = [String]()
+    var myJokes :[String] = [String]()
     var myTitle : String = ""
-    var jokeCategory : [String] = ["nerdy","very lame","funniest"]
-   
+    var jokeCategory : [String] = [String]()
+    var selectedCategory : String = ""
+    var jokes : [Joke] = []
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewJokeButton(_:)))
+        allJokesTableView.delegate = self
+        allJokesTableView.dataSource = self
+    }
     
-        
-            }
+    override func viewWillAppear(_ animated: Bool) {
+        getData()
+        allJokesTableView.reloadData()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -33,18 +43,17 @@ class AllJokesTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 	jokeCategory.count
+        return 	1 //jokeCategory.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return myJokes.count
+       
+        return jokes.count//myJokes.count
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.jokeCategory[section]
-    }
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return self.jokeCategory[section]
+//    }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let frame : CGRect = tableView.frame
@@ -94,25 +103,37 @@ class AllJokesTableViewController: UITableViewController {
     }
     
     
+    
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
-        
-     
-        let joke = myJokes[indexPath.row]
       
-  
-        cell.jokeLabel.text = joke
+     //   allJokesTableView.register(JokeCell(), forCellReuseIdentifier: "JokeCell")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
+//        
+        //let cell = tableView.dequeueReusableCell(withIdentifier: <#T##String#>)
+//        let joke = myJokes[indexPath.row]
+//        
+//        cell.jokeLabel.text = joke
+//        
+//        let random = Int(arc4random_uniform(6))
+//        
+//        if random > 0{
+//            cell.ratingStarsView.rating = Double(random)
+//        }else{
+//            cell.ratingStarsView.rating = 1
+//        }
+
         
-        let random = Int(arc4random_uniform(6))
+//let cell = UITableViewCell()
         
-        if random > 0{
-            cell.ratingStarsView.rating = Double(random)
-        }else{
-            cell.ratingStarsView.rating = 1
-        }
+        let joke = jokes[indexPath.row]
         
+        //cell.textLabel!.text = String(describing: joke.jokeDescription!)
+        cell.jokeLabel.text = String(describing: joke.jokeDescription!)
+        cell.ratingStarsView.rating = 1
+      //  cell.ratingStarsView.rating = Double(joke.jokeRating)
         
         
         return cell
@@ -120,9 +141,30 @@ class AllJokesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailView = storyboard?.instantiateViewController(withIdentifier: "DetailJoke") as? DetailJokeViewController
-        detailView?.selectedJoke = myJokes[indexPath.row]
-        detailView?.selectedCategory = jokeCategory[Int(arc4random_uniform(3))]
+        detailView?.selectedJoke = String(describing: jokes[indexPath.row].jokeDescription!)
+        detailView?.selectedCategory = String(describing: jokes[indexPath.row].jokeCategory!)
         navigationController?.pushViewController(detailView!, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        
+        if editingStyle == .delete{
+            let joke = jokes[indexPath.row]
+            context.delete(joke)
+            
+            
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            
+            
+            do {
+                try jokes = context.fetch(Joke.fetchRequest())
+            } catch  {
+                print("fecth failed on DELETE")
+            }
+        }
+        allJokesTableView.reloadData()
     }
     
     
@@ -143,23 +185,19 @@ class AllJokesTableViewController: UITableViewController {
     
     
     
-    
-    func imageForRating(rating : Int) -> UIImage{
-        switch rating {
-        case 1:
-            return UIImage(named: "1StarSmall")!
-        case 2:
-            return UIImage(named: "2StarsSmall")!
-        case 3:
-            return UIImage(named: "3StarsSmall")!
-        case 4:
-            return UIImage(named: "4StarsSmall")!
-        case 5:
-            return UIImage(named: "5StarsSmall")!
-        default:
-            return UIImage(named: "1StarSmall")!
+    func getData(){
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        
+        do{
+            try jokes = context.fetch(Joke.fetchRequest())
+        }catch {
+            print("error while fetching data from CoreData")
+        }
     }
+    
+   
     
 }
 
-}
+
