@@ -33,7 +33,14 @@ class RequestManager: NSObject {
                 
                 let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
                 let joke = Joke(context: context)
-                joke.jokeDescription = jsonResult as? String
+                
+                var jokeWihQuote = jsonResult as! String
+                if jokeWihQuote.contains("&quot;"){
+                    jokeWihQuote = jokeWihQuote.replacingOccurrences(of: "&quot;", with: "\'")
+                }
+                
+                
+                joke.jokeDescription = jokeWihQuote
                 //self.homeVCJokeLabel = String(describing: jsonResult)
                 
                 if categoryResult == []{
@@ -44,22 +51,6 @@ class RequestManager: NSObject {
                     auxCategory = auxCategory.replacingOccurrences(of: "]", with: "")
                     auxCategory = auxCategory.replacingOccurrences(of: "\"", with: "")
                     joke.jokeCategory = String(describing: auxCategory)
-                    
-                    
-//                    let random = Int64(Int(arc4random_uniform(6)))
-//                    let cosmos = CosmosView()
-//                    
-////                        if random > 0 {
-////                        joke.jokeRating = random
-////                       
-////                        }else{
-////                            joke.jokeRating = 1
-////                        }
-//                        cosmos.rating = Double(joke.jokeRating)
-//                    
-//                    }
-//                
-                    
                 }
                 
                 
