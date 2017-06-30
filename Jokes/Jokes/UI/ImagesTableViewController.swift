@@ -19,6 +19,7 @@ class ImagesTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
          getData()
 
         // Uncomment the following line to preserve selection between presentations
@@ -55,7 +56,7 @@ class ImagesTableViewController: UIViewController {
     
     
     
-    
+    // fetching from CoreData
     func getData() {
         
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext

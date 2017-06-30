@@ -20,16 +20,16 @@ class AddImageViewController: UIViewController {
     @IBOutlet weak var urlImageView: UIImageView!
     
     
-    struct images {
-        var name: NSManagedObject
-        var image: NSManagedObject
-        
-        init(name: NSManagedObject, image: NSManagedObject) {
-            self.name = name
-            self.image = image
-        }
-    }
-    var imgs = [images]()
+//    struct images {
+//        var name: NSManagedObject
+//        var image: NSManagedObject
+//        
+//        init(name: NSManagedObject, image: NSManagedObject) {
+//            self.name = name
+//            self.image = image
+//        }
+//    }
+//    var imgs = [images]()
     
     
     @IBAction func cancel(_ sender: Any) {
@@ -44,6 +44,11 @@ class AddImageViewController: UIViewController {
         
         downloadImage(url: urlPath)
             
+            let alert = UIAlertController.init(title: "Succesfully downloaded!", message: "Press the Cancel button on the top left of the screen to view your Saved Pictures", preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(cancel)
+            present(alert, animated: true)
+            
         } else {
             let alertView = UIAlertController.init(title: "Error", message: "Add viable URL before saving", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -54,7 +59,7 @@ class AddImageViewController: UIViewController {
         
         
         
-        
+        // fetching text from name field, checking if empty
         
         let imageName = imageNameTextField.text
         if imageName == "" {
@@ -65,6 +70,9 @@ class AddImageViewController: UIViewController {
         }
         
         
+        
+        // Saving in CoreData
+        
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let image = Pictures(context: context)
         image.name = imageNameTextField.text
@@ -73,6 +81,7 @@ class AddImageViewController: UIViewController {
         
 
         
+        // clearing text fields
         imageNameTextField.text = ""
         urlTextField.text = ""
 
