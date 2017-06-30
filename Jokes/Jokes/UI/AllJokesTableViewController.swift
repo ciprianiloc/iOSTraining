@@ -117,7 +117,7 @@ class AllJokesTableViewController: UITableViewController {
         let joke = jokes[indexPath.row]
         
         cell.jokeLabel.text = String(describing: joke.jokeDescription!)
-        cell.ratingStarsView.rating = 3
+        cell.ratingStarsView.rating = jokes[indexPath.row].jokeRating
         
 
         
@@ -128,7 +128,7 @@ class AllJokesTableViewController: UITableViewController {
         let detailView = storyboard?.instantiateViewController(withIdentifier: "DetailJoke") as? DetailJokeViewController
         detailView?.selectedJoke = String(describing: jokes[indexPath.row].jokeDescription!)
         detailView?.selectedCategory = String(describing: jokes[indexPath.row].jokeCategory!)
-       
+        detailView?.getAJoke(withObjectID: jokes[indexPath.row].objectID)
         
         
         //make a fetch request with an ID parameter ( from CoreData) to access a specific joke and change its rating 

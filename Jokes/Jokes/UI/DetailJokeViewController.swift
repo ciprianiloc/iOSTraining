@@ -47,7 +47,7 @@ class DetailJokeViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveJokeModification))
         
         
-        getAJoke()
+     //   getAJoke()
     }
     
     override func didReceiveMemoryWarning() {
@@ -59,6 +59,43 @@ class DetailJokeViewController: UIViewController {
         getRating(rating: Int(ratingView.rating))
     }
     
+    func getAJoke(withObjectID id : NSManagedObjectID){
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        do {
+            jokes = try managedContext.fetch(fetchRequest) as! [Joke]
+            
+            for joke in jokes{
+                //   if let jokeDescription = joke.jokeDescription{
+                //  if joke.jokeCategory == "nerdy"{
+                //print(jokeDescription)
+                if id == joke.objectID{
+                  //  print(joke.objectID)
+                    print(joke.jokeDescription!)
+                    joke.jokeRating = changeRating()
+                  //  printsth(joke: joke)//changeRating()
+
+                }
+                
+                
+                
+                
+                // }
+                
+                //   }
+            }
+            
+
+        } catch  {
+            print("fetching failed")
+        }
+        
+    }
+    
+    func printsth(joke: Joke){
+        print("adjsgdfaiksdhkjashdkjahsk")
+    }
     
     func getRating(rating: Int){
         switch rating {
@@ -78,40 +115,30 @@ class DetailJokeViewController: UIViewController {
     }
     
     func saveJokeModification(){
-        //get selected rating 
-        if let changedRating = self.selectedRating{
-            print(changedRating)
-        }
+        //get selected rating
+   //     changeRating()
         
-        
-        
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         navigationController?.popViewController(animated: true) //get back to tableViewController
+        
+       // return Double(ratingResult)
     }
 
-    
-    func getAJoke(){
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
-        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    func changeRating() -> Double{
+        var result : Double = 0
         
-        do {
-            jokes = try managedContext.fetch(fetchRequest) as! [Joke]
-            
-            for joke in jokes{
-                if let jokeDescription = joke.jokeDescription{
-                  //  if joke.jokeCategory == "nerdy"{
-                        //print(jokeDescription)
-                       
-                            print(joke.objectID)
-                        
-                   // }
-                    
-                }
-            }
-        } catch  {
-            print("fetching failed")
+        print(" i am in here")
+        
+        if let changedRating = self.selectedRating{
+            print(changedRating)
+            result = changedRating
         }
         
+        
+        
+        return result
     }
+  
 
 }
 
