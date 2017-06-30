@@ -25,7 +25,7 @@ class DetailJokeViewController: UIViewController {
     var selectedJoke : String?
     var selectedImage : UIImage?
     var selectedCategory : String?
-    var selectedRating : Double?
+    var selectedRating : Double? = 1
     var jokes: [Joke] = []
     
     
@@ -35,10 +35,8 @@ class DetailJokeViewController: UIViewController {
         detailLabel.text = selectedJoke
         jokeCategoryLabel.text = selectedCategory
         
-        ratingView.didTouchCosmos = { rating in
-            self.selectedRating = rating
-            //print(rating)
-                   }
+//        self.selectedRating = 3
+        
         
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(DetailJokeViewController.ratingLevelChanged), userInfo: nil, repeats: true)
        // RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
@@ -73,17 +71,10 @@ class DetailJokeViewController: UIViewController {
                 if id == joke.objectID{
                   //  print(joke.objectID)
                     print(joke.jokeDescription!)
+                    
                     joke.jokeRating = changeRating()
-                  //  printsth(joke: joke)//changeRating()
-
+    
                 }
-                
-                
-                
-                
-                // }
-                
-                //   }
             }
             
 
@@ -125,18 +116,21 @@ class DetailJokeViewController: UIViewController {
     }
 
     func changeRating() -> Double{
-        var result : Double = 0
+        //var result : Double = 0
         
         print(" i am in here")
         
-        if let changedRating = self.selectedRating{
-            print(changedRating)
-            result = changedRating
-        }
+//        if let changedRating = self.selectedRating{
+//            print(changedRating)
+//            result = changedRating
+//        }
         
+//        ratingView.didTouchCosmos = { rating in
+//            result = rating
+//        }
         
-        
-        return result
+       
+        return self.selectedRating!
     }
   
 
