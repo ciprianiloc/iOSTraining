@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+
 
 class AddImageViewController: UIViewController {
 
@@ -16,6 +18,18 @@ class AddImageViewController: UIViewController {
     @IBOutlet weak var imageNameTextField: UITextField!
     
     @IBOutlet weak var urlImageView: UIImageView!
+    
+    
+    struct images {
+        var name: NSManagedObject
+        var image: NSManagedObject
+        
+        init(name: NSManagedObject, image: NSManagedObject) {
+            self.name = name
+            self.image = image
+        }
+    }
+    var imgs = [images]()
     
     
     @IBAction func cancel(_ sender: Any) {
@@ -39,7 +53,33 @@ class AddImageViewController: UIViewController {
         }
         
         
+        
+        
+        
+        let imageName = imageNameTextField.text
+        if imageName == "" {
+            let alertView = UIAlertController.init(title: "Error", message: "Give your image a name before saving", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertView.addAction(cancelAction)
+            present(alertView, animated: true)
+        }
+        
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let image = Pictures(context: context)
+        image.name = imageNameTextField.text
+        
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
+
+        
+        imageNameTextField.text = ""
         urlTextField.text = ""
+
+        
+
+        
+        
         
        // dismiss(animated: true, completion: nil)
         

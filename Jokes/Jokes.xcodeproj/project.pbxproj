@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		66682CAD1F05008F0030F38A /* AddImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66682CAC1F05008F0030F38A /* AddImageViewController.swift */; };
 		6671B8111F0250BC000BC65B /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6671B8101F0250BC000BC65B /* CosmosDistrib.swift */; };
-		6671B8131F025377000BC65B /* SavedImagedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6671B8121F025377000BC65B /* SavedImagedViewController.swift */; };
 		6675942D1EFBDBD200E68F9E /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6675942C1EFBDBD200E68F9E /* colorPalette.plist */; };
 		667594301EFBDC4B00E68F9E /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6675942C1EFBDBD200E68F9E /* colorPalette.plist */; };
 		667594311EFBDC4B00E68F9E /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6675942C1EFBDBD200E68F9E /* colorPalette.plist */; };
@@ -22,8 +21,8 @@
 		667594431EFBF26E00E68F9E /* palette2.png in Resources */ = {isa = PBXBuildFile; fileRef = 667594411EFBEE2900E68F9E /* palette2.png */; };
 		667594441EFBF26F00E68F9E /* palette2.png in Resources */ = {isa = PBXBuildFile; fileRef = 667594411EFBEE2900E68F9E /* palette2.png */; };
 		667594461EFC0CF200E68F9E /* images.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 667594451EFC0CF200E68F9E /* images.jpeg */; };
-		66E72A0F1F0547B600A8499E /* SavedImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72A0E1F0547B600A8499E /* SavedImageTableViewCell.swift */; };
-		66E72A111F05486D00A8499E /* SavedImagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E72A101F05486D00A8499E /* SavedImagesTableViewController.swift */; };
+		6685ED211F068F7C003DF190 /* ImagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6685ED201F068F7C003DF190 /* ImagesTableViewController.swift */; };
+		66AED1A31F0695A7007A2A2D /* SavedImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AED1A21F0695A7007A2A2D /* SavedImageTableViewCell.swift */; };
 		CA3734181EFBD79000AE4408 /* DetailJokeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3734171EFBD79000AE4408 /* DetailJokeViewController.swift */; };
 		CA3734451EFBF2EC00AE4408 /* JokeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3734441EFBF2EC00AE4408 /* JokeCell.swift */; };
 		CA5158491EFA6C6E00C4EDE5 /* AllJokes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5158481EFA6C6E00C4EDE5 /* AllJokes.storyboard */; };
@@ -65,13 +64,12 @@
 /* Begin PBXFileReference section */
 		66682CAC1F05008F0030F38A /* AddImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddImageViewController.swift; sourceTree = "<group>"; };
 		6671B8101F0250BC000BC65B /* CosmosDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
-		6671B8121F025377000BC65B /* SavedImagedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedImagedViewController.swift; sourceTree = "<group>"; };
 		6675942C1EFBDBD200E68F9E /* colorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = colorPalette.plist; sourceTree = "<group>"; };
 		667594391EFBE35C00E68F9E /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		667594411EFBEE2900E68F9E /* palette2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = palette2.png; sourceTree = "<group>"; };
 		667594451EFC0CF200E68F9E /* images.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpeg; sourceTree = "<group>"; };
-		66E72A0E1F0547B600A8499E /* SavedImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedImageTableViewCell.swift; sourceTree = "<group>"; };
-		66E72A101F05486D00A8499E /* SavedImagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedImagesTableViewController.swift; sourceTree = "<group>"; };
+		6685ED201F068F7C003DF190 /* ImagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesTableViewController.swift; sourceTree = "<group>"; };
+		66AED1A21F0695A7007A2A2D /* SavedImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedImageTableViewCell.swift; sourceTree = "<group>"; };
 		CA3734171EFBD79000AE4408 /* DetailJokeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailJokeViewController.swift; sourceTree = "<group>"; };
 		CA3734441EFBF2EC00AE4408 /* JokeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokeCell.swift; sourceTree = "<group>"; };
 		CA5158481EFA6C6E00C4EDE5 /* AllJokes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AllJokes.storyboard; sourceTree = "<group>"; };
@@ -165,10 +163,9 @@
 				CA5158501EFA909B00C4EDE5 /* AddNewJokeViewController.swift */,
 				CA3734171EFBD79000AE4408 /* DetailJokeViewController.swift */,
 				CA3734441EFBF2EC00AE4408 /* JokeCell.swift */,
-				6671B8121F025377000BC65B /* SavedImagedViewController.swift */,
 				66682CAC1F05008F0030F38A /* AddImageViewController.swift */,
-				66E72A0E1F0547B600A8499E /* SavedImageTableViewCell.swift */,
-				66E72A101F05486D00A8499E /* SavedImagesTableViewController.swift */,
+				6685ED201F068F7C003DF190 /* ImagesTableViewController.swift */,
+				66AED1A21F0695A7007A2A2D /* SavedImageTableViewCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -383,12 +380,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66E72A111F05486D00A8499E /* SavedImagesTableViewController.swift in Sources */,
 				6675943A1EFBE35C00E68F9E /* ColorPickerViewController.swift in Sources */,
-				66E72A0F1F0547B600A8499E /* SavedImageTableViewCell.swift in Sources */,
+				66AED1A31F0695A7007A2A2D /* SavedImageTableViewCell.swift in Sources */,
 				CA51584F1EFA8FDF00C4EDE5 /* AllJokesTableViewController.swift in Sources */,
 				CA3734451EFBF2EC00AE4408 /* JokeCell.swift in Sources */,
-				6671B8131F025377000BC65B /* SavedImagedViewController.swift in Sources */,
+				6685ED211F068F7C003DF190 /* ImagesTableViewController.swift in Sources */,
 				F66BA2601EFA49F600463AB6 /* HomeViewController.swift in Sources */,
 				CA5158511EFA909B00C4EDE5 /* AddNewJokeViewController.swift in Sources */,
 				F66BA26A1EFA4B1000463AB6 /* DataManager.swift in Sources */,
