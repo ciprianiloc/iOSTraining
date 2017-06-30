@@ -17,7 +17,6 @@ class RequestManager: NSObject {
     
     let URLApi = "http://api.icndb.com/jokes/random"
     var jokesArray = [Joke]()
-    //var homeVCJokeLabel = ""
     
     func getJsonFromUrl(){
         let url = NSURL(string: URLApi)
@@ -41,8 +40,7 @@ class RequestManager: NSObject {
                 
                 
                 joke.jokeDescription = jokeWihQuote
-                //self.homeVCJokeLabel = String(describing: jsonResult)
-                
+                               
                 if categoryResult == []{
                         joke.jokeCategory = "Unknown"
                 }else{

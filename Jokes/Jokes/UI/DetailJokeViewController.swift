@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import CoreData
 
 class DetailJokeViewController: UIViewController {
 
@@ -25,8 +26,7 @@ class DetailJokeViewController: UIViewController {
     var selectedImage : UIImage?
     var selectedCategory : String?
     var selectedRating : Double?
-    
-    
+    var jokes: [Joke] = []
     
     
     
@@ -37,7 +37,7 @@ class DetailJokeViewController: UIViewController {
         
         ratingView.didTouchCosmos = { rating in
             self.selectedRating = rating
-            print(rating)
+            //print(rating)
                    }
         
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(DetailJokeViewController.ratingLevelChanged), userInfo: nil, repeats: true)
@@ -47,12 +47,12 @@ class DetailJokeViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveJokeModification))
         
         
-        
+        getAJoke()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+       
     }
     
     func ratingLevelChanged(){
@@ -78,16 +78,45 @@ class DetailJokeViewController: UIViewController {
     }
     
     func saveJokeModification(){
+        //get selected rating 
+        if let changedRating = self.selectedRating{
+            print(changedRating)
+        }
         
         
-        navigationController?.popViewController(animated: true)
+        
+        navigationController?.popViewController(animated: true) //get back to tableViewController
     }
 
+    
+    func getAJoke(){
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        do {
+            jokes = try managedContext.fetch(fetchRequest) as! [Joke]
+            
+            for joke in jokes{
+                if let jokeDescription = joke.jokeDescription{
+                  //  if joke.jokeCategory == "nerdy"{
+                        //print(jokeDescription)
+                       
+                            print(joke.objectID)
+                        
+                   // }
+                    
+                }
+            }
+        } catch  {
+            print("fetching failed")
+        }
+        
+    }
 
 }
 
-    
-    
+
+
 
 
 

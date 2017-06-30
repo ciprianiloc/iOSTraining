@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreData
 
 
 class AllJokesTableViewController: UITableViewController {
@@ -21,6 +21,7 @@ class AllJokesTableViewController: UITableViewController {
     var selectedCategory : String = ""
     var jokes : [Joke] = []
     var ratingFromDetailController : Int?
+    var results : [Joke] = []
     
     
     
@@ -29,11 +30,13 @@ class AllJokesTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewJokeButton(_:)))
         allJokesTableView.delegate = self
         allJokesTableView.dataSource = self
+        //getAJoke()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getData()
         allJokesTableView.reloadData()
+        //getAJoke()
     }
 
     override func didReceiveMemoryWarning() {
@@ -110,33 +113,13 @@ class AllJokesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
       
-     //   allJokesTableView.register(JokeCell(), forCellReuseIdentifier: "JokeCell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
-//        
-        //let cell = tableView.dequeueReusableCell(withIdentifier: <#T##String#>)
-//        let joke = myJokes[indexPath.row]
-//        
-//        cell.jokeLabel.text = joke
-//        
-//        let random = Int(arc4random_uniform(6))
-//        
-//        if random > 0{
-//            cell.ratingStarsView.rating = Double(random)
-//        }else{
-//            cell.ratingStarsView.rating = 1
-//        }
-
-        
-//let cell = UITableViewCell()
-        
         let joke = jokes[indexPath.row]
-         //let detailView = storyboard?.instantiateViewController(withIdentifier: "DetailJoke") as? DetailJokeViewController
         
-        //cell.textLabel!.text = String(describing: joke.jokeDescription!)
         cell.jokeLabel.text = String(describing: joke.jokeDescription!)
         cell.ratingStarsView.rating = 3
-      //  cell.ratingStarsView.rating = Double(joke.jokeRating)
         
+
         
         return cell
     }
@@ -145,8 +128,20 @@ class AllJokesTableViewController: UITableViewController {
         let detailView = storyboard?.instantiateViewController(withIdentifier: "DetailJoke") as? DetailJokeViewController
         detailView?.selectedJoke = String(describing: jokes[indexPath.row].jokeDescription!)
         detailView?.selectedCategory = String(describing: jokes[indexPath.row].jokeCategory!)
+       
+        
+        
+        //make a fetch request with an ID parameter ( from CoreData) to access a specific joke and change its rating 
+        //after changing rating, reload the tableView
+
+        
+        
+        
         navigationController?.pushViewController(detailView!, animated: true)
     }
+    
+    
+   
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
