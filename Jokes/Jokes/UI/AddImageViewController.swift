@@ -20,16 +20,8 @@ class AddImageViewController: UIViewController {
     @IBOutlet weak var urlImageView: UIImageView!
     
     
-//    struct images {
-//        var name: NSManagedObject
-//        var image: NSManagedObject
-//        
-//        init(name: NSManagedObject, image: NSManagedObject) {
-//            self.name = name
-//            self.image = image
-//        }
-//    }
-//    var imgs = [images]()
+
+   var imgs = [Pictures]()
     
     
     @IBAction func cancel(_ sender: Any) {
@@ -38,74 +30,121 @@ class AddImageViewController: UIViewController {
         
     }
     
-    @IBAction func saveImage(_ sender: Any) {
+    
+    @IBAction func downloadWallpaper(_ sender: Any) {
         
+        let downloadGroup = DispatchGroup()
         
-        
-            let downloadGroup = DispatchGroup()
-
-         downloadGroup.enter()
+        downloadGroup.enter()
         if  let urlPath = URL(string: self.urlTextField.text!) {
             
             self.downloadImage(url: urlPath)
-           downloadGroup.leave()
+            downloadGroup.leave()
             
-            let alert = UIAlertController.init(title: "Succesfully downloaded!", message: "Press the Cancel button on the top left of the screen to view your Saved Pictures", preferredStyle: .alert)
+            let alert = UIAlertController.init(title: "Succesfully downloaded!", message: "Press the Save button to add the wallpaper to your Saved Pictures, or cancel if you want to exit without saving", preferredStyle: .alert)
             let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alert.addAction(cancel)
             self.present(alert, animated: true)
             
+            
+            
+            
+            
+            // Download unsuccesfull
         } else {
             let alertView = UIAlertController.init(title: "Error", message: "Add viable URL before saving", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             alertView.addAction(cancelAction)
             self.present(alertView, animated: true)
             
-            }
+        }
+        downloadGroup.wait()
         downloadGroup.notify(queue: DispatchQueue.main) {
             
         }
+
+        
+    }
+    
+    
+    
+    @IBAction func saveImage(_ sender: Any) {
         
         
         
-        
-        
-        
-        
-        // fetching text from name field, checking if empty
+        // fetching text from name field and image from UIImageView, checking if empty
         
         let imageName = imageNameTextField.text
+        let imageView = urlImageView.image
         if imageName == "" {
             let alertView = UIAlertController.init(title: "Error", message: "Give your image a name before saving", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             alertView.addAction(cancelAction)
             present(alertView, animated: true)
-        }
-        
+        } else if imageView == nil {
+            let alertView = UIAlertController.init(title: "Error", message: "You can not save if image was not downloaded succesfully", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertView.addAction(cancelAction)
+            present(alertView, animated: true)
+
+        } else {
         
         
         // Saving in CoreData
         
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let image = Pictures(context: context)
+        let reuquest = NSFetchRequest<NSFetchRequestResult>(entityName: "Pictures")
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        let imageData: NSData = UIImagePNGRepresentation(urlImageView.image!)! as NSData
+        
+        let image = Pictures(context: managedContext)
+        image.image = imageData
         image.name = imageNameTextField.text
+        
+        
+        
+        do {
+            imgs = try managedContext.fetch(reuquest) as! [Pictures]
+            
+            for image in imgs {
+
+                if image.name != imageNameTextField.text && image.image != urlImageView.image {
+                    
+                    imgs.append(image)
+                    // if appended succesfully
+                    
+                    let alertView = UIAlertController.init(title: "Wallpaper saved", message: "Press Cancel to continue", preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    alertView.addAction(cancelAction)
+                    present(alertView, animated: true)
+                    
+                    //if not
+                } else {
+                    let alertView = UIAlertController.init(title: "Wallpaper NOT saved", message: "Wallpaper already exists. Press Cancel to continue", preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    alertView.addAction(cancelAction)
+                    present(alertView, animated: true)
+                    continue
+                }
+            }
+        } catch {
+            print("fetch failed")
+        }
         
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
-
+        
+        }
         
         // clearing text fields
         imageNameTextField.text = ""
         urlTextField.text = ""
-
-        
-
-        
-        
-        
-       // dismiss(animated: true, completion: nil)
-        
+        dismiss(animated: true, completion: nil)
+     
     }
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,6 +152,10 @@ class AddImageViewController: UIViewController {
         urlTextField.isUserInteractionEnabled = true
         imageNameTextField.isUserInteractionEnabled = true
         // Do any additional setup after loading the view.
+        
+        
+        //(UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
     }
 
     override func didReceiveMemoryWarning() {
