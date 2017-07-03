@@ -106,17 +106,18 @@ class AddImageViewController: UIViewController {
         do {
             imgs = try managedContext.fetch(reuquest) as! [Pictures]
             
-            for image in imgs {
-
-                if image.name != imageNameTextField.text && image.image != urlImageView.image {
+           
+                // if image is not saved already
+                if checkImage(picture: image, pictures: imgs) {
                     
-                    imgs.append(image)
-                    // if appended succesfully
+                     imgs.append(image)
+                    
                     
                     let alertView = UIAlertController.init(title: "Wallpaper saved", message: "Press Cancel to continue", preferredStyle: .alert)
                     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                     alertView.addAction(cancelAction)
                     present(alertView, animated: true)
+                    (UIApplication.shared.delegate as! AppDelegate).saveContext()
                     
                     //if not
                 } else {
@@ -124,22 +125,19 @@ class AddImageViewController: UIViewController {
                     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                     alertView.addAction(cancelAction)
                     present(alertView, animated: true)
-                    continue
+                    managedContext.delete(image)
                 }
-            }
+            
         } catch {
             print("fetch failed")
         }
-        
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        
         
         }
         
         // clearing text fields
         imageNameTextField.text = ""
         urlTextField.text = ""
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
      
     }
     
@@ -195,6 +193,16 @@ class AddImageViewController: UIViewController {
     }
 
     
+    func checkImage(picture: Pictures, pictures: [Pictures]) -> Bool {
+        var ok: Bool = true
+        for image in pictures {
+            if image.name == picture.name || image.image == picture.image {
+                ok = false
+                continue
+            }
+        }
+        return ok
+    }
     
 
     /*
