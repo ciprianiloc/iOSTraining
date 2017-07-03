@@ -51,7 +51,17 @@ class RequestManager: NSObject {
                     joke.jokeCategory = String(describing: auxCategory)
                 }
                 
-                joke.jokeRating = Double(arc4random_uniform(6)) //assign random rating when making a joke request - jokes from API do not have rating
+                let randomJokeRating = Double(arc4random_uniform(6))
+                
+                if randomJokeRating > 0 {
+                    joke.jokeRating = randomJokeRating
+                }else{
+                    joke.jokeRating = 1
+                }
+                
+                
+                
+                //joke.jokeRating =  //assign random rating when making a joke request - jokes from API do not have rating
                 
                    (UIApplication.shared.delegate as! AppDelegate).saveContext()
             
