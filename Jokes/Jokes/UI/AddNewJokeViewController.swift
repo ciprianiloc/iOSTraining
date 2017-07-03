@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import CoreData
 
 class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
   
@@ -17,16 +18,33 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
     @IBOutlet weak var newCategoryTextField: UITextField!
     
     var pickerData : [String] = [String] ()
-    
+    var jokes : [Joke] = []
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pickerData = ["category1","category2","category3"]
-       
         
-     
+       
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        do {
+            jokes = try managedContext.fetch(request) as! [Joke]
+            
+            for joke in jokes{
+                if !pickerData.contains(joke.jokeCategory!){
+                    pickerData.append(joke.jokeCategory!)
+                }else{
+                    continue
+                }
+            }
+            
+            
+        } catch  {
+            print("fetch for category failed")
+        }
+        
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
     }
 
