@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import CoreData
 
 
 
@@ -18,6 +19,7 @@ class RequestManager: NSObject {
     let URLApi = "http://api.icndb.com/jokes/random"
     var jokesArray = [Joke]()
     var categories : [JokeCategory] = [JokeCategory]()
+    var fetchedCategories : [JokeCategory] = [JokeCategory]()
     
     func getJsonFromUrl(){
         let url = NSURL(string: URLApi)
@@ -33,6 +35,7 @@ class RequestManager: NSObject {
                 
                 let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
                 let joke = Joke(context: context)
+               
               
                 let category = JokeCategory(context: context)
                 
@@ -41,18 +44,26 @@ class RequestManager: NSObject {
                     jokeWihQuote = jokeWihQuote.replacingOccurrences(of: "&quot;", with: "\'")
                 }
                 
-                
-                
                 joke.jokeDescription = jokeWihQuote
                                
                 if categoryResult == []{
                         joke.jokeCategory = "Unknown"
                     
-                    category.categoryName = "Unknown"
                     
-                    if  !self.categories.contains(where: {$0.categoryName == "Unknown"}){
-                        self.categories.append(category)
-                    }
+                    
+                        //fetch all categories and check if the new one exists
+                             let requestJoke = NSFetchRequest<NSFetchRequestResult>(entityName: "JokeCategory")
+                            do{
+                              self.fetchedCategories = try context.fetch(requestJoke) as! [JokeCategory]
+                                
+                                if !self.fetchedCategories.contains(category){
+                                    print("NOT ADDED")
+                                    category.categoryName = "Unknown"
+                                }
+                            }catch{
+                                print("fetch failed for checking if new category")
+                            }
+                            
                     
                     
                 }else{
@@ -61,17 +72,24 @@ class RequestManager: NSObject {
                     auxCategory = auxCategory.replacingOccurrences(of: "]", with: "")
                     auxCategory = auxCategory.replacingOccurrences(of: "\"", with: "")
                     joke.jokeCategory = String(describing: auxCategory)
-                    category.categoryName = String(describing: auxCategory)
-                
-                    if  !self.categories.contains(where: {$0.categoryName == auxCategory}){
-                        self.categories.append(category)
-                    }
                     
+                    
+                    
+                    let requestJoke = NSFetchRequest<NSFetchRequestResult>(entityName: "JokeCategory")
+                    do{
+                        self.fetchedCategories = try context.fetch(requestJoke) as! [JokeCategory]
+                        
+                        if self.fetchedCategories.contains(category){
+                            print("NOT added")
+                            category.categoryName = String(describing: auxCategory)
+                        }
+                    }catch{
+                        print("fetch failed for checking if new category")
+                    }
+                
                 }
-                
-             //   print(self.categories)
-                
-                
+                //joke.jokeRating =  //assign random rating when making a joke request - jokes from API do not have rating
+
                 let randomJokeRating = Double(arc4random_uniform(6))
                 
                 if randomJokeRating > 0 {
@@ -79,19 +97,8 @@ class RequestManager: NSObject {
                 }else{
                     joke.jokeRating = 1
                 }
-                
-                
-                let addJokeSB = UIStoryboard(name: "AllJokes", bundle: nil)
-                let addJokeVC = addJokeSB.instantiateViewController(withIdentifier: "AddNewJokeViewController") as? AddNewJokeViewController
-                addJokeVC?.pickerData  = self.categories
-                
-                
-                //joke.jokeRating =  //assign random rating when making a joke request - jokes from API do not have rating
-                
-                   (UIApplication.shared.delegate as! AppDelegate).saveContext()
-            
-                
-                
+             
+               (UIApplication.shared.delegate as! AppDelegate).saveContext()
                
                 let homeSB = UIStoryboard(name: "Main", bundle: nil)
                 let homeVC = homeSB.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
