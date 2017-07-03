@@ -40,22 +40,35 @@ class AddImageViewController: UIViewController {
     
     @IBAction func saveImage(_ sender: Any) {
         
-        if  let urlPath = URL(string: urlTextField.text!) {
         
-        downloadImage(url: urlPath)
+        
+            let downloadGroup = DispatchGroup()
+
+         downloadGroup.enter()
+        if  let urlPath = URL(string: self.urlTextField.text!) {
+            
+            self.downloadImage(url: urlPath)
+           downloadGroup.leave()
             
             let alert = UIAlertController.init(title: "Succesfully downloaded!", message: "Press the Cancel button on the top left of the screen to view your Saved Pictures", preferredStyle: .alert)
             let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alert.addAction(cancel)
-            present(alert, animated: true)
+            self.present(alert, animated: true)
             
         } else {
             let alertView = UIAlertController.init(title: "Error", message: "Add viable URL before saving", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             alertView.addAction(cancelAction)
-            present(alertView, animated: true)
+            self.present(alertView, animated: true)
+            
+            }
+        downloadGroup.notify(queue: DispatchQueue.main) {
             
         }
+        
+        
+        
+        
         
         
         
