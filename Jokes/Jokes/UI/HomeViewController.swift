@@ -13,7 +13,6 @@ import UIKit
 
 
 
-
 class HomeViewController: UIViewController{
 
     
@@ -45,15 +44,6 @@ class HomeViewController: UIViewController{
     
     
     
-    
-    
-//    func getJsonFromUrl(){
-//        let url = NSURL(string: URLApi)
-//        
-//
-//
-//    }
-    
     override func viewWillAppear(_ animated: Bool) {
         getFirstJoke()
     }
@@ -81,7 +71,7 @@ class HomeViewController: UIViewController{
     @IBAction func settingsAction(_ sender: Any) {
         let settingsStoryboard = UIStoryboard(name: "Settings", bundle: nil)
         let settingsVC = settingsStoryboard.instantiateViewController(withIdentifier: "SettingsViewController") as! SettingsViewController
-        settingsVC.delegate = self as! SettingsDelegate
+        settingsVC.delegate = self
         self.navigationController?.pushViewController(settingsVC, animated: true)
     }
 
@@ -162,7 +152,7 @@ extension UIFont {
     
     
         func verifyDefaults(label: UILabel)  {
-            let defaults = UserDefaults.standard
+ //           let defaults = UserDefaults.standard
 //            let font = defaults.string(forKey: "font")
 //            let fontSize = defaults.string(forKey: "fontSize")
             //let fontColor = defaults.string(forKey: "fontColor")

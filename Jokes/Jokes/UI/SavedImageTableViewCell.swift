@@ -10,24 +10,11 @@ import UIKit
 
 class SavedImageTableViewCell: UITableViewCell {
 
-    var savedImageLabel: UILabel = UILabel()
-    var savedImageView: UIImageView = UIImageView()
     
+    @IBOutlet weak var savedImageLabel: UILabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: "TableCell")
-        
-        self.contentView.addSubview(savedImageLabel)
-        self.contentView.addSubview(savedImageView)
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-
-        super.init(coder: aDecoder)
-        
-    }
-    
+    @IBOutlet weak var savedImageView: UIImageView!
+ 
     
     
     override func awakeFromNib() {

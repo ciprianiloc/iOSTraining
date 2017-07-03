@@ -323,8 +323,10 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         // File Manager
         
-
-        let imageData = UIImageJPEGRepresentation(backgroundImage.image!, 0.5)
+        
+        
+        
+        let imageData = UIImageJPEGRepresentation(backgroundImage.image!, 1)
         do {
             let path = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("cucubau.jpg")
             //Save image to Root

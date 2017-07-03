@@ -7,19 +7,39 @@
 //
 
 import UIKit
+import CoreData
 
 class SavedImagedViewController: UIViewController {
 
+    @IBOutlet weak var SavedImagesTableView: UITableView!
+  
+    @IBOutlet weak var savedNameLabel: UILabel!
+    @IBOutlet weak var savedImageView: UIImageView!
+    
+
+    var imgs = [Pictures]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        let tableView : SavedImagesTableViewController
         
+        SavedImagesTableView.register(UITableViewCell.self,
+                           forCellReuseIdentifier: "TableCell")
+        
+        getData()
     }
 
     @IBAction func addImage(_ sender: Any) {
+        
+        let viewController = AddImageViewController()
+        self.present(viewController, animated: true, completion: nil)
+        
+
+        
+        
     }
+    
+
     
    
     @IBAction func cancel(_ sender: Any) {
@@ -30,6 +50,17 @@ class SavedImagedViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getData() {
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        do {
+            try imgs = context.fetch(Pictures.fetchRequest())
+        } catch  {
+            print("fetch failed")
+        }
+
     }
     
 
@@ -44,3 +75,37 @@ class SavedImagedViewController: UIViewController {
     */
 
 }
+
+
+// MARK: - UITableViewDataSource
+extension SavedImagedViewController: UITableViewDataSource {
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return imgs.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell", for: indexPath) as! SavedImageTableViewCell
+        
+        let image = imgs[indexPath.row]
+        
+        cell.savedNameLabel.text = image.name
+        
+        //cell.savedNameLabel.text = String(describing: picture.name!)
+        
+        SavedImagesTableView.reloadData()
+        
+           // let image = imgs[indexPath.row]
+            //image = images.init()
+//            cell.textLabel?.text = image.value(forKey: "name") as! String
+//            cell.imageView?.image = image.value(forKey: "image") as! UIImage
+        
+        
+            
+            return cell
+    }
+}
+
