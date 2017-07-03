@@ -25,9 +25,9 @@ class DetailJokeViewController: UIViewController {
     var selectedJoke : String?
     var selectedImage : UIImage?
     var selectedCategory : String?
-    var selectedRating : Double? = 5
+    var selectedRating : Double? = 1
     var jokes: [Joke] = []
-    
+    var jokeID : NSManagedObjectID = NSManagedObjectID()
     
     
     override func viewDidLoad() {
@@ -35,12 +35,12 @@ class DetailJokeViewController: UIViewController {
         detailLabel.text = selectedJoke
         jokeCategoryLabel.text = selectedCategory
         
-//        self.selectedRating = 3
+        
         ratingView.didTouchCosmos = { rating in
             self.selectedRating = rating
-            print(self.selectedRating!)
-            self.changeRating(rating: rating)
         }
+        
+        
         
         
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(DetailJokeViewController.ratingLevelChanged), userInfo: nil, repeats: true)
@@ -65,6 +65,9 @@ class DetailJokeViewController: UIViewController {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
         let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
+        
+        
+        
         do {
             jokes = try managedContext.fetch(fetchRequest) as! [Joke]
             
@@ -73,11 +76,19 @@ class DetailJokeViewController: UIViewController {
                 //  if joke.jokeCategory == "nerdy"{
                 //print(jokeDescription)
                 if id == joke.objectID{
-                  //  print(joke.objectID)
-                    print(joke.jokeDescription!)
+                
+                    print(joke.jokeRating)
+                    
+//                    ratingView.didTouchCosmos = { rating in
+//                        self.selectedRating = rating
+//                        joke.jokeRating = self.selectedRating!
+//                        //  self.changeRating(rating: self.selectedRating!)
+//                    }
                     
                     joke.jokeRating = self.selectedRating!
-    
+                    
+                    self.jokeID = id
+                
                 }
             }
             
@@ -85,6 +96,7 @@ class DetailJokeViewController: UIViewController {
         } catch  {
             print("fetching failed")
         }
+        
         
     }
     
@@ -108,30 +120,35 @@ class DetailJokeViewController: UIViewController {
     }
     
     func saveJokeModification(){
-        //get selected rating
-   //     changeRating()
+        //fetch the joke with id jokeID and change its rating to selectedRating
         
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
+        do {
+            jokes = try managedContext.fetch(fetchRequest) as! [Joke]
+            
+            for joke in jokes{
+                if self.jokeID == joke.objectID{
+                   // print(joke.jokeRating)
+                    joke.jokeRating = self.selectedRating!
+                }
+            }
+            
+            
+        } catch  {
+            print("fetching failed")
+        }
+        
+         (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
+       
         navigationController?.popViewController(animated: true) //get back to tableViewController
         
-       // return Double(ratingResult)
     }
 
     func changeRating(rating : Double) -> Double{
-        //var result : Double = 0
-        
-        print(" i am in here")
-        
-//        if let changedRating = self.selectedRating{
-//            print(changedRating)
-//            self.selectedRating = changedRating
-//        }
-        
-       
-        
-        //print(ratingView.didTouchCosmos)
-       
-        return self.selectedRating!
+        return rating
     }
   
 

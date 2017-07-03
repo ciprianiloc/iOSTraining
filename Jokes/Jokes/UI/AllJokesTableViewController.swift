@@ -116,6 +116,7 @@ class AllJokesTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
         let joke = jokes[indexPath.row]
         
+        
         cell.jokeLabel.text = String(describing: joke.jokeDescription!)
         cell.ratingStarsView.rating = jokes[indexPath.row].jokeRating
         
