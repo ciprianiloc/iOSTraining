@@ -16,19 +16,20 @@ class ImagesTableViewController: UIViewController {
    
     var imgs = [Pictures]()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
          getData()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        imagesTableView.reloadData()
+        
+        
     }
 
+    
     @IBAction func cancel(_ sender: Any) {
         
         self.dismiss(animated: true, completion: nil)
@@ -62,6 +63,8 @@ class ImagesTableViewController: UIViewController {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do {
             try imgs = context.fetch(Pictures.fetchRequest())
+
+            
         } catch  {
             print("fetch failed")
         }
@@ -93,20 +96,44 @@ extension ImagesTableViewController: UITableViewDataSource {
         
         let image = imgs[indexPath.row]
         
+        
         cell.savedImageLabel.text = image.name
-        //cell.addSubview(imagesTableView)
-        
-        
-        imagesTableView.reloadData()
-        
+      
+        if image.image != nil {
+        cell.savedImageView.image = UIImage(data: image.image! as Data)
+        }
+    
         
         return cell
     }
     
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self .performSegue(withIdentifier: "show", sender: (tableView, cellForRowAt: indexPath))
     }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        if editingStyle == .delete {
+            let image = imgs[indexPath.row]
+            context.delete(image)
+            
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            
+            do {
+                try imgs = context.fetch(Pictures.fetchRequest())
+            } catch {
+                print("fetch failed on Delete")
+            }
+        }
+        imagesTableView.reloadData()
+        
+    }
+ 
     
 }
 
