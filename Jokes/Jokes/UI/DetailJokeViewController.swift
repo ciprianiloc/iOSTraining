@@ -25,7 +25,7 @@ class DetailJokeViewController: UIViewController {
     var selectedJoke : String?
     var selectedImage : UIImage?
     var selectedCategory : String?
-    var selectedRating : Double? = 1
+    var selectedRating : Double? = 5
     var jokes: [Joke] = []
     
     
@@ -36,6 +36,11 @@ class DetailJokeViewController: UIViewController {
         jokeCategoryLabel.text = selectedCategory
         
 //        self.selectedRating = 3
+        ratingView.didTouchCosmos = { rating in
+            self.selectedRating = rating
+            print(self.selectedRating!)
+            self.changeRating(rating: rating)
+        }
         
         
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(DetailJokeViewController.ratingLevelChanged), userInfo: nil, repeats: true)
@@ -45,7 +50,6 @@ class DetailJokeViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveJokeModification))
         
         
-     //   getAJoke()
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,7 +76,7 @@ class DetailJokeViewController: UIViewController {
                   //  print(joke.objectID)
                     print(joke.jokeDescription!)
                     
-                    joke.jokeRating = changeRating()
+                    joke.jokeRating = self.selectedRating!
     
                 }
             }
@@ -84,9 +88,7 @@ class DetailJokeViewController: UIViewController {
         
     }
     
-    func printsth(joke: Joke){
-        print("adjsgdfaiksdhkjashdkjahsk")
-    }
+    
     
     func getRating(rating: Int){
         switch rating {
@@ -115,20 +117,19 @@ class DetailJokeViewController: UIViewController {
        // return Double(ratingResult)
     }
 
-    func changeRating() -> Double{
+    func changeRating(rating : Double) -> Double{
         //var result : Double = 0
         
         print(" i am in here")
         
 //        if let changedRating = self.selectedRating{
 //            print(changedRating)
-//            result = changedRating
+//            self.selectedRating = changedRating
 //        }
         
-//        ratingView.didTouchCosmos = { rating in
-//            result = rating
-//        }
+       
         
+        //print(ratingView.didTouchCosmos)
        
         return self.selectedRating!
     }
