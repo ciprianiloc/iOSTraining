@@ -72,23 +72,8 @@ class DetailJokeViewController: UIViewController {
             jokes = try managedContext.fetch(fetchRequest) as! [Joke]
             
             for joke in jokes{
-                //   if let jokeDescription = joke.jokeDescription{
-                //  if joke.jokeCategory == "nerdy"{
-                //print(jokeDescription)
                 if id == joke.objectID{
-                
-                    print(joke.jokeRating)
-                    
-//                    ratingView.didTouchCosmos = { rating in
-//                        self.selectedRating = rating
-//                        joke.jokeRating = self.selectedRating!
-//                        //  self.changeRating(rating: self.selectedRating!)
-//                    }
-                    
-                    joke.jokeRating = self.selectedRating!
-                    
                     self.jokeID = id
-                
                 }
             }
             
@@ -130,12 +115,9 @@ class DetailJokeViewController: UIViewController {
             
             for joke in jokes{
                 if self.jokeID == joke.objectID{
-                   // print(joke.jokeRating)
                     joke.jokeRating = self.selectedRating!
                 }
             }
-            
-            
         } catch  {
             print("fetching failed")
         }
