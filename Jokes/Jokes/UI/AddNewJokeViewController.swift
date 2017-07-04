@@ -37,17 +37,14 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
             for category in pickerData{
               //  print(category.categoryName)
                //
-                managedContext.delete(category)
+               // managedContext.delete(category)
                 
-                
-                if  !self.pickerData.contains(where: {$0.categoryName == "Unknown"}){
-                    print(category)
-                }
-                
-            
-                
+//                
+//                if  !self.pickerData.contains(where: {$0.categoryName == "Unknown"}){
+//                    print(category)
+//                }
             }
-                
+           
                 
             }catch  {
             print("fetch for category failed")

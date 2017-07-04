@@ -15,8 +15,7 @@
     </entity>
     <elements>
         <element name="Joke" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="Pictures" positionX="-63" positionY="9" width="128" height="75"/>
-        <element name="Pictures" positionX="-63" positionY="9" width="128" height="60"/>
         <element name="JokeCategory" positionX="-45" positionY="27" width="128" height="60"/>
+        <element name="Pictures" positionX="-63" positionY="9" width="128" height="60"/>
     </elements>
 </model>
