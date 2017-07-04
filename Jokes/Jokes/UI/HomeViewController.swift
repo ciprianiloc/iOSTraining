@@ -152,31 +152,12 @@ extension UIFont {
     
     
         func verifyDefaults(label: UILabel)  {
- //           let defaults = UserDefaults.standard
-//            let font = defaults.string(forKey: "font")
-//            let fontSize = defaults.string(forKey: "fontSize")
-            //let fontColor = defaults.string(forKey: "fontColor")
-            
-//            if font == nil && fontSize == nil{
+
             
                 label.font = UIFont(name: "TimesNewRomanPSMT", size: 17)
-                
-//            } else if font == nil && fontSize != nil {
-//                
-//                label.font = UIFont(name: "TimesNewRomanPSMT", size: CGFloat(Int(fontSize!)!))
-//                
-//            } else if font != nil && fontSize == nil {
-//                label.font = UIFont(name: font!, size: CGFloat(Int(fontSize!)!))
-//               
-//            }
-//            
-//             if fontColor == nil {
-            
                 label.textColor = UIColor.black
                 
-//              
-//            }
-//        }
+
     }
 }
 
@@ -191,6 +172,6 @@ extension UIImageView {
 
 }
         
-   //     var mainHomeVC = HomeViewController()
+ 
 
 

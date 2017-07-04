@@ -11,6 +11,8 @@ import CoreData
 
 class ImagesTableViewController: UIViewController {
 
+    let myNotification = Notification.init(name: Notification.Name(rawValue: "SavedImageNotification"))
+    
     
     @IBOutlet weak var imagesTableView: UITableView!
    
@@ -77,6 +79,8 @@ class ImagesTableViewController: UIViewController {
 
 // MARK: - UITableViewDataSource
 extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
+    
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections

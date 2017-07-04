@@ -19,6 +19,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     // Delegate
     var delegate:SettingsDelegate?
     
+    
+    
     let imagePicker = UIImagePickerController()
     
     @IBOutlet weak var pickerView: UIPickerView!
@@ -40,8 +42,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
     
+        
         // Image picker delegate
         
         imagePicker.delegate = self
@@ -196,10 +198,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         present(alert, animated: true, completion: nil)
 
        
-        
-        
-        
-    }
+        }
     
 
     
