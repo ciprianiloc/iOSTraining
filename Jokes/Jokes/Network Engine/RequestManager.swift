@@ -18,9 +18,6 @@ class RequestManager: NSObject {
     
     let URLApi = "http://api.icndb.com/jokes/random"
     var jokesArray = [Joke]()
-    var categories : [JokeCategory] = [JokeCategory]()
-    var fetchedCategories : [JokeCategory] = [JokeCategory]()
-    
     func getJsonFromUrl(){
         let url = NSURL(string: URLApi)
         
@@ -37,7 +34,6 @@ class RequestManager: NSObject {
                 let joke = Joke(context: context)
                
               
-                let category = JokeCategory(context: context)
                 
                 var jokeWihQuote = jsonResult as! String
                 if jokeWihQuote.contains("&quot;"){
@@ -48,22 +44,29 @@ class RequestManager: NSObject {
                                
                 if categoryResult == []{
                         joke.jokeCategory = "Unknown"
+                
+                    
+                    
+//                    let category = JokeCategory(context: context)
+//                    category.categoryName = "Unknown"
+//                    self.categoryExists = true
+//                   
+                
+//                    let categoryRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "JokeCategory")
+//                    do{
+//                        
+//                    try self.categories = context.fetch(categoryRequest) as! [JokeCategory]
+//                        if !self.categories.contains(where: {$0.categoryName == category.categoryName}){
+//                            self.categories.append(category)
+//                        }
+//                    }catch{
+//                        print("fetch failed category request")
+//                    }
+                
                     
                     
                     
-                        //fetch all categories and check if the new one exists
-                             let requestJoke = NSFetchRequest<NSFetchRequestResult>(entityName: "JokeCategory")
-                            do{
-                              self.fetchedCategories = try context.fetch(requestJoke) as! [JokeCategory]
-                                
-                                if !self.fetchedCategories.contains(category){
-                                    print("NOT ADDED")
-                                    category.categoryName = "Unknown"
-                                }
-                            }catch{
-                                print("fetch failed for checking if new category")
-                            }
-                            
+                    //save category to CoreData if it does not exist yet
                     
                     
                 }else{
@@ -72,21 +75,6 @@ class RequestManager: NSObject {
                     auxCategory = auxCategory.replacingOccurrences(of: "]", with: "")
                     auxCategory = auxCategory.replacingOccurrences(of: "\"", with: "")
                     joke.jokeCategory = String(describing: auxCategory)
-                    
-                    
-                    
-                    let requestJoke = NSFetchRequest<NSFetchRequestResult>(entityName: "JokeCategory")
-                    do{
-                        self.fetchedCategories = try context.fetch(requestJoke) as! [JokeCategory]
-                        
-                        if self.fetchedCategories.contains(category){
-                            print("NOT added")
-                            category.categoryName = String(describing: auxCategory)
-                        }
-                    }catch{
-                        print("fetch failed for checking if new category")
-                    }
-                
                 }
                 //joke.jokeRating =  //assign random rating when making a joke request - jokes from API do not have rating
 

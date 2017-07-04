@@ -17,32 +17,30 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
     @IBOutlet weak var jokeDescription: UITextView!
     @IBOutlet weak var newCategoryTextField: UITextField!
     
-    var pickerData : [JokeCategory] = []
+    var pickerData : [String] = []
     var jokes : [Joke] = []
     //need to add categories to CoreData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getAndAddMissingCategories()
+      getAndAddMissingCategories()
+        
+        //pickerData = ["Unknown","Nerdy","Explicit"]
+        
     }
     
     func getAndAddMissingCategories(){
         let requestJoke = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
-        let requestCategory = NSFetchRequest<NSFetchRequestResult>(entityName: "JokeCategory")
+      //  let requestCategory = NSFetchRequest<NSFetchRequestResult>(entityName: "JokeCategory")
         let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do {
             jokes = try managedContext.fetch(requestJoke) as! [Joke]
-            pickerData = try managedContext.fetch(requestCategory) as! [JokeCategory]
             
-            for category in pickerData{
-              //  print(category.categoryName)
-               //
-               // managedContext.delete(category)
-                
-//                
-//                if  !self.pickerData.contains(where: {$0.categoryName == "Unknown"}){
-//                    print(category)
-//                }
+            
+            for joke in jokes{
+                if !pickerData.contains(joke.jokeCategory!){
+                    pickerData.append(joke.jokeCategory!)
+                }
             }
            
                 
@@ -50,7 +48,11 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
             print("fetch for category failed")
         }
     
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        do{
+          try   managedContext.save()
+        }catch {
+            print("failed to save")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -76,7 +78,17 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
-        return pickerData[row].categoryName
+//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//        
+//        let categoryRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "JokeCategory")
+//        
+//        do {
+//            try pickerData = context.fetch(categoryRequest) as! [JokeCategory]
+//        } catch  {
+//            print("fetch for picker failed")
+//        }
+        
+        return pickerData[row]
     }
     
     
@@ -90,9 +102,10 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
         
         //save the new category to CoreData
         
-//                if !pickerData.contains(newCategoryTextField.text!){
-//                    pickerData.append(newCategoryTextField.text!)
-//                }
+                if !pickerData.contains(newCategoryTextField.text!){
+                    pickerData.append(newCategoryTextField.text!)
+                }
+        self.jokePickerView.reloadAllComponents()
     }
 
     
