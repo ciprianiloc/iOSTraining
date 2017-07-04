@@ -76,7 +76,7 @@ class ImagesTableViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource
-extension ImagesTableViewController: UITableViewDataSource {
+extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -101,16 +101,40 @@ extension ImagesTableViewController: UITableViewDataSource {
       
         if image.image != nil {
         cell.savedImageView.image = UIImage(data: image.image! as Data)
+            
         }
+        
+    
     
         
         return cell
     }
-    
-    
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self .performSegue(withIdentifier: "show", sender: (tableView, cellForRowAt: indexPath))
+
+        let cell = tableView.cellForRow(at: indexPath) as! SavedImageTableViewCell
+        
+        
+        
+
+        // if cell image is not empty
+        if (cell.savedImageView.image != nil) {
+            
+            // Saving image to file Manager
+            let imageData = UIImageJPEGRepresentation(cell.savedImageView.image!, 1)
+            do {
+                let path = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("cucubau.jpg")
+                //Save image to Root
+                try imageData?.write(to: path, options:  .atomic)
+                print("Saved To Root")
+            } catch let error {
+                print(error)
+            }
+            
+        }
+        self.dismiss(animated: true, completion: nil)
+
     }
     
     
@@ -133,6 +157,9 @@ extension ImagesTableViewController: UITableViewDataSource {
         imagesTableView.reloadData()
         
     }
+    
+    
+    
  
     
 }

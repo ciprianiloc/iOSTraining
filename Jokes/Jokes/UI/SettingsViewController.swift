@@ -34,13 +34,14 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     @IBOutlet weak var backgroundImage: UIImageView!
     
 
+  
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        
+    
         // Image picker delegate
         
         imagePicker.delegate = self
@@ -176,35 +177,6 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             }
          alert.addAction(cameraAction)
         
-//        // Get data from URL
-//        func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
-//            URLSession.shared.dataTask(with: url) {
-//                (data, response, error) in
-//                completion(data, response, error)
-//                }.resume()
-//        }
-//        
-//        // Download image
-//        func downloadImage(url: URL) {
-//            print("Download Started")
-//            getDataFromUrl(url: url) { (data, response, error)  in
-//                guard let data = data, error == nil else {
-//                    let alert = UIAlertController(title: "Unsafe URL", message: "The URL path you have chose does not start with HTTPS and it is not safe. Please choose an image with HTTPS URL prefix", preferredStyle: .alert)
-//                    
-//                    
-//                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//                    alert.addAction(cancelAction)
-//                    
-//                    self.present(alert, animated: true, completion: nil)
-//                    
-//                    return }
-//                print(response?.suggestedFilename ?? url.lastPathComponent)
-//                print("Download Finished")
-//                DispatchQueue.main.async() { () -> Void in
-//                    self.backgroundImage.image = UIImage(data: data)
-//                }
-//            }
-//        }
         
         
         
@@ -216,11 +188,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SavedImagesStoryboard")
             self.present(viewController!, animated: true, completion: nil)
             
-//            let urlPath = URL(string: "https://image.freepik.com/free-vector/orange-geometric-background-with-halftone-dots_1035-7243.jpg")
-//          
-//           
-//
-//            downloadImage(url: urlPath!)
+
         }
         alert.addAction(internetAction)
         

@@ -121,7 +121,7 @@ class AddImageViewController: UIViewController {
                     (UIApplication.shared.delegate as! AppDelegate).saveContext()
                     
                     
-                    //viewController.imagesTableView.reloadData()
+                    
                     
                     
                     //if not
