@@ -97,27 +97,32 @@ class AddImageViewController: UIViewController {
         
         let imageData: NSData = UIImagePNGRepresentation(urlImageView.image!)! as NSData
         
-        let image = Pictures(context: managedContext)
-        image.image = imageData
-        image.name = imageNameTextField.text
+      
         
         
         
         do {
             imgs = try managedContext.fetch(reuquest) as! [Pictures]
             
-           
+           let image = Pictures(context: managedContext)
                 // if image is not saved already
                 if checkImage(picture: image, pictures: imgs) {
                     
+                    
+                    image.image = imageData
+                    image.name = imageNameTextField.text
                      imgs.append(image)
                     
-                    
+                    let viewController = storyboard?.instantiateViewController(withIdentifier: "SavedImagesStoryboard") as? ImagesTableViewController
                     let alertView = UIAlertController.init(title: "Wallpaper saved", message: "Press Cancel to continue", preferredStyle: .alert)
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {(alert: UIAlertAction!) in self.present(viewController!, animated: true)})
                     alertView.addAction(cancelAction)
                     present(alertView, animated: true)
                     (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                    
+                    
+                    //viewController.imagesTableView.reloadData()
+                    
                     
                     //if not
                 } else {
@@ -193,12 +198,14 @@ class AddImageViewController: UIViewController {
     }
 
     
+    
+    
     func checkImage(picture: Pictures, pictures: [Pictures]) -> Bool {
         var ok: Bool = true
         for image in pictures {
             if image.name == picture.name || image.image == picture.image {
                 ok = false
-                continue
+                break
             }
         }
         return ok
