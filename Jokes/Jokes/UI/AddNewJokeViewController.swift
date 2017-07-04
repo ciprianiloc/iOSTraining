@@ -19,13 +19,11 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
     
     var pickerData : [String] = []
     var jokes : [Joke] = []
-    //need to add categories to CoreData
     
     override func viewDidLoad() {
         super.viewDidLoad()
       getAndAddMissingCategories()
         
-        //pickerData = ["Unknown","Nerdy","Explicit"]
         
     }
     
@@ -35,15 +33,12 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
         do {
             jokes = try managedContext.fetch(requestJoke) as! [Joke]
             
-            
             for joke in jokes{
                 if !pickerData.contains(joke.jokeCategory!){
                     pickerData.append(joke.jokeCategory!)
                 }
             }
-           
-                
-            }catch  {
+        }catch  {
             print("fetch for category failed")
         }
     
@@ -76,17 +71,6 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
     
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//        
-//        let categoryRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "JokeCategory")
-//        
-//        do {
-//            try pickerData = context.fetch(categoryRequest) as! [JokeCategory]
-//        } catch  {
-//            print("fetch for picker failed")
-//        }
-        
         return pickerData[row]
     }
     
@@ -107,12 +91,10 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
         
         do {
             jokes = try managedContext.fetch(requestJoke) as! [Joke]
-            
             //add a new category only if you add a new Joke
             
             if jokeDescription.text != ""{
                 let joke = Joke(context: managedContext)
-                
                 joke.jokeDescription = jokeDescription.text
                 
                 if newCategoryTextField.text != ""{
@@ -121,21 +103,16 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
                     joke.jokeCategory = "Unknown"
                 }
                 //will add rating and date added for the joke
-                
             }
-            
-            
-        } catch  {
+        }catch  {
             print("failed to request joke - add new category")
         }
-        
+    
         jokeDescription.text = ""
         newCategoryTextField.text = ""
         jokePickerView.reloadAllComponents()
         
-        
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
-        
         self.dismiss(animated: true, completion: nil)
     }
 }
