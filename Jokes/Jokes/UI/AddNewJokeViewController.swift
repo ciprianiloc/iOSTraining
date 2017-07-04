@@ -31,7 +31,6 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
     
     func getAndAddMissingCategories(){
         let requestJoke = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
-      //  let requestCategory = NSFetchRequest<NSFetchRequestResult>(entityName: "JokeCategory")
         let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do {
             jokes = try managedContext.fetch(requestJoke) as! [Joke]
@@ -98,16 +97,47 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
     }
 
     
-    @IBAction func addNewCategory(_ sender: UIButton) {
-        
-        //save the new category to CoreData
-        
-                if !pickerData.contains(newCategoryTextField.text!){
-                    pickerData.append(newCategoryTextField.text!)
-                }
-        self.jokePickerView.reloadAllComponents()
-    }
-
     
 
+   
+    @IBAction func saveJoke(_ sender: UIBarButtonItem) {
+        //save the new category to CoreData
+        let requestJoke = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        do {
+            jokes = try managedContext.fetch(requestJoke) as! [Joke]
+            
+            //add a new category only if you add a new Joke
+            
+            if jokeDescription.text != ""{
+                let joke = Joke(context: managedContext)
+                
+                joke.jokeDescription = jokeDescription.text
+                
+                if newCategoryTextField.text != ""{
+                    joke.jokeCategory = newCategoryTextField.text
+                }else{
+                    joke.jokeCategory = "Unknown"
+                }
+                //will add rating and date added for the joke
+                
+            }
+            
+            
+        } catch  {
+            print("failed to request joke - add new category")
+        }
+        
+        jokeDescription.text = ""
+        newCategoryTextField.text = ""
+        jokePickerView.reloadAllComponents()
+        
+        
+        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        
+        self.dismiss(animated: true, completion: nil)
+    }
 }
+
+

@@ -231,20 +231,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyI-dn-RqV">
-                                <rect key="frame" x="16" y="348" width="95" height="30"/>
-                                <state key="normal" title="Add Category"/>
-                                <connections>
-                                    <action selector="addNewCategory:" destination="sZ9-i7-3S3" eventType="touchUpInside" id="mfU-tG-aQT"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="147-eq-WGZ">
-                                <rect key="frame" x="237" y="348" width="107" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="107" id="Ml7-Y6-Lx0"/>
-                                </constraints>
-                                <state key="normal" title="Add joke"/>
-                            </button>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AdR-hy-xDA">
                                 <rect key="frame" x="0.0" y="179" width="375" height="123"/>
                                 <connections>
@@ -267,7 +253,7 @@
                                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="QL8-TB-0O6">
                                             <color key="tintColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
-                                                <action selector="saveAddJoke:" destination="sZ9-i7-3S3" id="rbr-3e-viq"/>
+                                                <action selector="saveJoke:" destination="sZ9-i7-3S3" id="LhY-B4-whp"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -278,10 +264,7 @@
                         <constraints>
                             <constraint firstItem="AdR-hy-xDA" firstAttribute="top" secondItem="POM-mV-Xrw" secondAttribute="bottom" constant="-8" id="2Ff-sF-bg1"/>
                             <constraint firstItem="jm6-vF-HTL" firstAttribute="top" secondItem="2j4-ZC-yqR" secondAttribute="bottom" constant="21" id="5Kt-th-SeJ"/>
-                            <constraint firstItem="VWq-nf-PuA" firstAttribute="top" secondItem="147-eq-WGZ" secondAttribute="bottom" constant="-2" id="5R9-ol-vX8"/>
-                            <constraint firstItem="VWq-nf-PuA" firstAttribute="top" secondItem="zyI-dn-RqV" secondAttribute="bottom" constant="-2" id="7XT-Nd-ROw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2j4-ZC-yqR" secondAttribute="trailing" constant="15" id="7dy-81-7Ca"/>
-                            <constraint firstItem="zyI-dn-RqV" firstAttribute="top" secondItem="wW0-wv-90l" secondAttribute="bottom" constant="8" id="BIc-6Q-DEn"/>
                             <constraint firstItem="AdR-hy-xDA" firstAttribute="trailing" secondItem="n9X-vn-g4G" secondAttribute="trailing" id="EZw-t1-Oy8"/>
                             <constraint firstItem="wW0-wv-90l" firstAttribute="trailing" secondItem="2j4-ZC-yqR" secondAttribute="trailing" id="FYd-Ln-gFB"/>
                             <constraint firstItem="VWq-nf-PuA" firstAttribute="trailing" secondItem="POM-mV-Xrw" secondAttribute="trailing" id="Fb2-c6-5L6"/>
@@ -289,19 +272,15 @@
                             <constraint firstItem="n9X-vn-g4G" firstAttribute="leading" secondItem="TQa-xf-Be0" secondAttribute="leading" id="Ni4-4M-cfL"/>
                             <constraint firstItem="VWq-nf-PuA" firstAttribute="leading" secondItem="2j4-ZC-yqR" secondAttribute="leading" id="OQe-sk-Kwc"/>
                             <constraint firstAttribute="bottom" secondItem="VWq-nf-PuA" secondAttribute="bottom" constant="247" id="UT5-Cp-o3w"/>
-                            <constraint firstItem="2j4-ZC-yqR" firstAttribute="top" secondItem="147-eq-WGZ" secondAttribute="bottom" constant="58" id="WmH-sH-Ow9"/>
                             <constraint firstItem="VWq-nf-PuA" firstAttribute="leading" secondItem="POM-mV-Xrw" secondAttribute="leading" id="Xuu-v7-BC4"/>
                             <constraint firstItem="VWq-nf-PuA" firstAttribute="leading" secondItem="TQa-xf-Be0" secondAttribute="leadingMargin" id="YBD-fL-g5R"/>
-                            <constraint firstItem="147-eq-WGZ" firstAttribute="trailing" secondItem="wW0-wv-90l" secondAttribute="trailing" id="YqF-4B-P87"/>
                             <constraint firstItem="wW0-wv-90l" firstAttribute="top" secondItem="AdR-hy-xDA" secondAttribute="bottom" constant="8" id="aKY-Kw-Ep7"/>
-                            <constraint firstItem="zyI-dn-RqV" firstAttribute="centerX" secondItem="AdR-hy-xDA" secondAttribute="centerX" constant="-124" id="bMx-d3-tVM"/>
                             <constraint firstItem="wW0-wv-90l" firstAttribute="centerX" secondItem="TQa-xf-Be0" secondAttribute="centerX" constant="-7.5" id="bSX-br-Jmy"/>
                             <constraint firstAttribute="trailing" secondItem="n9X-vn-g4G" secondAttribute="trailing" id="c6p-cP-DBy"/>
                             <constraint firstItem="AdR-hy-xDA" firstAttribute="leading" secondItem="n9X-vn-g4G" secondAttribute="leading" id="eJX-be-sAx"/>
                             <constraint firstItem="wW0-wv-90l" firstAttribute="centerY" secondItem="TQa-xf-Be0" secondAttribute="centerY" constant="-8.5" id="jbQ-gp-f6F"/>
                             <constraint firstItem="POM-mV-Xrw" firstAttribute="top" secondItem="TQa-xf-Be0" secondAttribute="top" constant="143" id="nl1-R3-GRG"/>
                             <constraint firstItem="2j4-ZC-yqR" firstAttribute="top" secondItem="VWq-nf-PuA" secondAttribute="bottom" constant="16" id="xEK-nP-k6f"/>
-                            <constraint firstItem="147-eq-WGZ" firstAttribute="top" secondItem="wW0-wv-90l" secondAttribute="bottom" constant="8" id="yct-9k-i5C"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
