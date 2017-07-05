@@ -18,7 +18,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     // Delegate
     var delegate:SettingsDelegate?
-    var delegate2: GetImageFromRowDelegate?
+    
     
     
     let imagePicker = UIImagePickerController()
@@ -42,7 +42,6 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-    
         
         // Image picker delegate
         
@@ -361,6 +360,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             
             let secondVC: ImagesTableViewController = segue.destination as! ImagesTableViewController
             secondVC.delegate = self
+           
         }
         
     }

@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,69 +23,122 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Change font style:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEy-xe-abb">
-                                <rect key="frame" x="16" y="72" width="343" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Change font size:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eyn-y8-97v">
-                                <rect key="frame" x="16" y="338" width="343" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="images.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="nfB-ut-6ch">
-                                <rect key="frame" x="16" y="456" width="343" height="191"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="images.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="nfB-ut-6ch">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fgl-cd-LwW">
-                                <rect key="frame" x="0.0" y="121" width="375" height="165"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4uK-kR-3z4">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change font style:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEy-xe-abb">
+                                <rect key="frame" x="16" y="102" width="343" height="21"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change font size:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eyn-y8-97v">
+                                <rect key="frame" x="16" y="308" width="343" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Eyn-y8-97v" secondAttribute="height" multiplier="343:20" id="p6D-3j-M75"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <pickerView contentMode="scaleToFill" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="fgl-cd-LwW">
+                                <rect key="frame" x="0.0" y="138" width="375" height="125"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fgl-cd-LwW" secondAttribute="height" multiplier="3:1" id="I5A-Fp-kZP"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="3SP-eL-Czw" id="HlD-kK-EKM"/>
                                     <outlet property="delegate" destination="3SP-eL-Czw" id="5pm-Qx-qhh"/>
                                 </connections>
                             </pickerView>
-                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="17" minValue="10" maxValue="35" translatesAutoresizingMaskIntoConstraints="NO" id="Zva-Kh-YF6">
-                                <rect key="frame" x="33" y="367" width="309" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="17" minValue="10" maxValue="35" translatesAutoresizingMaskIntoConstraints="NO" id="Zva-Kh-YF6">
+                                <rect key="frame" x="14" y="350" width="347" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Zva-Kh-YF6" secondAttribute="height" multiplier="343:30" id="W0T-2Z-wbd"/>
+                                    <constraint firstAttribute="width" secondItem="Zva-Kh-YF6" secondAttribute="height" multiplier="343:30" id="zmK-ON-88U"/>
+                                </constraints>
                                 <connections>
                                     <action selector="changeFontSize:" destination="3SP-eL-Czw" eventType="valueChanged" id="KsM-jn-rQM"/>
                                 </connections>
                             </slider>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lcj-QH-NkY">
-                                <rect key="frame" x="35" y="405" width="305" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.1201508084" green="0.58801085630000005" blue="0.66835110779999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" red="0.27792857553718275" green="0.42019469326596393" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Change Background Image">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="changeBackgroungImage:" destination="3SP-eL-Czw" eventType="touchUpInside" id="oFs-f9-iez"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtL-2P-Pei">
-                                <rect key="frame" x="74" y="294" width="285" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.1201508084" green="0.58801085630000005" blue="0.66835110779999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mtL-2P-Pei">
+                                <rect key="frame" x="16" y="449" width="343" height="33"/>
+                                <color key="backgroundColor" red="0.2297798704" green="0.38947143299999998" blue="0.66835110779999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <state key="normal" title="Cange Font Color">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="changeFontColor:" destination="3SP-eL-Czw" eventType="touchUpInside" id="p1Z-bw-kxc"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qan-7D-h8K">
-                                <rect key="frame" x="16" y="284" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lcj-QH-NkY">
+                                <rect key="frame" x="16" y="572" width="343" height="42"/>
+                                <color key="backgroundColor" red="0.22977987042274486" green="0.38947143297383269" blue="0.66835110779999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Lcj-QH-NkY" secondAttribute="height" multiplier="49:6" id="9us-wf-Hv9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="tintColor" red="0.27792857553718275" green="0.42019469326596393" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Change Background Image">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeBackgroungImage:" destination="3SP-eL-Czw" eventType="touchUpInside" id="oFs-f9-iez"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qan-7D-h8K">
+                                <rect key="frame" x="16" y="480" width="343" height="8"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="8" id="OVv-MO-36J"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.90140142732165951" blue="0.79956240544501289" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="QEy-xe-abb" firstAttribute="top" secondItem="XXG-hE-djE" secondAttribute="bottom" constant="38" id="4Nt-KP-TOy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qan-7D-h8K" secondAttribute="trailing" id="4br-Qe-h20"/>
+                            <constraint firstItem="qan-7D-h8K" firstAttribute="leading" secondItem="jOB-ln-nqh" secondAttribute="leadingMargin" id="77S-LG-XO4"/>
+                            <constraint firstItem="Zva-Kh-YF6" firstAttribute="top" secondItem="Eyn-y8-97v" secondAttribute="bottom" constant="22" id="8Zd-KE-v4f"/>
+                            <constraint firstItem="QEy-xe-abb" firstAttribute="leading" secondItem="jOB-ln-nqh" secondAttribute="leadingMargin" id="AWe-pc-bDz"/>
+                            <constraint firstItem="fgl-cd-LwW" firstAttribute="top" secondItem="QEy-xe-abb" secondAttribute="bottom" constant="15" id="D21-UV-xHY"/>
+                            <constraint firstItem="qan-7D-h8K" firstAttribute="top" secondItem="mtL-2P-Pei" secondAttribute="bottom" constant="-2" id="EBn-No-QjX"/>
+                            <constraint firstItem="qan-7D-h8K" firstAttribute="top" secondItem="Zva-Kh-YF6" secondAttribute="bottom" constant="100" id="EKf-JV-CTW"/>
+                            <constraint firstItem="QEy-xe-abb" firstAttribute="leading" secondItem="jOB-ln-nqh" secondAttribute="leadingMargin" id="EPr-7Q-YJ8"/>
+                            <constraint firstItem="nfB-ut-6ch" firstAttribute="leading" secondItem="jOB-ln-nqh" secondAttribute="leading" id="FKS-wW-hZE"/>
+                            <constraint firstItem="Zva-Kh-YF6" firstAttribute="leading" secondItem="jOB-ln-nqh" secondAttribute="leadingMargin" id="JtV-UA-ZdF"/>
+                            <constraint firstItem="qan-7D-h8K" firstAttribute="top" secondItem="mtL-2P-Pei" secondAttribute="bottom" constant="-2" id="Jx8-h1-rTS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QEy-xe-abb" secondAttribute="trailing" id="MBV-eu-KYc"/>
+                            <constraint firstItem="fgl-cd-LwW" firstAttribute="leading" secondItem="jOB-ln-nqh" secondAttribute="leading" id="MG5-Zo-CJE"/>
+                            <constraint firstItem="4uK-kR-3z4" firstAttribute="top" secondItem="XXG-hE-djE" secondAttribute="bottom" id="OpF-GY-wFl"/>
+                            <constraint firstItem="mtL-2P-Pei" firstAttribute="centerX" secondItem="jOB-ln-nqh" secondAttribute="centerX" id="SQo-2A-l4V"/>
+                            <constraint firstItem="Lcj-QH-NkY" firstAttribute="top" secondItem="qan-7D-h8K" secondAttribute="bottom" constant="84" id="SXG-pR-U8L"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QEy-xe-abb" secondAttribute="trailing" id="THH-Wm-N0d"/>
+                            <constraint firstItem="nfB-ut-6ch" firstAttribute="top" secondItem="XXG-hE-djE" secondAttribute="bottom" id="WbK-e1-RfQ"/>
+                            <constraint firstItem="eSB-jq-EYo" firstAttribute="top" secondItem="nfB-ut-6ch" secondAttribute="bottom" id="XQP-PA-VNo"/>
+                            <constraint firstItem="Eyn-y8-97v" firstAttribute="trailing" secondItem="jOB-ln-nqh" secondAttribute="trailingMargin" id="XmP-qH-0pw"/>
+                            <constraint firstAttribute="trailing" secondItem="fgl-cd-LwW" secondAttribute="trailing" id="Z68-uU-aZ9"/>
+                            <constraint firstItem="mtL-2P-Pei" firstAttribute="width" secondItem="jOB-ln-nqh" secondAttribute="height" multiplier="343:58" constant="-3601.5" id="beH-qD-bwf"/>
+                            <constraint firstItem="Eyn-y8-97v" firstAttribute="leading" secondItem="jOB-ln-nqh" secondAttribute="leadingMargin" id="bjx-RZ-tpn"/>
+                            <constraint firstItem="qan-7D-h8K" firstAttribute="trailing" secondItem="jOB-ln-nqh" secondAttribute="trailingMargin" id="bsz-WZ-scz"/>
+                            <constraint firstItem="Lcj-QH-NkY" firstAttribute="trailing" secondItem="jOB-ln-nqh" secondAttribute="trailingMargin" id="dsc-HT-Cnr"/>
+                            <constraint firstItem="4uK-kR-3z4" firstAttribute="leading" secondItem="jOB-ln-nqh" secondAttribute="leading" id="fAY-ZR-CQ7"/>
+                            <constraint firstItem="qan-7D-h8K" firstAttribute="leading" secondItem="jOB-ln-nqh" secondAttribute="leadingMargin" id="haK-yp-nGH"/>
+                            <constraint firstAttribute="trailing" secondItem="nfB-ut-6ch" secondAttribute="trailing" id="jpC-2N-jTg"/>
+                            <constraint firstAttribute="trailing" secondItem="4uK-kR-3z4" secondAttribute="trailing" id="kiF-Zq-cnM"/>
+                            <constraint firstItem="mtL-2P-Pei" firstAttribute="width" secondItem="jOB-ln-nqh" secondAttribute="width" constant="-32" id="pEb-qk-efN"/>
+                            <constraint firstItem="Lcj-QH-NkY" firstAttribute="leading" secondItem="jOB-ln-nqh" secondAttribute="leadingMargin" id="q2k-lm-So4"/>
+                            <constraint firstItem="Eyn-y8-97v" firstAttribute="top" secondItem="fgl-cd-LwW" secondAttribute="bottom" constant="45" id="sBo-0M-wnS"/>
+                            <constraint firstItem="qan-7D-h8K" firstAttribute="top" secondItem="mtL-2P-Pei" secondAttribute="bottom" constant="-2" id="spO-1u-wCh"/>
+                            <constraint firstItem="Zva-Kh-YF6" firstAttribute="trailing" secondItem="jOB-ln-nqh" secondAttribute="trailingMargin" id="xfk-5e-jUo"/>
+                            <constraint firstItem="eSB-jq-EYo" firstAttribute="top" secondItem="4uK-kR-3z4" secondAttribute="bottom" id="zF6-hl-LzX"/>
+                            <constraint firstItem="mtL-2P-Pei" firstAttribute="centerY" secondItem="jOB-ln-nqh" secondAttribute="centerY" constant="132" id="zhL-ag-ppG"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Settings" id="phP-2b-ir0">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="kdu-yB-a6e">
@@ -104,7 +159,7 @@
                         <outlet property="fontSizeLabel" destination="Eyn-y8-97v" id="hHL-MQ-9r2"/>
                         <outlet property="fontSlider" destination="Zva-Kh-YF6" id="PRQ-kn-fXW"/>
                         <outlet property="pickerView" destination="fgl-cd-LwW" id="FAv-ol-M0Y"/>
-                        <segue destination="mTr-Js-2NB" kind="presentation" identifier="show" id="ntu-bm-sdp"/>
+                        <segue destination="mTr-Js-2NB" kind="show" identifier="show" id="ntu-bm-sdp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hcl-4U-OOg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -163,7 +218,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="5Iq-7f-z0i">
-                                        <rect key="frame" x="81" y="0.0" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="0.0" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -171,7 +226,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="M0V-Ci-YC9">
-                                        <rect key="frame" x="108" y="0.0" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="0.0" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -179,7 +234,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="9qx-wS-Kdv">
-                                        <rect key="frame" x="135" y="0.0" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="0.0" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -187,7 +242,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="yFd-8y-3Bl">
-                                        <rect key="frame" x="162" y="0.0" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="0.0" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -243,7 +298,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="Cbr-F2-gz2">
-                                        <rect key="frame" x="81" y="27" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="27" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -251,7 +306,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="8wH-fJ-oJW">
-                                        <rect key="frame" x="108" y="27" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="27" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -259,7 +314,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="lLL-GZ-iEs">
-                                        <rect key="frame" x="135" y="27" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="27" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -267,7 +322,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="XZT-5Y-oY6">
-                                        <rect key="frame" x="162" y="27" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="27" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -323,7 +378,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="yhJ-2X-17D">
-                                        <rect key="frame" x="81" y="54" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="54" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -331,7 +386,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="MCe-46-1f6">
-                                        <rect key="frame" x="108" y="54" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="54" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -339,7 +394,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="dhW-lf-QEG">
-                                        <rect key="frame" x="135" y="54" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="54" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -347,7 +402,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="LIW-z1-0rI">
-                                        <rect key="frame" x="162" y="54" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="54" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -403,7 +458,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="T8g-Jl-eV9">
-                                        <rect key="frame" x="81" y="81" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="81" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -411,7 +466,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="Snj-Xi-TV3">
-                                        <rect key="frame" x="108" y="81" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="81" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -419,7 +474,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="AAt-oa-SXp">
-                                        <rect key="frame" x="135" y="81" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="81" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -427,7 +482,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="ZtE-Hx-cK2">
-                                        <rect key="frame" x="162" y="81" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="81" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -483,7 +538,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="xar-QZ-aEI">
-                                        <rect key="frame" x="81" y="108" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="108" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -491,7 +546,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="cqu-ee-fGz">
-                                        <rect key="frame" x="108" y="108" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="108" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -499,7 +554,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="4nA-2c-owk">
-                                        <rect key="frame" x="135" y="108" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="108" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -507,7 +562,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="4sh-fB-KyA">
-                                        <rect key="frame" x="162" y="108" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="108" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -563,7 +618,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="clb-u9-KwV">
-                                        <rect key="frame" x="81" y="135" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="135" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -571,7 +626,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="V2F-z2-m7y">
-                                        <rect key="frame" x="108" y="135" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="135" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -579,7 +634,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="vLE-K3-olQ">
-                                        <rect key="frame" x="135" y="135" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="135" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -587,7 +642,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="adm-hD-zbU">
-                                        <rect key="frame" x="162" y="135" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="135" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -643,7 +698,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="yjs-oL-hqy">
-                                        <rect key="frame" x="81" y="162" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="162" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -651,7 +706,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="oiJ-XC-VqH">
-                                        <rect key="frame" x="108" y="162" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="162" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -659,7 +714,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="AMD-hY-eCv">
-                                        <rect key="frame" x="135" y="162" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="162" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -667,7 +722,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="n6H-iH-LXA">
-                                        <rect key="frame" x="162" y="162" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="162" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -723,7 +778,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="dUY-ji-9RT">
-                                        <rect key="frame" x="81" y="189" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="189" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -731,7 +786,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="5HC-sX-5mo">
-                                        <rect key="frame" x="108" y="189" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="189" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -739,7 +794,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="ATR-ay-ZTh">
-                                        <rect key="frame" x="135" y="189" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="189" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -747,7 +802,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="KB1-it-NPD">
-                                        <rect key="frame" x="162" y="189" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="189" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -803,7 +858,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="HtK-rk-2Fk">
-                                        <rect key="frame" x="81" y="216" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="216" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -811,7 +866,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="7Td-V5-Bc4">
-                                        <rect key="frame" x="108" y="216" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="216" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -819,7 +874,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="5wp-on-NsL">
-                                        <rect key="frame" x="135" y="216" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="216" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -827,7 +882,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="yqM-ca-Iw2">
-                                        <rect key="frame" x="162" y="216" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="216" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -883,7 +938,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="SW1-jg-F4O">
-                                        <rect key="frame" x="81" y="243" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="243" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -891,7 +946,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="srn-Xk-sib">
-                                        <rect key="frame" x="108" y="243" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="243" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -899,7 +954,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="j2Q-du-Qkm">
-                                        <rect key="frame" x="135" y="243" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="243" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -907,7 +962,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="itr-YI-cQm">
-                                        <rect key="frame" x="162" y="243" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="243" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -963,7 +1018,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="zTb-zi-RjI">
-                                        <rect key="frame" x="81" y="270" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="270" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -971,7 +1026,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="j0t-x1-y2Y">
-                                        <rect key="frame" x="108" y="270" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="270" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -979,7 +1034,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="uax-Rn-78L">
-                                        <rect key="frame" x="135" y="270" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="270" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -987,7 +1042,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="17z-VY-jP5">
-                                        <rect key="frame" x="162" y="270" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="270" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1043,7 +1098,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="kt4-Ws-0wl">
-                                        <rect key="frame" x="81" y="297" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="297" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1051,7 +1106,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="qAM-Ws-dOD">
-                                        <rect key="frame" x="108" y="297" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="297" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1059,7 +1114,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="mhw-dP-og0">
-                                        <rect key="frame" x="135" y="297" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="297" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1067,7 +1122,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="kBV-WE-qFu">
-                                        <rect key="frame" x="162" y="297" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="297" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1123,7 +1178,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="eMV-ZV-cF2">
-                                        <rect key="frame" x="81" y="324" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="324" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1131,7 +1186,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="sGE-4f-gYN">
-                                        <rect key="frame" x="108" y="324" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="324" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1139,7 +1194,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="nct-yZ-5Gg">
-                                        <rect key="frame" x="135" y="324" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="324" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1147,7 +1202,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="2w4-lB-Lyw">
-                                        <rect key="frame" x="162" y="324" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="324" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1203,7 +1258,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="lsh-wK-QYt">
-                                        <rect key="frame" x="81" y="351" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="351" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1211,7 +1266,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="sEW-5E-TQy">
-                                        <rect key="frame" x="108" y="351" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="351" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1219,7 +1274,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="b0v-XV-ffW">
-                                        <rect key="frame" x="135" y="351" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="351" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1227,7 +1282,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="RFc-We-Sqg">
-                                        <rect key="frame" x="162" y="351" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="351" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1283,7 +1338,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="8iH-Vd-qS1">
-                                        <rect key="frame" x="81" y="378" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="378" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1291,7 +1346,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="vBh-B4-Qaa">
-                                        <rect key="frame" x="108" y="378" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="378" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1299,7 +1354,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="LCR-5D-4mx">
-                                        <rect key="frame" x="135" y="378" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="378" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1307,7 +1362,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="BP1-Ps-rSl">
-                                        <rect key="frame" x="162" y="378" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="378" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1363,7 +1418,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="bmi-rP-CG2">
-                                        <rect key="frame" x="81" y="405" width="26" height="27"/>
+                                        <rect key="frame" x="80" y="405" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1371,7 +1426,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="OZ2-nk-bnW">
-                                        <rect key="frame" x="108" y="405" width="26" height="27"/>
+                                        <rect key="frame" x="107" y="405" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1379,7 +1434,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="NzD-vt-rp4">
-                                        <rect key="frame" x="135" y="405" width="26" height="27"/>
+                                        <rect key="frame" x="134" y="405" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1387,7 +1442,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="keF-OR-A9z">
-                                        <rect key="frame" x="162" y="405" width="26" height="27"/>
+                                        <rect key="frame" x="161" y="405" width="26" height="27"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="26" height="27"/>
@@ -1444,30 +1499,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rrD-al-rwh">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rrD-al-rwh">
                                 <rect key="frame" x="0.0" y="66" width="375" height="601"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableCell" rowHeight="100" id="Udf-3G-7jT" customClass="SavedImageTableViewCell" customModule="Jokes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TableCell" rowHeight="150" id="Udf-3G-7jT" customClass="SavedImageTableViewCell" customModule="Jokes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Udf-3G-7jT" id="GY1-Xm-r6f">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7ct-rN-CUj">
-                                                    <rect key="frame" x="8" y="0.0" width="161" height="79"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7ct-rN-CUj">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SmZ-vF-vzN">
-                                                    <rect key="frame" x="199" y="10" width="142" height="58"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
+                                                <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N1y-75-pEd">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SmZ-vF-vzN">
+                                                    <rect key="frame" x="10" y="33" width="359" height="58"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sqo-nn-Pw9">
+                                                    <rect key="frame" x="142" y="89" width="90" height="2"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="N1y-75-pEd" firstAttribute="top" secondItem="GY1-Xm-r6f" secondAttribute="top" id="0AF-k8-A1D"/>
+                                                <constraint firstAttribute="bottom" secondItem="N1y-75-pEd" secondAttribute="bottom" id="4ZD-8z-Mv2"/>
+                                                <constraint firstItem="7ct-rN-CUj" firstAttribute="leading" secondItem="GY1-Xm-r6f" secondAttribute="leadingMargin" constant="-8" id="HSI-p2-6sS"/>
+                                                <constraint firstItem="sqo-nn-Pw9" firstAttribute="centerX" secondItem="7ct-rN-CUj" secondAttribute="centerX" id="K92-LT-YeY"/>
+                                                <constraint firstAttribute="trailing" secondItem="7ct-rN-CUj" secondAttribute="trailing" id="PmC-dK-0BG"/>
+                                                <constraint firstItem="sqo-nn-Pw9" firstAttribute="leading" secondItem="GY1-Xm-r6f" secondAttribute="leading" constant="142" id="RaC-z1-snn"/>
+                                                <constraint firstItem="SmZ-vF-vzN" firstAttribute="leading" secondItem="GY1-Xm-r6f" secondAttribute="leadingMargin" constant="2" id="SZu-od-egk"/>
+                                                <constraint firstItem="N1y-75-pEd" firstAttribute="leading" secondItem="GY1-Xm-r6f" secondAttribute="leading" id="fSX-js-20J"/>
+                                                <constraint firstAttribute="trailing" secondItem="N1y-75-pEd" secondAttribute="trailing" id="h8n-Mf-kdV"/>
+                                                <constraint firstItem="sqo-nn-Pw9" firstAttribute="bottom" secondItem="SmZ-vF-vzN" secondAttribute="bottom" id="iCG-op-mTj"/>
+                                                <constraint firstItem="sqo-nn-Pw9" firstAttribute="top" secondItem="GY1-Xm-r6f" secondAttribute="topMargin" constant="81" id="p56-ZH-eUc"/>
+                                                <constraint firstAttribute="bottom" secondItem="7ct-rN-CUj" secondAttribute="bottom" id="sQo-gh-6W2"/>
+                                                <constraint firstItem="SmZ-vF-vzN" firstAttribute="top" secondItem="GY1-Xm-r6f" secondAttribute="topMargin" constant="25" id="tIx-g0-vqP"/>
+                                                <constraint firstItem="7ct-rN-CUj" firstAttribute="leading" secondItem="GY1-Xm-r6f" secondAttribute="leading" id="vVT-UG-vRh"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="SmZ-vF-vzN" secondAttribute="bottom" constant="50.5" id="wOc-Vu-Bux"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="SmZ-vF-vzN" secondAttribute="trailing" constant="-2" id="zbS-Si-mD4"/>
+                                                <constraint firstItem="7ct-rN-CUj" firstAttribute="top" secondItem="GY1-Xm-r6f" secondAttribute="top" id="zn6-dJ-Zi8"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <accessibility key="accessibilityConfiguration">
                                             <accessibilityTraits key="traits" adjustable="YES"/>

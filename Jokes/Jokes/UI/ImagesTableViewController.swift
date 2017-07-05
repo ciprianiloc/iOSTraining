@@ -19,6 +19,8 @@ protocol GetImageFromRowDelegate {
 class ImagesTableViewController: UIViewController {
 
     
+    
+    
     var delegate: GetImageFromRowDelegate? = nil
     
     @IBOutlet weak var imagesTableView: UITableView!
@@ -29,6 +31,7 @@ class ImagesTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         
          getData()
@@ -132,10 +135,21 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
         // if cell image is not empty
         if (cell.savedImageView.image != nil) {
             
+            
             // Saving image to file Manager
             let imageData = UIImageJPEGRepresentation(cell.savedImageView.image!, 1)
             do {
                 let path = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("cucubau.jpg")
+                
+                //delegation
+                if (delegate != nil){
+                    print("Delegate worked")
+                    let imageInfo = cell.savedImageView.image
+                    delegate?.getImageInformation(info: imageInfo!)
+                }else {
+                    print("DELEGATE NIL")
+                }
+                
                 //Save image to Root
                 try imageData?.write(to: path, options:  .atomic)
                 print("Saved To Root")
@@ -143,11 +157,7 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
                 print(error)
             }
             
-            //delegation
-            if (delegate != nil){
-                let imageInfo = cell.savedImageView.image
-                delegate?.getImageInformation(info: imageInfo!)
-            }
+            
             
         }
         self.dismiss(animated: true, completion: nil)
