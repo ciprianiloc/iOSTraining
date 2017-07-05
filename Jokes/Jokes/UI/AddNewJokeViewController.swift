@@ -103,6 +103,25 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
                     joke.jokeCategory = "Unknown"
                 }
                 //will add rating and date added for the joke
+                
+                //adding date to joke
+                let date = Date()
+                var calendar = Calendar.current
+                let components = calendar.dateComponents([.year, .month, .day,.hour,.minute,.second], from: date)
+                calendar.timeZone = NSTimeZone(name: "GMT")! as TimeZone
+                
+                joke.jokeDateAdded = calendar.date(from: components)! as NSDate
+
+                let randomJokeRating = Double(arc4random_uniform(6))
+                
+                if randomJokeRating > 0 {
+                    joke.jokeRating = randomJokeRating
+                }else{
+                    joke.jokeRating = 1
+                }
+                
+                print(joke.jokeDateAdded!)
+                
             }
         }catch  {
             print("failed to request joke - add new category")

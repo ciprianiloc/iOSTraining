@@ -49,6 +49,7 @@ class RequestManager: NSObject {
                     jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "Chuck Norris", with: "Irina Țari")
                     jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "his", with: "her")
                     jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "women", with:"men")
+                    jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "he", with: "she")
                 }
                 
                 joke.jokeDescription = jokeWithQuoteAndName
@@ -76,29 +77,26 @@ class RequestManager: NSObject {
                     joke.jokeRating = 1
                 }
                 
+                
+                //adding date to joke
                 let date = Date()
-                let calendar = Calendar.current
-              //  print(calendar)
-                let components = calendar.dateComponents([.year, .month, .day], from: date)
+                var calendar = Calendar(identifier: .gregorian)
+                let components = calendar.dateComponents([.day,.month,.year,.hour,.minute,.second], from: date)
+                calendar.timeZone = NSTimeZone(name: "GMT")! as TimeZone
                 
-                let year =  components.year
-                let month = components.month
-                let day = components.day
+                joke.jokeDateAdded = calendar.date(from: components)! as NSDate
                 
-                print(year)
-                print(month)
-                print(day)
+                print(joke.jokeDateAdded!)
+                
+                
+                
+                //////////
                 
                (UIApplication.shared.delegate as! AppDelegate).saveContext()
                
                 let homeSB = UIStoryboard(name: "Main", bundle: nil)
                 let homeVC = homeSB.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
                 homeVC?.selectedJokeLabel = joke.jokeDescription
-                
-               // print(timeStamp)
-                
-                
-              
             }
             
             
@@ -107,7 +105,7 @@ class RequestManager: NSObject {
         
     }
     
-
+    
 
 
 }
