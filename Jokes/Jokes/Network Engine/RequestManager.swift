@@ -40,7 +40,16 @@ class RequestManager: NSObject {
                     jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "&quot;", with: "\'")
                 }
                 
-                jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "Chuck Norris", with: "Cristian Banarescu")
+                let randomNameJokeValue = Int(arc4random_uniform(10))
+              //  print(randomNameJokeValue)
+                
+                if randomNameJokeValue < 5 {
+                    jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "Chuck Norris", with: "Cristian Bănărescu")
+                }else{
+                    jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "Chuck Norris", with: "Irina Țari")
+                    jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "his", with: "her")
+                    jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "women", with:"men")
+                }
                 
                 joke.jokeDescription = jokeWithQuoteAndName
                                
