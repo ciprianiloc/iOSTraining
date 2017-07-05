@@ -18,7 +18,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     // Delegate
     var delegate:SettingsDelegate?
-    
+    var delegate2: GetImageFromRowDelegate?
     
     
     let imagePicker = UIImagePickerController()
@@ -104,6 +104,13 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         
     }
+    
+    
+   
+    
+    
+   
+    
     
     
     
@@ -343,16 +350,38 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "show" {
+            
+            let secondVC: ImagesTableViewController = segue.destination as! ImagesTableViewController
+            secondVC.delegate = self
+        }
+        
     }
-    */
+ 
 
+}
+
+
+// extension for row image delegate
+
+extension SettingsViewController: GetImageFromRowDelegate {
+    
+    // image from row delegate function
+    
+    func getImageInformation(info: UIImage) {
+        backgroundImage.image = info
+    }
+    
+
+    
+    
 }
 
 

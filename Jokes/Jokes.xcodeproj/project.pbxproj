@@ -12,8 +12,6 @@
 		6675942D1EFBDBD200E68F9E /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6675942C1EFBDBD200E68F9E /* colorPalette.plist */; };
 		667594301EFBDC4B00E68F9E /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6675942C1EFBDBD200E68F9E /* colorPalette.plist */; };
 		667594311EFBDC4B00E68F9E /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6675942C1EFBDBD200E68F9E /* colorPalette.plist */; };
-		667594321EFBDEC500E68F9E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66BA25F1EFA49F600463AB6 /* SettingsViewController.swift */; };
-		667594331EFBDEC600E68F9E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66BA25F1EFA49F600463AB6 /* SettingsViewController.swift */; };
 		6675943A1EFBE35C00E68F9E /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667594391EFBE35C00E68F9E /* ColorPickerViewController.swift */; };
 		6675943D1EFBE69700E68F9E /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667594391EFBE35C00E68F9E /* ColorPickerViewController.swift */; };
 		6675943E1EFBE69800E68F9E /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667594391EFBE35C00E68F9E /* ColorPickerViewController.swift */; };
@@ -22,6 +20,8 @@
 		667594441EFBF26F00E68F9E /* palette2.png in Resources */ = {isa = PBXBuildFile; fileRef = 667594411EFBEE2900E68F9E /* palette2.png */; };
 		667594461EFC0CF200E68F9E /* images.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 667594451EFC0CF200E68F9E /* images.jpeg */; };
 		6685ED211F068F7C003DF190 /* ImagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6685ED201F068F7C003DF190 /* ImagesTableViewController.swift */; };
+		6688DE6B1F0CD22B00A5484F /* ImagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6685ED201F068F7C003DF190 /* ImagesTableViewController.swift */; };
+		6688DE6C1F0CD22B00A5484F /* ImagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6685ED201F068F7C003DF190 /* ImagesTableViewController.swift */; };
 		66AED1A31F0695A7007A2A2D /* SavedImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AED1A21F0695A7007A2A2D /* SavedImageTableViewCell.swift */; };
 		CA3734181EFBD79000AE4408 /* DetailJokeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3734171EFBD79000AE4408 /* DetailJokeViewController.swift */; };
 		CA3734451EFBF2EC00AE4408 /* JokeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3734441EFBF2EC00AE4408 /* JokeCell.swift */; };
@@ -404,8 +404,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6840DF41EF94B5D0036F317 /* JokesTests.swift in Sources */,
-				667594321EFBDEC500E68F9E /* SettingsViewController.swift in Sources */,
 				6675943D1EFBE69700E68F9E /* ColorPickerViewController.swift in Sources */,
+				6688DE6B1F0CD22B00A5484F /* ImagesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,8 +414,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6840DFF1EF94B5D0036F317 /* JokesUITests.swift in Sources */,
-				667594331EFBDEC600E68F9E /* SettingsViewController.swift in Sources */,
 				6675943E1EFBE69800E68F9E /* ColorPickerViewController.swift in Sources */,
+				6688DE6C1F0CD22B00A5484F /* ImagesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

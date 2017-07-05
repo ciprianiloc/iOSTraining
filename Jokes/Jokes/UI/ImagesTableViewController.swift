@@ -9,10 +9,17 @@
 import UIKit
 import CoreData
 
+
+protocol GetImageFromRowDelegate {
+    func getImageInformation(info: UIImage)
+}
+
+
+
 class ImagesTableViewController: UIViewController {
 
-    let myNotification = Notification.init(name: Notification.Name(rawValue: "SavedImageNotification"))
     
+    var delegate: GetImageFromRowDelegate? = nil
     
     @IBOutlet weak var imagesTableView: UITableView!
    
@@ -134,6 +141,12 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
                 print("Saved To Root")
             } catch let error {
                 print(error)
+            }
+            
+            //delegation
+            if (delegate != nil){
+                let imageInfo = cell.savedImageView.image
+                delegate?.getImageInformation(info: imageInfo!)
             }
             
         }

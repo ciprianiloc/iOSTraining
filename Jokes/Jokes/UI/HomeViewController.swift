@@ -148,6 +148,15 @@ extension HomeViewController: SettingsDelegate {
         
 }
 
+
+extension HomeViewController: GetImageFromRowDelegate {
+    
+    func getImageInformation(info: UIImage) {
+        backgroundImageView.image = info
+    }
+    
+}
+
 extension UIFont {
     
     
