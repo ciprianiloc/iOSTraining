@@ -50,7 +50,7 @@ class AllJokesTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {                  //WORKS !!! gives the correct number of sections based on joke categories   
+    override func numberOfSections(in tableView: UITableView) -> Int {                  //WORKS !!! gives the correct number of sections based on joke categories
         
         //fetch joke categories and add them to an array
         
@@ -63,9 +63,6 @@ class AllJokesTableViewController: UITableViewController {
                     categories.append(joke.jokeCategory!)
                 }
             }
-            
-        
-        
         }catch  {
             print("fetch for category failed")
         }
@@ -73,7 +70,7 @@ class AllJokesTableViewController: UITableViewController {
         print(categories.count)
         
         return categories.count
-        //categories.count
+        //return  1 to come back to normal things
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -134,10 +131,10 @@ class AllJokesTableViewController: UITableViewController {
     }
     
     
-    //
-    //    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    //        return jokes[i]
-    //    }
+    
+        override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+            return self.categories[section]
+        }
     
     //    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     //        let frame : CGRect = tableView.frame
