@@ -27,20 +27,18 @@ class AllJokesTableViewController: UITableViewController {
     
     
     
-    //START TO WORK ON SECTIONS
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewJokeButton(_:)))
         allJokesTableView.delegate = self
         allJokesTableView.dataSource = self
-        //getAJoke()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getData()
         allJokesTableView.reloadData()
-        //getAJoke()
+       // getNumberOfJokesForCategory(category: categories[0])
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,6 +75,7 @@ class AllJokesTableViewController: UITableViewController {
        
         //fetch jokes that have the specified category
         
+        //WORKING
         
         return jokes.count
         //getNumberOfJokesForCategory(category: categories[section])        //getAJoke(withObjectCategory: jokes[section].jokeCategory!)
@@ -184,7 +183,7 @@ class AllJokesTableViewController: UITableViewController {
     //    }
     
     
-    func getNumberOfJokesForCategory(category : String) -> Int{
+    func getNumberOfJokesForCategory(category : String) -> Int{  //count the jokes for a specific category
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
         let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         var countJokesForCategory = 0
