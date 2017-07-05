@@ -77,7 +77,8 @@ class AllJokesTableViewController: UITableViewController {
         
         //WORKING
         
-        return jokes.count
+        return getNumberOfJokesForCategory(category: categories[section])
+            //jokes.count  RETURN THIS TO GO BACK TO NORMAL
         //getNumberOfJokesForCategory(category: categories[section])        //getAJoke(withObjectCategory: jokes[section].jokeCategory!)
     }
     
