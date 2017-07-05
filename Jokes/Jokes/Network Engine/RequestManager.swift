@@ -75,16 +75,30 @@ class RequestManager: NSObject {
                 }else{
                     joke.jokeRating = 1
                 }
-             
+                
+                let date = Date()
+                let calendar = Calendar.current
+              //  print(calendar)
+                let components = calendar.dateComponents([.year, .month, .day], from: date)
+                
+                let year =  components.year
+                let month = components.month
+                let day = components.day
+                
+                print(year)
+                print(month)
+                print(day)
+                
                (UIApplication.shared.delegate as! AppDelegate).saveContext()
                
                 let homeSB = UIStoryboard(name: "Main", bundle: nil)
                 let homeVC = homeSB.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
                 homeVC?.selectedJokeLabel = joke.jokeDescription
                 
+               // print(timeStamp)
                 
                 
-                
+              
             }
             
             
