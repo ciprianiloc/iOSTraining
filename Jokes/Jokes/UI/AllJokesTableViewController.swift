@@ -23,7 +23,11 @@ class AllJokesTableViewController: UITableViewController {
     var ratingFromDetailController : Int?
     var results : [Joke] = []
     
+    var categories : [String] = []
     
+    
+    
+    //START TO WORK ON SECTIONS
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,64 +51,110 @@ class AllJokesTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 	1 //jokeCategory.count
+        
+        //fetch joke categories and add them to an array
+        
+        let requestJoke = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        do {
+            jokes = try managedContext.fetch(requestJoke) as! [Joke]
+            for joke in jokes{
+                if !categories.contains(joke.jokeCategory!){
+                    categories.append(joke.jokeCategory!)
+                }
+            }
+            
+        
+        
+        }catch  {
+            print("fetch for category failed")
+        }
+        
+       // print(categories.count)
+        
+        return categories.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
-        return jokes.count//myJokes.count
+        //fetch jokes that have the specified category
+        
+        
+        return getAJoke(withObjectCategory: jokes[section].jokeCategory!)
     }
     
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return self.jokeCategory[section]
+    func getAJoke(withObjectCategory category : String) -> Int{
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        var countCategory = 0
+        
+        do {
+            jokes = try managedContext.fetch(fetchRequest) as! [Joke]
+            
+            for joke in jokes{
+                if category == joke.jokeCategory{
+                    //self.jokeID = id
+                    countCategory += 1
+                }
+            }
+        } catch  {
+            print("fetching failed")
+        }
+        return countCategory
+    }
+    
+    
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return categories[section]
+    }
+    
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let frame : CGRect = tableView.frame
+//        
+//        let title : UILabel = UILabel(frame:CGRect(x: 20, y: 0, width: 100, height: 20))
+//        title.backgroundColor = UIColor.red
+//        title.text = self.jokeCategory[section]
+//        title.textColor = UIColor.white
+//        title.textAlignment = .center
+//        
+//        
+//        let sortBylabel : UILabel = UILabel(frame: CGRect(x: 160, y: 0, width: 70, height: 20))
+//        sortBylabel.backgroundColor = UIColor.red
+//        sortBylabel.text = "Sort By:"
+//        sortBylabel.textColor = UIColor.white
+//        
+//        
+//        let ratingButton : UIButton = UIButton(frame: CGRect(x: 240, y: 0, width: 60, height: 20))
+//            ratingButton.setTitle("Rating",for:.normal)
+//            ratingButton.setTitleColor(UIColor.black, for: .normal)
+//            ratingButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
+//            ratingButton.layer.cornerRadius = 5
+//            ratingButton.layer.borderWidth = 2
+//            ratingButton.layer.borderColor = UIColor.black.cgColor
+//            ratingButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
+//            ratingButton.addTarget(self, action: #selector(ratingButtonPressed), for: .touchUpInside)
+//        
+//        let dateButton : UIButton = UIButton(frame: CGRect(x: 310, y: 0, width: 100, height: 20))
+//            dateButton.setTitle("Date added", for: .normal)
+//            dateButton.setTitleColor(UIColor.black, for: .normal)
+//            dateButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
+//            dateButton.layer.cornerRadius = 5
+//            dateButton.layer.borderWidth = 2
+//            dateButton.layer.borderColor = UIColor.black.cgColor
+//            dateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
+//            dateButton.addTarget(self, action: #selector(dateButtonPressed), for: .touchUpInside)
+//        
+//        let ratingView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
+//        ratingView.backgroundColor = UIColor.white
+//        ratingView.addSubview(ratingButton)
+//        ratingView.addSubview(dateButton)
+//        ratingView.addSubview(title)
+//        ratingView.addSubview(sortBylabel)
+//        
+//        
+//        return ratingView
 //    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let frame : CGRect = tableView.frame
-        
-        let title : UILabel = UILabel(frame:CGRect(x: 20, y: 0, width: 100, height: 20))
-        title.backgroundColor = UIColor.red
-        title.text = self.jokeCategory[section]
-        title.textColor = UIColor.white
-        title.textAlignment = .center
-        
-        
-        let sortBylabel : UILabel = UILabel(frame: CGRect(x: 160, y: 0, width: 70, height: 20))
-        sortBylabel.backgroundColor = UIColor.red
-        sortBylabel.text = "Sort By:"
-        sortBylabel.textColor = UIColor.white
-        
-        
-        let ratingButton : UIButton = UIButton(frame: CGRect(x: 240, y: 0, width: 60, height: 20))
-            ratingButton.setTitle("Rating",for:.normal)
-            ratingButton.setTitleColor(UIColor.black, for: .normal)
-            ratingButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
-            ratingButton.layer.cornerRadius = 5
-            ratingButton.layer.borderWidth = 2
-            ratingButton.layer.borderColor = UIColor.black.cgColor
-            ratingButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
-            ratingButton.addTarget(self, action: #selector(ratingButtonPressed), for: .touchUpInside)
-        
-        let dateButton : UIButton = UIButton(frame: CGRect(x: 310, y: 0, width: 100, height: 20))
-            dateButton.setTitle("Date added", for: .normal)
-            dateButton.setTitleColor(UIColor.black, for: .normal)
-            dateButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
-            dateButton.layer.cornerRadius = 5
-            dateButton.layer.borderWidth = 2
-            dateButton.layer.borderColor = UIColor.black.cgColor
-            dateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
-            dateButton.addTarget(self, action: #selector(dateButtonPressed), for: .touchUpInside)
-        
-        let ratingView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
-        ratingView.backgroundColor = UIColor.white
-        ratingView.addSubview(ratingButton)
-        ratingView.addSubview(dateButton)
-        ratingView.addSubview(title)
-        ratingView.addSubview(sortBylabel)
-        
-        
-        return ratingView
-    }
     
     
     

@@ -47,7 +47,13 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
         }catch {
             print("failed to save")
         }
+        
+        
+//        let allJokesVC = storyboard?.instantiateViewController(withIdentifier: "AllJokesTableViewController") as! AllJokesTableViewController
+//        allJokesVC.pickerDataCount = pickerData.count
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
