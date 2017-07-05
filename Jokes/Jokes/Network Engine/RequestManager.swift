@@ -35,37 +35,18 @@ class RequestManager: NSObject {
                
               
                 
-                var jokeWihQuote = jsonResult as! String
-                if jokeWihQuote.contains("&quot;"){
-                    jokeWihQuote = jokeWihQuote.replacingOccurrences(of: "&quot;", with: "\'")
+                var jokeWithQuoteAndName = jsonResult as! String
+                if jokeWithQuoteAndName.contains("&quot;"){
+                    jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "&quot;", with: "\'")
                 }
                 
-                joke.jokeDescription = jokeWihQuote
+                jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "Chuck Norris", with: "Cristian Banarescu")
+                
+                joke.jokeDescription = jokeWithQuoteAndName
                                
                 if categoryResult == []{
                         joke.jokeCategory = "Unknown"
                 
-                    
-                    
-//                    let category = JokeCategory(context: context)
-//                    category.categoryName = "Unknown"
-//                    self.categoryExists = true
-//                   
-                
-//                    let categoryRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "JokeCategory")
-//                    do{
-//                        
-//                    try self.categories = context.fetch(categoryRequest) as! [JokeCategory]
-//                        if !self.categories.contains(where: {$0.categoryName == category.categoryName}){
-//                            self.categories.append(category)
-//                        }
-//                    }catch{
-//                        print("fetch failed category request")
-//                    }
-                
-                    
-                    
-                    
                     //save category to CoreData if it does not exist yet
                     
                     
