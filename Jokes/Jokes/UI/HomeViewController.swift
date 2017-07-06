@@ -41,6 +41,14 @@ class HomeViewController: UIViewController{
         getFirstJoke()
         changeFont()
         changeBackground()
+
+//        if backgroundImageView.image == nil {
+//            backgroundImageView.image = UIImage(named: "default.jpg")
+//
+//        }
+        
+
+        
     }
     
     
@@ -116,10 +124,13 @@ extension HomeViewController: SettingsDelegate {
         if fontColorHex != nil {
             jokeLabel.textColor = UIColor(hex: (fontColorHex)!)
         } else {
-            jokeLabel.font.verifyDefaults(label: jokeLabel)
+            jokeLabel.font = UIFont(name: "Arial-BoldMT", size: 20)
+            jokeLabel.textColor = UIColor.black
         }
 
     }
+    
+    
     func changeBackground() {
         
         
@@ -133,13 +144,10 @@ extension HomeViewController: SettingsDelegate {
         if fileManager.fileExists(atPath: imagePAth){
            
             self.backgroundImageView.image = UIImage(contentsOfFile: imagePAth)!
-//            self.backgroundImageView.contentMode = UIViewContentMode.scaleAspectFit
-//            self.backgroundImageView.contentMode = UIViewContentMode.center
-//            self.backgroundImageView.alpha = 0.8
-            
-            
+
         } else {
-            backgroundImageView.defaultBackground(imageView: backgroundImageView)
+            
+            backgroundImageView.image = UIImage(named: "default.jpg")
         }
         
     }
@@ -171,9 +179,8 @@ extension UIFont {
 extension UIImageView {
     
     func defaultBackground(imageView: UIImageView) {
-        imageView.image = UIImage(named: "images.jpg")
-        imageView.contentMode = .scaleAspectFit
-        imageView.contentMode = UIViewContentMode.center
+        imageView.image = UIImage(named: "default.jpg")
+
     }
 
 

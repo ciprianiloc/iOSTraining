@@ -30,6 +30,7 @@
 		66715F6A1F0E6EFC00FEDDCE /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 66715F551F0E6EFC00FEDDCE /* iTunesArtwork */; };
 		66715F6B1F0E6EFC00FEDDCE /* iTunesArtwork@2x in Resources */ = {isa = PBXBuildFile; fileRef = 66715F561F0E6EFC00FEDDCE /* iTunesArtwork@2x */; };
 		66715F6D1F0E70FB00FEDDCE /* jokes.png in Resources */ = {isa = PBXBuildFile; fileRef = 66715F6C1F0E70FB00FEDDCE /* jokes.png */; };
+		66715F6F1F0E727300FEDDCE /* default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 66715F6E1F0E727300FEDDCE /* default.jpg */; };
 		6671B8111F0250BC000BC65B /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6671B8101F0250BC000BC65B /* CosmosDistrib.swift */; };
 		6675942D1EFBDBD200E68F9E /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6675942C1EFBDBD200E68F9E /* colorPalette.plist */; };
 		667594301EFBDC4B00E68F9E /* colorPalette.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6675942C1EFBDBD200E68F9E /* colorPalette.plist */; };
@@ -107,6 +108,7 @@
 		66715F551F0E6EFC00FEDDCE /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		66715F561F0E6EFC00FEDDCE /* iTunesArtwork@2x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "iTunesArtwork@2x"; sourceTree = "<group>"; };
 		66715F6C1F0E70FB00FEDDCE /* jokes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = jokes.png; path = ../../UI/jokes.png; sourceTree = "<group>"; };
+		66715F6E1F0E727300FEDDCE /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		6671B8101F0250BC000BC65B /* CosmosDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
 		6675942C1EFBDBD200E68F9E /* colorPalette.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = colorPalette.plist; sourceTree = "<group>"; };
 		667594391EFBE35C00E68F9E /* ColorPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			children = (
 				6671B8101F0250BC000BC65B /* CosmosDistrib.swift */,
 				667594451EFC0CF200E68F9E /* images.jpeg */,
+				66715F6E1F0E727300FEDDCE /* default.jpg */,
 				667594411EFBEE2900E68F9E /* palette2.png */,
 				6675942C1EFBDBD200E68F9E /* colorPalette.plist */,
 				667594391EFBE35C00E68F9E /* ColorPickerViewController.swift */,
@@ -449,6 +452,7 @@
 				66715F651F0E6EFC00FEDDCE /* Icon-Spotlight-40.png in Resources */,
 				F66BA2681EFA4A8300463AB6 /* JokeURLs.plist in Resources */,
 				66715F631F0E6EFC00FEDDCE /* Icon-Small@2x.png in Resources */,
+				66715F6F1F0E727300FEDDCE /* default.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

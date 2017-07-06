@@ -61,7 +61,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             self.backgroundImage.image = UIImage(contentsOfFile: imagePAth)
         }else{
             print("Using default image")
-            backgroundImage.image = #imageLiteral(resourceName: "images.jpeg")
+            backgroundImage.image = #imageLiteral(resourceName: "default.jpg")
         }
         
         
