@@ -97,20 +97,14 @@ class RequestManager: NSObject {
                 let homeVC = homeSB.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController
                 homeVC?.selectedJokeLabel = joke.jokeDescription
                 
-            
+                
             }
            
         }).resume()
        // completed()
+        
     }
-    
-//    
-//    getJsonFromUrl { () -> () in
-//    let homeVC = HomeViewController()
-//    homeVC.getFirstJoke()
-//    
-//    }
-    
+  
 }
 
 

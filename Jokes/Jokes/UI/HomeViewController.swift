@@ -63,6 +63,7 @@ class HomeViewController: UIViewController{
    
     
     func getFirstJoke(){
+       // sleep(1)
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         do{
             try jokes = context.fetch(Joke.fetchRequest())
@@ -96,9 +97,10 @@ class HomeViewController: UIViewController{
         
     mainRequest.getJsonFromUrl()
         
-    //DispatchQueue.main.asyncAfter(deadline: .now() + 0.16, execute: {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.16, execute: {
                 self.getFirstJoke()
-  //  })
+    })
+    
     }
     }
 
