@@ -133,7 +133,7 @@ class AddImageViewController: UIViewController {
                         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                         alertView.addAction(cancelAction)
                         present(alertView, animated: true)
-                        //managedContext.delete(image)
+                        managedContext.delete(image)
                     }
             } catch {
                 print("fetch failed")

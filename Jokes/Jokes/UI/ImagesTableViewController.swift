@@ -40,6 +40,12 @@ class ImagesTableViewController: UIViewController {
         
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getData()
+        imagesTableView.reloadData()
+        
+    }
 
     
     @IBAction func cancel(_ sender: Any) {
