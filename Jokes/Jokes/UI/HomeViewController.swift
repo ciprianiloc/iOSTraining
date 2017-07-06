@@ -35,7 +35,7 @@ class HomeViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        getFirstJoke()
         changeFont()
         changeBackground()
 
@@ -45,7 +45,9 @@ class HomeViewController: UIViewController{
     
     
     override func viewWillAppear(_ animated: Bool) {
-        getFirstJoke()
+       // getFirstJoke()
+       
+        
     }
    
    
@@ -59,8 +61,6 @@ class HomeViewController: UIViewController{
         }
         
         self.jokeLabel.text = jokes.last?.jokeDescription
-       // self.jokeLabel.text = selectedJokeLabel
-
     }
   
     override func didReceiveMemoryWarning() {
@@ -83,18 +83,15 @@ class HomeViewController: UIViewController{
     }
     
     @IBAction func getRandomJoke(_ sender: UIButton) { //tap button to add random joke to CoreData
-//        let requestJoke = RequestManager()
-//        requestJoke.getJsonFromUrl()
         mainRequest.getJsonFromUrl()
-        getFirstJoke()
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+            self.getFirstJoke()
+        })
+        
     }
-
-    
     }
-
-
-
-
 
 extension HomeViewController: SettingsDelegate {
     
