@@ -193,7 +193,8 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
             (action) -> Void
             in
            
-            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SavedImagesStoryboard")
+            let viewController = self.storyboard?.instantiateViewController(withIdentifier: "SavedImagesStoryboard") as? ImagesTableViewController
+            viewController?.delegate = self
             self.present(viewController!, animated: true, completion: nil)
             
 
@@ -352,10 +353,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         if segue.identifier == "show" {
             
             let secondVC: ImagesTableViewController = segue.destination as! ImagesTableViewController

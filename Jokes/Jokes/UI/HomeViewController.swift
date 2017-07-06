@@ -135,9 +135,9 @@ extension HomeViewController: SettingsDelegate {
         if fileManager.fileExists(atPath: imagePAth){
            
             self.backgroundImageView.image = UIImage(contentsOfFile: imagePAth)!
-            self.backgroundImageView.contentMode = UIViewContentMode.scaleAspectFit
-            self.backgroundImageView.contentMode = UIViewContentMode.center
-            self.backgroundImageView.alpha = 0.8
+//            self.backgroundImageView.contentMode = UIViewContentMode.scaleAspectFit
+//            self.backgroundImageView.contentMode = UIViewContentMode.center
+//            self.backgroundImageView.alpha = 0.8
             
             
         } else {

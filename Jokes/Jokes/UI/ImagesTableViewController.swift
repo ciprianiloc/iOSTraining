@@ -142,6 +142,9 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
                 let path = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("cucubau.jpg")
                 
                 //delegation
+                
+                               
+                
                 if (delegate != nil){
                     print("Delegate worked")
                     let imageInfo = cell.savedImageView.image

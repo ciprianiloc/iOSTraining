@@ -95,47 +95,50 @@ class AddImageViewController: UIViewController {
         let reuquest = NSFetchRequest<NSFetchRequestResult>(entityName: "Pictures")
         let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
+            
         let imageData: NSData = UIImagePNGRepresentation(urlImageView.image!)! as NSData
+        let imageName = imageNameTextField.text
+         let imageURL = urlTextField.text
         
-      
         
-        
-        
+           
+
+    
         do {
             imgs = try managedContext.fetch(reuquest) as! [Pictures]
             
            let image = Pictures(context: managedContext)
+                
                 // if image is not saved already
-                if checkImage(picture: image, pictures: imgs) {
+                if (checkImage(pictureUrl: imageURL!, pictures: imgs)) == false {
+                        
+                        image.image = imageData
+                        image.name = imageName
+                        image.url = imageURL
+                        imgs.append(image)
+                        
+
+                        let alertView = UIAlertController.init(title: "Wallpaper saved", message: "Press Cancel to continue", preferredStyle: .alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {(alert: UIAlertAction!) in self.dismiss(animated: true, completion: nil)})
+                        alertView.addAction(cancelAction)
+                        present(alertView, animated: true)
+                        (UIApplication.shared.delegate as! AppDelegate).saveContext()
                     
-                    
-                    image.image = imageData
-                    image.name = imageNameTextField.text
-                     imgs.append(image)
-                    
-                    let viewController = storyboard?.instantiateViewController(withIdentifier: "SavedImagesStoryboard") as? ImagesTableViewController
-                    let alertView = UIAlertController.init(title: "Wallpaper saved", message: "Press Cancel to continue", preferredStyle: .alert)
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: {(alert: UIAlertAction!) in self.present(viewController!, animated: true)})
-                    alertView.addAction(cancelAction)
-                    present(alertView, animated: true)
-                    (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                    
-                    
-                    
-                    
-                    
-                    //if not
-                } else {
-                    let alertView = UIAlertController.init(title: "Wallpaper NOT saved", message: "Wallpaper already exists. Press Cancel to continue", preferredStyle: .alert)
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                    alertView.addAction(cancelAction)
-                    present(alertView, animated: true)
-                    managedContext.delete(image)
-                }
-            
-        } catch {
-            print("fetch failed")
-        }
+                                
+                   
+                            
+                            //if images exists
+                    } else {
+                        let alertView = UIAlertController.init(title: "Wallpaper NOT saved", message: "Wallpaper already exists. Press Cancel to continue", preferredStyle: .alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                        alertView.addAction(cancelAction)
+                        present(alertView, animated: true)
+                        //managedContext.delete(image)
+                    }
+            } catch {
+                print("fetch failed")
+            }
+        
         
         }
         
@@ -200,13 +203,21 @@ class AddImageViewController: UIViewController {
     
     
     
-    func checkImage(picture: Pictures, pictures: [Pictures]) -> Bool {
-        var ok: Bool = true
+    func checkImage(pictureUrl: String, pictures: [Pictures]) -> Bool {
+        var ok: Bool = false
+       
+        
+        if pictures.count > 0 {
         for image in pictures {
-            if image.name == picture.name || image.image == picture.image {
-                ok = false
+            
+            if image.url == pictureUrl {
+                ok = true
                 break
+            } else {
+                ok = false
             }
+            
+        }
         }
         return ok
     }
