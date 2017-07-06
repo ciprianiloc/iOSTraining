@@ -38,6 +38,7 @@ class HomeViewController: UIViewController{
         getFirstJoke()
         changeFont()
         changeBackground()
+        
 
         
     }
@@ -86,7 +87,7 @@ class HomeViewController: UIViewController{
         mainRequest.getJsonFromUrl()
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.16, execute: {
             self.getFirstJoke()
         })
         
