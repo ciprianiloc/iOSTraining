@@ -40,7 +40,6 @@ class AllJokesTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         getData()
         allJokesTableView.reloadData()
-       // getNumberOfJokesForCategory(category: categories[0])
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,25 +50,12 @@ class AllJokesTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {                  //WORKS !!! gives the correct number of sections based on joke categories
-        
-        //fetch joke categories and add them to an array
-        
-        let requestJoke = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
-        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        do {
-            jokes = try managedContext.fetch(requestJoke) as! [Joke]
             for joke in jokes{
                 if !categories.contains(joke.jokeCategory!){
                     categories.append(joke.jokeCategory!)
                 }
             }
-        }catch  {
-            print("fetch for category failed")
-        }
-        
-      //  print(categories.count)
-        
-        return categories.count
+        return 1 //categories.count
         //return  1 to come back to normal things
     }
 
@@ -79,7 +65,7 @@ class AllJokesTableViewController: UITableViewController {
         
         //WORKING
         
-        return getNumberOfJokesForCategory(category: categories[section])
+        return jokes.count//getNumberOfJokesForCategory(category: categories[section])
             //jokes.count  RETURN THIS TO GO BACK TO NORMAL
         //getNumberOfJokesForCategory(category: categories[section])        //getAJoke(withObjectCategory: jokes[section].jokeCategory!)
     }
@@ -242,42 +228,62 @@ class AllJokesTableViewController: UITableViewController {
     
     
     func ratingButtonPressed(sender : UIButton){
-        print("will sort things")
+       // print("will sort things")
 
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        var result : [Joke] = [Joke]()
-        //var sortedResult : [Joke] = [Joke]()
-        
-        do {
-            result = try context.fetch(fetchRequest) as! [Joke]
-            result = result.sorted(by: {$0.jokeRating > $1.jokeRating})
+        DispatchQueue.main.async(execute: {
+            // Update your UI here
             
-            self.jokes = result
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            var result : [Joke] = [Joke]()
+            //var sortedResult : [Joke] = [Joke]()
             
+            do {
+                result = try context.fetch(fetchRequest) as! [Joke]
+                result = result.sorted(by: {$0.jokeRating > $1.jokeRating})
+                
+                self.jokes = result
 
-            
-            
-            for joke in result{
-                print(joke.jokeRating)
+                (UIApplication.shared.delegate as! AppDelegate).saveContext()
+                self.allJokesTableView.reloadData()
+                
+            } catch  {
+                print("fetch failed for sorting jokes by rating")
             }
-            
-            
-            print()
-            
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
-
-        } catch  {
-            print("fetch failed for sorting jokes by rating")
-        }
-            self.allJokesTableView.reloadData()
+        })
+        
+        
+        
         
     }
     
     func dateButtonPressed(sender : UIButton){
-        print("date sorting button pressed")
+       // print("date sorting button pressed")
         
+        
+        let fecthForDate = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        var result : [Joke] = [Joke]()
+        
+        do {
+            
+            result = try context.fetch(fecthForDate) as! [Joke]
+            result = result.sorted(by: {$0.jokeDateAdded?.compare(($1.jokeDateAdded as Date?)!) == .orderedDescending})
+            
+            self.jokes = result
+            
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            self.allJokesTableView.reloadData()
+            
+//            for joke in result{
+//                print(joke.jokeDateAdded!)
+//                print(joke.jokeDescription!)
+//            }
+            
+        } catch  {
+            print("fetch for sorting by date failed")
+        }
         
     }
     
