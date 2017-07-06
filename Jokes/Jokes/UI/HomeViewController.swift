@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 
 
@@ -29,6 +30,8 @@ class HomeViewController: UIViewController{
     var jokes : [Joke] = []
     
     
+    
+    
     @IBOutlet var homeView: UIView!
     
     @IBOutlet weak var backgroundImageView: UIImageView!
@@ -38,15 +41,13 @@ class HomeViewController: UIViewController{
         getFirstJoke()
         changeFont()
         changeBackground()
-        
-
-        
     }
     
     
     
     override func viewWillAppear(_ animated: Bool) {
        // getFirstJoke()
+      
        
         
     }
@@ -84,13 +85,12 @@ class HomeViewController: UIViewController{
     }
     
     @IBAction func getRandomJoke(_ sender: UIButton) { //tap button to add random joke to CoreData
-        mainRequest.getJsonFromUrl()
         
+    mainRequest.getJsonFromUrl()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.16, execute: {
-            self.getFirstJoke()
-        })
-        
+    //DispatchQueue.main.asyncAfter(deadline: .now() + 0.16, execute: {
+                self.getFirstJoke()
+  //  })
     }
     }
 

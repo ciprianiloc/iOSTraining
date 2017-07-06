@@ -18,6 +18,9 @@ class RequestManager: NSObject {
     
     let URLApi = "http://api.icndb.com/jokes/random"
     var jokesArray = [Joke]()
+    typealias FinishedRequest = () -> ()
+    
+    
     func getJsonFromUrl(){
         let url = NSURL(string: URLApi)
    //     var jokeString : String?
@@ -98,10 +101,20 @@ class RequestManager: NSObject {
             }
            
         }).resume()
-               //return jokeString
+       // completed()
     }
     
+//    
+//    getJsonFromUrl { () -> () in
+//    let homeVC = HomeViewController()
+//    homeVC.getFirstJoke()
+//    
+//    }
+    
 }
+
+
+
 var mainRequest = RequestManager()
 
 

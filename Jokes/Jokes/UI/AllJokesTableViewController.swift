@@ -124,7 +124,14 @@ class AllJokesTableViewController: UITableViewController {
     
     
         override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-            return self.categories[section]
+            
+            if categories.count>0{
+                return self.categories[section]
+            }else{
+                return ""
+            }
+            
+            
         }
     
         override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
