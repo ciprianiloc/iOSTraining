@@ -17,7 +17,7 @@ class AddImageViewController: UIViewController {
     
     @IBOutlet weak var imageNameTextField: UITextField!
     
-    @IBOutlet weak var urlImageView: UIImageView!
+   
     
     
 
@@ -31,40 +31,40 @@ class AddImageViewController: UIViewController {
     }
     
     
-    @IBAction func downloadWallpaper(_ sender: Any) {
-        
-        let downloadGroup = DispatchGroup()
-        
-        downloadGroup.enter()
-        if  let urlPath = URL(string: self.urlTextField.text!) {
-            
-            self.downloadImage(url: urlPath)
-            downloadGroup.leave()
-            
-            let alert = UIAlertController.init(title: "Succesfully downloaded!", message: "Press the Save button to add the wallpaper to your Saved Pictures, or cancel if you want to exit without saving", preferredStyle: .alert)
-            let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alert.addAction(cancel)
-            self.present(alert, animated: true)
-            
-            
-            
+//    @IBAction func downloadWallpaper(_ sender: Any) {
+//        
+//        let downloadGroup = DispatchGroup()
+//        
+//        downloadGroup.enter()
+//        if  let urlPath = URL(string: self.urlTextField.text!) {
+//            
+//            self.downloadImage(url: urlPath)
+//            downloadGroup.leave()
+//            
+//            let alert = UIAlertController.init(title: "Succesfully downloaded!", message: "Press the Save button to add the wallpaper to your Saved Pictures, or cancel if you want to exit without saving", preferredStyle: .alert)
+//            let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+//            alert.addAction(cancel)
+//            self.present(alert, animated: true)
+    
             
             
-            // Download unsuccesfull
-        } else {
-            let alertView = UIAlertController.init(title: "Error", message: "Add viable URL before saving", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            alertView.addAction(cancelAction)
-            self.present(alertView, animated: true)
-            
-        }
-        downloadGroup.wait()
-        downloadGroup.notify(queue: DispatchQueue.main) {
-            
-        }
-
-        
-    }
+//            
+//            
+//            // Download unsuccesfull
+//        } else {
+//            let alertView = UIAlertController.init(title: "Error", message: "Add viable URL before saving", preferredStyle: .alert)
+//            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//            alertView.addAction(cancelAction)
+//            self.present(alertView, animated: true)
+//            
+//        }
+//        downloadGroup.wait()
+//        downloadGroup.notify(queue: DispatchQueue.main) {
+//            
+//        }
+//
+//        
+//    }
     
     
     
@@ -75,14 +75,14 @@ class AddImageViewController: UIViewController {
         // fetching text from name field and image from UIImageView, checking if empty
         
         let imageName = imageNameTextField.text
-        let imageView = urlImageView.image
+        //let imageView = urlImageView.image
         if imageName == "" {
             let alertView = UIAlertController.init(title: "Error", message: "Give your image a name before saving", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             alertView.addAction(cancelAction)
             present(alertView, animated: true)
-        } else if imageView == nil {
-            let alertView = UIAlertController.init(title: "Error", message: "You can not save if image was not downloaded succesfully", preferredStyle: .alert)
+        } else if urlTextField.text == "" {
+            let alertView = UIAlertController.init(title: "Error", message: "Please insert URL into text field", preferredStyle: .alert)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             alertView.addAction(cancelAction)
             present(alertView, animated: true)
@@ -96,7 +96,7 @@ class AddImageViewController: UIViewController {
         let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
             
-        let imageData: NSData = UIImagePNGRepresentation(urlImageView.image!)! as NSData
+       // let imageData: NSData = UIImagePNGRepresentation(urlImageView.image!)! as NSData
         let imageName = imageNameTextField.text
          let imageURL = urlTextField.text
         
@@ -109,10 +109,10 @@ class AddImageViewController: UIViewController {
             
            let image = Pictures(context: managedContext)
                 
-                // if image is not saved already
-                if (checkImage(pictureUrl: imageURL!, pictures: imgs)) == false {
+                // if url is not saved already
+                if (checkURL(pastedURL: imageURL!, pictures: imgs)) == false {
                         
-                        image.image = imageData
+                       // image.image = imageData
                         image.name = imageName
                         image.url = imageURL
                         imgs.append(image)
@@ -127,7 +127,7 @@ class AddImageViewController: UIViewController {
                                 
                    
                             
-                            //if images exists
+                            //if url exists
                     } else {
                         let alertView = UIAlertController.init(title: "Wallpaper NOT saved", message: "Wallpaper already exists. Press Cancel to continue", preferredStyle: .alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -170,47 +170,17 @@ class AddImageViewController: UIViewController {
     }
     
     
-    // Get data from URL
-    func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
-        URLSession.shared.dataTask(with: url) {
-            (data, response, error) in
-            completion(data, response, error)
-            }.resume()
-    }
-    
-    // Download image
-    func downloadImage(url: URL) {
-        print("Download Started")
-        getDataFromUrl(url: url) { (data, response, error)  in
-            guard let data = data, error == nil else {
-                let alert = UIAlertController(title: "Unsafe URL", message: "The URL path you have chose does not start with HTTPS and it is not safe. Please choose an image with HTTPS URL prefix", preferredStyle: .alert)
-                
-                
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                alert.addAction(cancelAction)
-                
-                self.present(alert, animated: true, completion: nil)
-                
-                return }
-            print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("Download Finished")
-            DispatchQueue.main.async() { () -> Void in
-                self.urlImageView.image = UIImage(data: data)
-            }
-        }
-    }
-
+ 
     
     
-    
-    func checkImage(pictureUrl: String, pictures: [Pictures]) -> Bool {
+    func checkURL(pastedURL: String, pictures: [Pictures]) -> Bool {
         var ok: Bool = false
        
         
         if pictures.count > 0 {
         for image in pictures {
             
-            if image.url == pictureUrl {
+            if String(image.url!)! == pastedURL {
                 ok = true
                 break
             } else {
