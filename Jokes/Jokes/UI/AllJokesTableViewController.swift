@@ -35,6 +35,8 @@ class AllJokesTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewJokeButton(_:)))
         allJokesTableView.delegate = self
         allJokesTableView.dataSource = self
+        
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -55,46 +57,61 @@ class AllJokesTableViewController: UITableViewController {
                     categories.append(joke.jokeCategory!)
                 }
             }
-        return 1 //categories.count
+        return categories.count
         //return  1 to come back to normal things
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
-        //fetch jokes that have the specified category
         
         //WORKING
         
-        return jokes.count//getNumberOfJokesForCategory(category: categories[section])
+        let number = getNumberOfJokesForCategory(category: categories[section])
+        
+        return number
             //jokes.count  RETURN THIS TO GO BACK TO NORMAL
-        //getNumberOfJokesForCategory(category: categories[section])        //getAJoke(withObjectCategory: jokes[section].jokeCategory!)
     }
+    
+    
+    
+    //get a cell from a specific section
+    
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
-        let joke = jokes[indexPath.row]
-
+//        let joke = jokes[indexPath.row]
+        
+        
+        let jokesFromSection = getJokesFromSection(section: indexPath.section)
+        
+        let joke = jokesFromSection[indexPath.row]
+        
+        
        
             cell.jokeLabel.text = String(describing: joke.jokeDescription!)
+            //cell.ratingStarsView.rating = jokes[indexPath.row].jokeRating
             cell.ratingStarsView.rating = jokes[indexPath.row].jokeRating
-        
-        
-        
-        //WORKING
-        
-        
         
         return cell
     }
     
+    
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailView = storyboard?.instantiateViewController(withIdentifier: "DetailJoke") as? DetailJokeViewController
-        detailView?.selectedJoke = String(describing: jokes[indexPath.row].jokeDescription!)
-        detailView?.selectedCategory = String(describing: jokes[indexPath.row].jokeCategory!)
-        detailView?.getAJoke(withObjectID: jokes[indexPath.row].objectID)
+         let jokesFromSection = getJokesFromSection(section: indexPath.section)
+        
+        
+        //detailView?.selectedJoke = String(describing: jokes[indexPath.row].jokeDescription!)
+        detailView?.selectedJoke = String(describing: jokesFromSection[indexPath.row].jokeDescription!)
+      //  detailView?.selectedCategory = String(describing: jokes[indexPath.row].jokeCategory!)
+        detailView?.selectedCategory = String(describing: jokesFromSection[indexPath.row].jokeCategory!)
+       // detailView?.getAJoke(withObjectID: jokes[indexPath.row].objectID)
+        detailView?.getAJoke(withObjectID: jokesFromSection[indexPath.row].objectID)
+        
         
         //make a fetch request with an ID parameter ( from CoreData) to access a specific joke and change its rating
         //after changing rating, reload the tableView
@@ -201,7 +218,7 @@ class AllJokesTableViewController: UITableViewController {
         return countJokesForCategory
     }
     
-    func getJokeFromSection(section: Int) -> [Joke]{
+    func getJokesFromSection(section: Int) -> [Joke]{
         var result : [Joke] = [Joke]()
         var finalResult : [Joke] = [Joke]()
         
