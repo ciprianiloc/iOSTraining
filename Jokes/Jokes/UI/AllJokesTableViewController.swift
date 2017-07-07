@@ -26,6 +26,8 @@ class AllJokesTableViewController: UITableViewController {
     var categories : [String] = []
     var isSorted : Bool = false
     var sortedJokesByRating : [Joke] = [Joke]()
+    var selectedSection : Int = 0
+    var jokesFromSection : [Joke] = [Joke]()
     
     
     
@@ -58,18 +60,11 @@ class AllJokesTableViewController: UITableViewController {
                 }
             }
         return categories.count
-        //return  1 to come back to normal things
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
-        
-        //WORKING
-        
         let number = getNumberOfJokesForCategory(category: categories[section])
-        
         return number
-            //jokes.count  RETURN THIS TO GO BACK TO NORMAL
     }
     
     
@@ -82,18 +77,19 @@ class AllJokesTableViewController: UITableViewController {
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
-//        let joke = jokes[indexPath.row]
+        self.selectedSection = indexPath.section
         
-        
-        let jokesFromSection = getJokesFromSection(section: indexPath.section)
-        
+        if !isSorted{
+            self.jokesFromSection = getJokesFromSection(section: indexPath.section)
+            let joke = jokesFromSection[indexPath.row]
+            cell.jokeLabel.text = String(describing: joke.jokeDescription!)
+            cell.ratingStarsView.rating = jokesFromSection[indexPath.row].jokeRating
+        }
         let joke = jokesFromSection[indexPath.row]
         
-        
-       
+    
             cell.jokeLabel.text = String(describing: joke.jokeDescription!)
-            //cell.ratingStarsView.rating = jokes[indexPath.row].jokeRating
-            cell.ratingStarsView.rating = jokes[indexPath.row].jokeRating
+            cell.ratingStarsView.rating = jokesFromSection[indexPath.row].jokeRating
         
         return cell
     }
@@ -102,15 +98,14 @@ class AllJokesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailView = storyboard?.instantiateViewController(withIdentifier: "DetailJoke") as? DetailJokeViewController
-         let jokesFromSection = getJokesFromSection(section: indexPath.section)
+        
+            detailView?.selectedJoke = String(describing: jokesFromSection[indexPath.row].jokeDescription!)
+            detailView?.selectedCategory = String(describing: jokesFromSection[indexPath.row].jokeCategory!)
+            detailView?.getAJoke(withObjectID: jokesFromSection[indexPath.row].objectID)
         
         
-        //detailView?.selectedJoke = String(describing: jokes[indexPath.row].jokeDescription!)
-        detailView?.selectedJoke = String(describing: jokesFromSection[indexPath.row].jokeDescription!)
-      //  detailView?.selectedCategory = String(describing: jokes[indexPath.row].jokeCategory!)
-        detailView?.selectedCategory = String(describing: jokesFromSection[indexPath.row].jokeCategory!)
-       // detailView?.getAJoke(withObjectID: jokes[indexPath.row].objectID)
-        detailView?.getAJoke(withObjectID: jokesFromSection[indexPath.row].objectID)
+        
+        
         
         
         //make a fetch request with an ID parameter ( from CoreData) to access a specific joke and change its rating
@@ -160,6 +155,7 @@ class AllJokesTableViewController: UITableViewController {
             title.textColor = UIColor.white
             title.textAlignment = .center
     
+            
     
             let sortBylabel : UILabel = UILabel(frame: CGRect(x: 160, y: 0, width: 70, height: 20))
             sortBylabel.backgroundColor = UIColor.red
@@ -252,28 +248,39 @@ class AllJokesTableViewController: UITableViewController {
     
     
     func ratingButtonPressed(sender : UIButton){
-       // print("will sort things")
+        print("will sort things")
+        
+        //get the section you want
 
         DispatchQueue.main.async(execute: {
             // Update your UI here
             
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
-            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+         //   let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
+           // let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             var result : [Joke] = [Joke]()
             //var sortedResult : [Joke] = [Joke]()
             
-            do {
-                result = try context.fetch(fetchRequest) as! [Joke]
+          //  do {
+                //result = try context.fetch(fetchRequest) as! [Joke]
+                result = self.getJokesFromSection(section: self.selectedSection)
                 result = result.sorted(by: {$0.jokeRating > $1.jokeRating})
                 
-                self.jokes = result
+                self.jokesFromSection = result
+                self.isSorted = true
+            
+//            for i in result{
+//                print(i.jokeDescription!)
+//            }
+            
+            
 
                 (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                self.allJokesTableView.reloadData()
-                
-            } catch  {
-                print("fetch failed for sorting jokes by rating")
-            }
+                //self.allJokesTableView.reloadSections(selectedSection, with: .automatic)
+                let indexSection = NSIndexSet(index: self.selectedSection)
+                self.allJokesTableView.reloadSections(indexSection as IndexSet, with: .fade)
+//            } catch  {
+//                print("fetch failed for sorting jokes by rating")
+//            }
         })
         
         
@@ -282,7 +289,7 @@ class AllJokesTableViewController: UITableViewController {
     }
     
     func dateButtonPressed(sender : UIButton){
-       // print("date sorting button pressed")
+        print("date sorting button pressed")
         
         
         let fecthForDate = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
