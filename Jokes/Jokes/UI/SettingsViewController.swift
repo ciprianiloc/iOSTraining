@@ -62,10 +62,10 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         }else{
             print("Using default image")
             backgroundImage.image = #imageLiteral(resourceName: "default.jpg")
+            
         }
         
-        
-        
+                
         // all fonts
         for familyName in fontFamilies {
             
@@ -88,12 +88,23 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         let selectedRow = defaults.integer(forKey: "selectedRow")
         pickerView.selectRow(selectedRow, inComponent: 0, animated: true)
         
-        
-        
+        //slider - fontSizeLabel
         let fontSize = defaults.integer(forKey: "fontSize")
+        
+        if fontSlider.value == 0 {
+            self.fontSlider.setValue(17, animated: true)
+            fontSizeLabel.font = UIFont(name: self.fontNames[0], size: CGFloat(fontSize))
+            fontSlider.setValue(Float(fontSize), animated: true)
+            fontSlider.minimumValue = 15
+        } else {
+        
         fontSizeLabel.font = UIFont(name: self.fontNames[0], size: CGFloat(fontSize))
         fontSlider.setValue(Float(fontSize), animated: true)
+        self.fontSizeLabel.text = "Font size: " + "\(Int(fontSlider.value))"
+        }
         
+        
+        // font color
         let fontColorHex = defaults.string(forKey: "fontColor")
         if fontColorHex != nil {
         fontColor.backgroundColor = UIColor(hex: (fontColorHex)!)
@@ -105,14 +116,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     
-   
-    
-    
-   
-    
-    
-    
-    
+
     
     @IBAction func changeFontColor(_ sender: Any) {
         let popoverVC = storyboard?.instantiateViewController(withIdentifier: "colorPickerPopover") as! ColorPickerViewController
