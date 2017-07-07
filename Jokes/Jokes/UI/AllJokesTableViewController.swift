@@ -28,6 +28,11 @@ class AllJokesTableViewController: UITableViewController {
     var sortedJokesByRating : [Joke] = [Joke]()
     var selectedSection : Int = 0
     var jokesFromSection : [Joke] = [Joke]()
+
+    
+    //var dateButton : UIButton = UIButton()//(frame: CGRect(x: 310, y: 0, width: 100, height: 20))
+    
+
     
     
     
@@ -37,9 +42,40 @@ class AllJokesTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewJokeButton(_:)))
         allJokesTableView.delegate = self
         allJokesTableView.dataSource = self
+       
         
        
+//        let screenSize = UIScreen.main.bounds
+//        print(screenSize.maxX)
+        
+//        
+//        var bounds = UIScreen.main.bounds
+//        var width = bounds.size.width
+//        var height = bounds.size.height
+        
+        
     }
+//    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+//        var text = ""
+//        switch UIDevice.current.orientation{
+//        case .portrait:
+//            text="Portrait"
+//     //       self.dateButton = UIButton(frame: CGRect(x: 310, y: 0, width: 100, height: 20))
+//        case .portraitUpsideDown:
+//            text="PortraitUpsideDown"
+//        case .landscapeLeft:
+//            text="LandscapeLeft"
+//                       self.allJokesTableView.addSubview(dateButton)
+//            
+//          //  self.dateButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 200, y: 0, width: 100, height: 20))
+//        case .landscapeRight:
+//            text="LandscapeRight"
+//        default:
+//            text="Another"
+//        }
+//        
+//        print(text)
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         getData()
@@ -71,7 +107,7 @@ class AllJokesTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
+        //self.selectedSection = indexPath.section
         if categories.count>0{
             return self.categories[section]
         }else{
@@ -100,6 +136,19 @@ class AllJokesTableViewController: UITableViewController {
         sortBylabel.text = "Sort By:"
         sortBylabel.textColor = UIColor.white
         
+        let dateButton = UIButton(frame: CGRect(x: 314, y: 0, width: 100, height: 20))
+        dateButton.setTitle("Date added", for: .normal)
+        dateButton.setTitleColor(UIColor.black, for: .normal)
+        dateButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
+        dateButton.layer.cornerRadius = 5
+        dateButton.layer.borderWidth = 2
+        dateButton.layer.borderColor = UIColor.black.cgColor
+        dateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
+        dateButton.addTarget(self, action: #selector(dateButtonPressed), for: .touchUpInside)
+        
+        
+        
+   
         
         let ratingButton : UIButton = UIButton(frame: CGRect(x: 240, y: 0, width: 60, height: 20))
         ratingButton.setTitle("Rating",for:.normal)
@@ -109,17 +158,9 @@ class AllJokesTableViewController: UITableViewController {
         ratingButton.layer.borderWidth = 2
         ratingButton.layer.borderColor = UIColor.black.cgColor
         ratingButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
-        ratingButton.addTarget(self, action: #selector(ratingButtonPressed), for: .touchUpInside)
-        
-        let dateButton : UIButton = UIButton(frame: CGRect(x: 310, y: 0, width: 100, height: 20))
-        dateButton.setTitle("Date added", for: .normal)
-        dateButton.setTitleColor(UIColor.black, for: .normal)
-        dateButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
-        dateButton.layer.cornerRadius = 5
-        dateButton.layer.borderWidth = 2
-        dateButton.layer.borderColor = UIColor.black.cgColor
-        dateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
-        dateButton.addTarget(self, action: #selector(dateButtonPressed), for: .touchUpInside)
+      //  ratingButton.addTarget(self, action: #selector(ratingButtonPressed), for: .touchUpInside)
+        ratingButton.addTarget(self, action: #selector(ratingButtonPressed(sender:)), for: .touchUpInside)
+        ratingButton.tag = section
         
         let ratingView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
         ratingView.backgroundColor = UIColor.white
@@ -138,19 +179,30 @@ class AllJokesTableViewController: UITableViewController {
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
-        self.selectedSection = indexPath.section
+        //self.selectedSection = indexPath.section
         
         if !isSorted{
             self.jokesFromSection = getJokesFromSection(section: indexPath.section)
             let joke = jokesFromSection[indexPath.row]
             cell.jokeLabel.text = String(describing: joke.jokeDescription!)
             cell.ratingStarsView.rating = jokesFromSection[indexPath.row].jokeRating
-        }
-        let joke = jokesFromSection[indexPath.row]
+            
+            
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+//            
+//            let indexSection = NSIndexSet(index: self.selectedSection)
+//            self.allJokesTableView.reloadSections(indexSection as IndexSet, with: .fade)
+        }else{
+            let joke = jokesFromSection[indexPath.row]
+            
         
-    
-            cell.jokeLabel.text = String(describing: joke.jokeDescription!)
-            cell.ratingStarsView.rating = jokesFromSection[indexPath.row].jokeRating
+                cell.jokeLabel.text = String(describing: joke.jokeDescription!)
+                cell.ratingStarsView.rating = jokesFromSection[indexPath.row].jokeRating
+
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+    //        let indexSection = NSIndexSet(index: self.selectedSection)
+    //        self.allJokesTableView.reloadSections(indexSection as IndexSet, with: .fade)
+        }
         
         return cell
     }
@@ -160,10 +212,20 @@ class AllJokesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailView = storyboard?.instantiateViewController(withIdentifier: "DetailJoke") as? DetailJokeViewController
         
+            //check if sorted
+        
+        if !isSorted{
             self.jokesFromSection = getJokesFromSection(section: indexPath.section)
             detailView?.selectedJoke = String(describing: jokesFromSection[indexPath.row].jokeDescription!)
             detailView?.selectedCategory = String(describing: jokesFromSection[indexPath.row].jokeCategory!)
             detailView?.getAJoke(withObjectID: jokesFromSection[indexPath.row].objectID)
+        }else{
+            detailView?.selectedJoke = String(describing: jokesFromSection[indexPath.row].jokeDescription!)
+            detailView?.selectedCategory = String(describing: jokesFromSection[indexPath.row].jokeCategory!)
+            detailView?.getAJoke(withObjectID: jokesFromSection[indexPath.row].objectID)
+        }
+        
+        
         
         navigationController?.pushViewController(detailView!, animated: true)
         
@@ -255,37 +317,23 @@ class AllJokesTableViewController: UITableViewController {
         DispatchQueue.main.async(execute: {
             // Update your UI here
             
-         //   let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
-           // let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             var result : [Joke] = [Joke]()
-            //var sortedResult : [Joke] = [Joke]()
-            
-          //  do {
-                //result = try context.fetch(fetchRequest) as! [Joke]
-                result = self.getJokesFromSection(section: self.selectedSection)
-                result = result.sorted(by: {$0.jokeRating > $1.jokeRating})
+           
+                //result = self.getJokesFromSection(section: self.selectedSection)
+            result = self.getJokesFromSection(section: sender.tag)
+            result = result.sorted(by: {$0.jokeRating > $1.jokeRating})
                 
                 self.jokesFromSection = result
                 self.isSorted = true
             
-//            for i in result{
-//                print(i.jokeDescription!)
-//            }
-            
-            
-
-                (UIApplication.shared.delegate as! AppDelegate).saveContext()
-                //self.allJokesTableView.reloadSections(selectedSection, with: .automatic)
                 let indexSection = NSIndexSet(index: self.selectedSection)
                 self.allJokesTableView.reloadSections(indexSection as IndexSet, with: .fade)
+            
+            (UIApplication.shared.delegate as! AppDelegate).saveContext()
 //            } catch  {
 //                print("fetch failed for sorting jokes by rating")
 //            }
         })
-        
-        
-        
-        
     }
     
     func dateButtonPressed(sender : UIButton){

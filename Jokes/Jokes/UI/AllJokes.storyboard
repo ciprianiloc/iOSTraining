@@ -124,16 +124,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="342" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8S-L7-Bhf">
-                                            <rect key="frame" x="8" y="19" width="137" height="42"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z8S-L7-Bhf">
+                                            <rect key="frame" x="23" y="22" width="122" height="42"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NJT-FB-fYW" customClass="CosmosView" customModule="Jokes" customModuleProvider="target">
-                                            <rect key="frame" x="231" y="28" width="105" height="24"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NJT-FB-fYW" customClass="CosmosView" customModule="Jokes" customModuleProvider="target">
+                                            <rect key="frame" x="231" y="26" width="86" height="24"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
@@ -166,6 +164,16 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Z8S-L7-Bhf" firstAttribute="leading" secondItem="0Br-PY-QwO" secondAttribute="leadingMargin" constant="15" id="086-xv-4oe"/>
+                                        <constraint firstItem="NJT-FB-fYW" firstAttribute="top" secondItem="0Br-PY-QwO" secondAttribute="topMargin" constant="18" id="AXg-5N-tLR"/>
+                                        <constraint firstItem="Z8S-L7-Bhf" firstAttribute="top" secondItem="0Br-PY-QwO" secondAttribute="topMargin" constant="14" id="Gbg-Zq-YSu"/>
+                                        <constraint firstItem="NJT-FB-fYW" firstAttribute="leading" secondItem="0Br-PY-QwO" secondAttribute="leading" constant="231" id="hq6-eV-Urs"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="NJT-FB-fYW" secondAttribute="bottom" constant="21.5" id="jsE-S4-8RB"/>
+                                        <constraint firstAttribute="trailing" secondItem="NJT-FB-fYW" secondAttribute="trailing" constant="25" id="nSO-9z-40e"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Z8S-L7-Bhf" secondAttribute="bottom" constant="7.5" id="xPh-SR-iWn"/>
+                                        <constraint firstItem="NJT-FB-fYW" firstAttribute="leading" secondItem="Z8S-L7-Bhf" secondAttribute="trailing" constant="86" id="xWC-Hw-cSK"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="jokeLabel" destination="Z8S-L7-Bhf" id="nqc-yE-RcN"/>
