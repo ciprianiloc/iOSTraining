@@ -90,6 +90,7 @@ class RequestManager: NSObject {
                 
                 joke.jokeDateAdded = calendar.date(from: components)! as NSDate
                 
+               // print(joke.jokeDescription!)
                 
                (UIApplication.shared.delegate as! AppDelegate).saveContext()
                

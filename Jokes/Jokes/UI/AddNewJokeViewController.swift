@@ -19,6 +19,7 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
     
     var pickerData : [String] = []
     var jokes : [Joke] = []
+    var selectedRow : Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,13 +71,15 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData.count
     }
-    
+//    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        //print(pickerData[row])
         return
     }
     
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        self.selectedRow = row
         return pickerData[row]
     }
     
@@ -106,7 +109,9 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
                 if newCategoryTextField.text != ""{
                     joke.jokeCategory = newCategoryTextField.text
                 }else{
-                    joke.jokeCategory = "Unknown"
+                 //   let row = jokePickerView.selectedRow(inComponent: 0)
+                    joke.jokeCategory = pickerData[self.selectedRow]
+                    
                 }
                 //will add rating and date added for the joke
                 
