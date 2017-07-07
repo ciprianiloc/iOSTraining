@@ -23,15 +23,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jokes.png" translatesAutoresizingMaskIntoConstraints="NO" id="uKg-mY-zsU">
-                                <rect key="frame" x="45" y="200" width="285" height="287"/>
+                                <rect key="frame" x="66" y="220" width="243" height="226"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="226" id="VZS-fd-5IL"/>
+                                    <constraint firstAttribute="width" constant="243" id="tjN-xb-DbI"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="uKg-mY-zsU" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="180" id="8Fs-WT-FyL"/>
-                            <constraint firstItem="uKg-mY-zsU" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="29" id="Q7I-ZE-mOe"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="uKg-mY-zsU" secondAttribute="trailing" constant="29" id="Tby-YT-KNB"/>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="uKg-mY-zsU" secondAttribute="bottom" constant="180" id="dl3-yc-mVX"/>
+                            <constraint firstItem="uKg-mY-zsU" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" priority="750" constant="200" id="8Fs-WT-FyL"/>
+                            <constraint firstItem="uKg-mY-zsU" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" priority="750" constant="50" id="Q7I-ZE-mOe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="uKg-mY-zsU" secondAttribute="trailing" priority="750" constant="50" id="Tby-YT-KNB"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="uKg-mY-zsU" secondAttribute="bottom" priority="750" constant="221" id="dl3-yc-mVX"/>
+                            <constraint firstItem="uKg-mY-zsU" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="oVr-9h-UB9"/>
+                            <constraint firstItem="uKg-mY-zsU" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="vd9-Ku-I95"/>
                         </constraints>
                     </view>
                 </viewController>
