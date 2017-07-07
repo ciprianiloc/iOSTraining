@@ -119,11 +119,32 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
         
         cell.savedImageLabel.text = image.name
       
-        if image.image != nil {
-        cell.savedImageView.image = UIImage(data: image.image! as Data)
+        // DOWNLOAD IMAGE FOR ROW
+        let url = URL(string: image.url!)!
+        
+        getDataFromUrl(url: url) { (data, response, error)  in
+            guard let data = data, error == nil else {
+                let alert = UIAlertController(title: "Unsafe URL", message: "The URL path you have chose does not start with HTTPS and it is not safe. Please choose an image with HTTPS URL prefix", preferredStyle: .alert)
+                
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alert.addAction(cancelAction)
+                
+                self.present(alert, animated: true, completion: nil)
+                
+                return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            
+            DispatchQueue.main.async() { () -> Void in
+                cell.savedImageView.image = UIImage(data: data)
+                
+                
+            }
             
         }
-        
+
+    
     
     
         
@@ -205,27 +226,33 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     
-    // Download image
-    func downloadImage(url: URL) {
-        print("Download Started")
-        getDataFromUrl(url: url) { (data, response, error)  in
-            guard let data = data, error == nil else {
-                let alert = UIAlertController(title: "Unsafe URL", message: "The URL path you have chose does not start with HTTPS and it is not safe. Please choose an image with HTTPS URL prefix", preferredStyle: .alert)
-                
-                
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                alert.addAction(cancelAction)
-                
-                self.present(alert, animated: true, completion: nil)
-                
-                return }
-            print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("Download Finished")
+//    // Download image
+//    func downloadImage(url: URL)  {
+//        
+//        print("Download Started")
+//        getDataFromUrl(url: url) { (data, response, error)  in
+//            guard let data = data, error == nil else {
+//                let alert = UIAlertController(title: "Unsafe URL", message: "The URL path you have chose does not start with HTTPS and it is not safe. Please choose an image with HTTPS URL prefix", preferredStyle: .alert)
+//                
+//                
+//                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//                alert.addAction(cancelAction)
+//                
+//                self.present(alert, animated: true, completion: nil)
+//                
+//                return }
+//            print(response?.suggestedFilename ?? url.lastPathComponent)
+//            print("Download Finished")
+//            
 //                        DispatchQueue.main.async() { () -> Void in
-//                            self.imagesTableView.image = UIImage(data: data)
+//                       // image = UIImage(data: data)
+//                            
+//                            
 //                        }
-        }
-    }
+//            
+//        }
+//       
+//    }
  
     
 }
