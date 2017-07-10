@@ -82,7 +82,7 @@ class AllJokesTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getData()
-        allJokesTableView.reloadData()
+        allJokesTableView.reloadData() 
     }
 
     override func didReceiveMemoryWarning() {
@@ -198,9 +198,10 @@ class AllJokesTableViewController: UITableViewController {
             //create method getJokesFromSectionSorted
            //  self.jokesFromSection = getJokesFromSortedSection(section: indexPath.section)
           //   let joke = jokesFromSection[indexPath.row]
-                let joke = sortedJokes[indexPath.row]
+            self.jokesFromSection = getJokesFromSortedSection(section: indexPath.section)
+                let joke = jokesFromSection[indexPath.row]
                 cell.jokeLabel.text = String(describing: joke.jokeDescription!)
-                cell.ratingStarsView.rating = sortedJokes[indexPath.row].jokeRating
+                cell.ratingStarsView.rating = jokesFromSection[indexPath.row].jokeRating
             
 
             
@@ -232,7 +233,7 @@ class AllJokesTableViewController: UITableViewController {
 //            detailView?.selectedCategory = String(describing: sortedJokes[indexPath.row].jokeCategory!)
 //            detailView?.getAJoke(withObjectID: sortedJokes[indexPath.row].objectID)
         }
-        //(UIApplication.shared.delegate as! AppDelegate).saveContext()
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
 
 //        let indexSection = NSIndexSet(index: indexPath.section)
 //        self.allJokesTableView.reloadSections(indexSection as IndexSet, with: .fade)
@@ -359,6 +360,9 @@ class AllJokesTableViewController: UITableViewController {
                 let indexSection = NSIndexSet(index: sender.tag)
                 self.allJokesTableView.reloadSections(indexSection as IndexSet, with: .fade)
 
+            //(UIApplication.shared.delegate as! AppDelegate).saveContext()
+
+            
               //  self.allJokesTableView.reloadData()
             
 //            } catch  {
