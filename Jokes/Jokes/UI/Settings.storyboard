@@ -1590,7 +1590,9 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.90140142729999995" blue="0.79956240540000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="TQb-V7-yO3"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="imagesTableView" destination="rrD-al-rwh" id="ylN-0u-vjW"/>
                     </connections>

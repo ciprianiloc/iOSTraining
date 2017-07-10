@@ -20,9 +20,17 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     var delegate:SettingsDelegate?
     
     
-    
+    // UIImagePickerController
     let imagePicker = UIImagePickerController()
     
+    
+    // declaring font families variables and arrays
+    var fontFamilies = UIFont.familyNames
+    var fontNames = [String]()
+    var fontSizes = [String]()
+    
+    
+    //IBOutlets
     @IBOutlet weak var pickerView: UIPickerView!
     
     @IBOutlet weak var fontLabel: UILabel!
@@ -53,7 +61,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         let documentsDirectory = paths[0]
         
         
-        // Get image
+        // Get image from directory
         
         let fileManager = FileManager.default
         let imagePAth = (documentsDirectory as NSString).appendingPathComponent("cucubau.jpg")
@@ -66,14 +74,14 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         }
         
                 
-        // all fonts
+        // take all fonts from fontFamilies and append to fontNames array
         for familyName in fontFamilies {
             
             fontNames.append(familyName)
         }
         
         
-        // font settings
+        // saving font settings using NSUserDefaults
 
         
         let defaults = UserDefaults.standard
@@ -85,6 +93,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
         }
         
+        // saving in NSUserDefaults the position of the selected row from UIPickerView
         let selectedRow = defaults.integer(forKey: "selectedRow")
         pickerView.selectRow(selectedRow, inComponent: 0, animated: true)
         
@@ -115,9 +124,9 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         
     }
     
-    
+    // MARK: - Buttons
 
-    
+    // changeFontColor button
     @IBAction func changeFontColor(_ sender: Any) {
         let popoverVC = storyboard?.instantiateViewController(withIdentifier: "colorPickerPopover") as! ColorPickerViewController
         popoverVC.modalPresentationStyle = .popover
@@ -132,7 +141,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         present(popoverVC, animated: true, completion: nil)
     }
     
-    
+    // changeFontSize slider action
     @IBAction func changeFontSize(_ sender: AnyObject) {
 
         let senderValue = CGFloat(fontSlider.value)
@@ -140,6 +149,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         fontSizeLabel?.font = UIFont(name: (fontSizeLabel?.font.fontName)!, size:senderValue)
     }
     
+    // change background image button
     @IBAction func changeBackgroungImage(_ sender: Any) {
         
         imagePicker.allowsEditing = false
@@ -235,10 +245,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     }
     
     
-    
-   var fontFamilies = UIFont.familyNames
-    var fontNames = [String]()
-    var fontSizes = [String]()
+   
     
    
     // Override the iPhone behavior that presents a popover as fullscreen
@@ -247,13 +254,13 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
         return .none
     }
 
-    
+    // change color to label function
     func setLabelColor (_ color: UIColor) {
        
         self.fontColor.backgroundColor = color
     }
 
-    
+    // MARK: - pickerView functions
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -289,7 +296,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
    
     
     
-    
+    // MARK: - View Controller Save & Cancel button
     @IBAction func cancelButton(_ sender: Any) {
        
         self.navigationController?.popViewController(animated: true)
@@ -356,7 +363,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 
     
     // MARK: - Navigation
-
+    // settings ImagesTableViewController as delegate for changing background Image from Saved Images
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "show" {
             
@@ -371,7 +378,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 }
 
 
-// extension for row image delegate
+// MARK: - extension for row image delegate
 
 extension SettingsViewController: GetImageFromRowDelegate {
     
@@ -386,7 +393,7 @@ extension SettingsViewController: GetImageFromRowDelegate {
     
 }
 
-
+// MARK: - UIColor functions
 
 // Function converting color to hex
 

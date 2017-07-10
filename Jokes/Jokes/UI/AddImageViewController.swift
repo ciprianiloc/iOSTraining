@@ -24,47 +24,12 @@ class AddImageViewController: UIViewController {
    var imgs = [Pictures]()
     
     
+    // MARK: - IBAction buttons
     @IBAction func cancel(_ sender: Any) {
         
         dismiss(animated: true, completion: nil)
         
     }
-    
-    
-//    @IBAction func downloadWallpaper(_ sender: Any) {
-//        
-//        let downloadGroup = DispatchGroup()
-//        
-//        downloadGroup.enter()
-//        if  let urlPath = URL(string: self.urlTextField.text!) {
-//            
-//            self.downloadImage(url: urlPath)
-//            downloadGroup.leave()
-//            
-//            let alert = UIAlertController.init(title: "Succesfully downloaded!", message: "Press the Save button to add the wallpaper to your Saved Pictures, or cancel if you want to exit without saving", preferredStyle: .alert)
-//            let cancel = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-//            alert.addAction(cancel)
-//            self.present(alert, animated: true)
-    
-            
-            
-//            
-//            
-//            // Download unsuccesfull
-//        } else {
-//            let alertView = UIAlertController.init(title: "Error", message: "Add viable URL before saving", preferredStyle: .alert)
-//            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//            alertView.addAction(cancelAction)
-//            self.present(alertView, animated: true)
-//            
-//        }
-//        downloadGroup.wait()
-//        downloadGroup.notify(queue: DispatchQueue.main) {
-//            
-//        }
-//
-//        
-//    }
     
     
     
@@ -87,6 +52,17 @@ class AddImageViewController: UIViewController {
             alertView.addAction(cancelAction)
             present(alertView, animated: true)
 
+        } else if (urlTextField.text?.contains("http://"))!{
+            
+            let alert = UIAlertController(title: "Unsafe URL", message: "The URL path you have chose does not start with HTTPS and it is not safe. Please choose an image with HTTPS URL prefix and try again.", preferredStyle: .alert)
+            
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alert.addAction(cancelAction)
+            
+            self.present(alert, animated: true, completion: nil)
+            
+        
         } else {
         
         
@@ -96,13 +72,10 @@ class AddImageViewController: UIViewController {
         let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
             
-       // let imageData: NSData = UIImagePNGRepresentation(urlImageView.image!)! as NSData
         let imageName = imageNameTextField.text
          let imageURL = urlTextField.text
         
         
-           
-
     
         do {
             imgs = try managedContext.fetch(reuquest) as! [Pictures]
@@ -112,7 +85,6 @@ class AddImageViewController: UIViewController {
                 // if url is not saved already
                 if (checkURL(pastedURL: imageURL!, pictures: imgs)) == false {
                         
-                       // image.image = imageData
                         image.name = imageName
                         image.url = imageURL
                         imgs.append(image)
@@ -145,7 +117,6 @@ class AddImageViewController: UIViewController {
         // clearing text fields
         imageNameTextField.text = ""
         urlTextField.text = ""
-        //dismiss(animated: true, completion: nil)
      
     }
     
@@ -160,8 +131,6 @@ class AddImageViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         
-        //(UIApplication.shared.delegate as! AppDelegate).saveContext()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -172,7 +141,7 @@ class AddImageViewController: UIViewController {
     
  
     
-    
+    // MARK: - func that checks if URL already exists in CoreData
     func checkURL(pastedURL: String, pictures: [Pictures]) -> Bool {
         var ok: Bool = false
        

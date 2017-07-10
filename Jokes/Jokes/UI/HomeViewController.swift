@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-
+import UserNotifications
 
 
 
@@ -42,12 +42,26 @@ class HomeViewController: UIViewController{
         changeFont()
         changeBackground()
 
-//        if backgroundImageView.image == nil {
-//            backgroundImageView.image = UIImage(named: "default.jpg")
-//
-//        }
-        
 
+        // Local Notification
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {didAllow, error in
+            
+            if didAllow {
+                
+                let alertView = UIAlertController.init(title: "Chuck Norris is pleased", message: "You just avoided catastrophe", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alertView.addAction(cancelAction)
+                self.present(alertView, animated: true)
+                
+            } else {
+                let alertView = UIAlertController.init(title: "Chuck Norris is NOT pleased", message: "...", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alertView.addAction(cancelAction)
+                self.present(alertView, animated: true)
+            }
+        
+        })
         
     }
     
@@ -101,6 +115,20 @@ class HomeViewController: UIViewController{
                 self.getFirstJoke()
     })
     
+        
+        //Local Notification
+        let content = UNMutableNotificationContent()
+        content.title = "Have you laughed today?"
+        content.subtitle = "Chuck Norris can make you happy. Get your random joke dose for today!"
+        content.body = "It is scientifically proven that laughter can make a person live longer and look younger"
+        content.sound = UNNotificationSound.default()
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: "FiveSeconds", content: content, trigger: trigger)
+        let center = UNUserNotificationCenter.current()
+        center.add(request, withCompletionHandler: nil)
+        
+        
     }
     }
 

@@ -21,11 +21,11 @@ class ImagesTableViewController: UIViewController {
     
     
     
-    var delegate: GetImageFromRowDelegate? = nil
+    var delegate: GetImageFromRowDelegate? = nil // delegate type GetImageFromRowDelegate
     
-    @IBOutlet weak var imagesTableView: UITableView!
+    @IBOutlet weak var imagesTableView: UITableView! // IBOutlet for TableView
    
-    var imgs = [Pictures]()
+    var imgs = [Pictures]() // array type Pictures entity (CoreData)
     
     
     
@@ -47,10 +47,12 @@ class ImagesTableViewController: UIViewController {
         
     }
 
+    // MARK: - Buttons IBActions
     
     @IBAction func cancel(_ sender: Any) {
         
         self.dismiss(animated: true, completion: nil)
+        
         
     }
     
@@ -75,7 +77,7 @@ class ImagesTableViewController: UIViewController {
     
     
     
-    // fetching from CoreData
+    // MARK: - function fetching from CoreData
     func getData() {
         
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -93,7 +95,7 @@ class ImagesTableViewController: UIViewController {
 
 }
 
-// MARK: - UITableViewDataSource
+// MARK: - UITableViewDataSource, UITableViewDelegate
 extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
     
     
@@ -108,7 +110,7 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
         return imgs.count
     }
     
-    
+    // editing cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
@@ -124,14 +126,7 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
         
         getDataFromUrl(url: url) { (data, response, error)  in
             guard let data = data, error == nil else {
-                let alert = UIAlertController(title: "Unsafe URL", message: "The URL path you have chose does not start with HTTPS and it is not safe. Please choose an image with HTTPS URL prefix", preferredStyle: .alert)
-                
-                
-                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                alert.addAction(cancelAction)
-                
-                self.present(alert, animated: true, completion: nil)
-                
+                print("Getting data failed")
                 return }
             print(response?.suggestedFilename ?? url.lastPathComponent)
             print("Download Finished")
@@ -139,21 +134,17 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
             DispatchQueue.main.async() { () -> Void in
                 cell.savedImageView.image = UIImage(data: data)
                 
-                
             }
             
         }
-
-    
-    
-    
-        
         return cell
     }
 
     
+    // didSelectRow action
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
+        // using CellForRow function to get rows
         let cell = tableView.cellForRow(at: indexPath) as! SavedImageTableViewCell
         
         
@@ -168,19 +159,17 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
             do {
                 let path = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("cucubau.jpg")
                 
+                
                 //delegation
-                
-                               
-                
                 if (delegate != nil){
                     print("Delegate worked")
-                    let imageInfo = cell.savedImageView.image
-                    delegate?.getImageInformation(info: imageInfo!)
+                    let imageInfo = cell.savedImageView.image  // saving image into imageInfo immutable var
+                    delegate?.getImageInformation(info: imageInfo!) // calling protocol function
                 }else {
                     print("DELEGATE NIL")
                 }
                 
-                //Save image to Root
+                //Save image to path
                 try imageData?.write(to: path, options:  .atomic)
                 print("Saved To Root")
             } catch let error {
@@ -194,23 +183,26 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
 
     }
     
-    
+    // Delete button for rows
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
+        // if delete pressed
         if editingStyle == .delete {
-            let image = imgs[indexPath.row]
-            context.delete(image)
+            let image = imgs[indexPath.row] // select the row
+            context.delete(image) //delete row
             
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
+            (UIApplication.shared.delegate as! AppDelegate).saveContext() // save context
             
+            // try to fetch the new context
             do {
                 try imgs = context.fetch(Pictures.fetchRequest())
             } catch {
                 print("fetch failed on Delete")
             }
         }
+        // reload data in table view
         imagesTableView.reloadData()
         
     }
@@ -223,36 +215,12 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
             (data, response, error) in
             completion(data, response, error)
             }.resume()
+            
+    
     }
+   
     
     
-//    // Download image
-//    func downloadImage(url: URL)  {
-//        
-//        print("Download Started")
-//        getDataFromUrl(url: url) { (data, response, error)  in
-//            guard let data = data, error == nil else {
-//                let alert = UIAlertController(title: "Unsafe URL", message: "The URL path you have chose does not start with HTTPS and it is not safe. Please choose an image with HTTPS URL prefix", preferredStyle: .alert)
-//                
-//                
-//                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//                alert.addAction(cancelAction)
-//                
-//                self.present(alert, animated: true, completion: nil)
-//                
-//                return }
-//            print(response?.suggestedFilename ?? url.lastPathComponent)
-//            print("Download Finished")
-//            
-//                        DispatchQueue.main.async() { () -> Void in
-//                       // image = UIImage(data: data)
-//                            
-//                            
-//                        }
-//            
-//        }
-//       
-//    }
  
     
 }
