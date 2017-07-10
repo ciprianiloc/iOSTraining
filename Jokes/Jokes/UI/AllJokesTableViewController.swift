@@ -24,10 +24,12 @@ class AllJokesTableViewController: UITableViewController {
     var results : [Joke] = []
     
     var categories : [String] = []
-    var isSorted : Bool = false
+    var isSorted : [Bool] = [Bool]()
     var sortedJokesByRating : [Joke] = [Joke]()
     var selectedSection : Int = 0
     var jokesFromSection : [Joke] = [Joke]()
+    var sortedJokes : [Joke] = [Joke]()
+    //var jokesFromSection : [[Joke]] = [[Joke]]()
 
     
     //var dateButton : UIButton = UIButton()//(frame: CGRect(x: 310, y: 0, width: 100, height: 20))
@@ -43,6 +45,7 @@ class AllJokesTableViewController: UITableViewController {
         allJokesTableView.delegate = self
         allJokesTableView.dataSource = self
        
+        
         
        
 //        let screenSize = UIScreen.main.bounds
@@ -94,9 +97,11 @@ class AllJokesTableViewController: UITableViewController {
                 if let newCategory = joke.jokeCategory{
                     if !categories.contains(newCategory){
                         categories.append(newCategory)
+                        isSorted.append(false)
                     }
                 }
             }
+        
         return categories.count
     }
 
@@ -179,31 +184,29 @@ class AllJokesTableViewController: UITableViewController {
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
-        //self.selectedSection = indexPath.section
+        //self.allJokesTableView.reloadData()
         
-        if !isSorted{
+        if !isSorted[indexPath.section]{
             self.jokesFromSection = getJokesFromSection(section: indexPath.section)
             let joke = jokesFromSection[indexPath.row]
             cell.jokeLabel.text = String(describing: joke.jokeDescription!)
             cell.ratingStarsView.rating = jokesFromSection[indexPath.row].jokeRating
             
             
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
-//            
-//            let indexSection = NSIndexSet(index: self.selectedSection)
-//            self.allJokesTableView.reloadSections(indexSection as IndexSet, with: .fade)
         }else{
-            let joke = jokesFromSection[indexPath.row]
-            
-        
+            //self.jokesFromSection = sortedJokes
+            //create method getJokesFromSectionSorted
+           //  self.jokesFromSection = getJokesFromSortedSection(section: indexPath.section)
+          //   let joke = jokesFromSection[indexPath.row]
+                let joke = sortedJokes[indexPath.row]
                 cell.jokeLabel.text = String(describing: joke.jokeDescription!)
-                cell.ratingStarsView.rating = jokesFromSection[indexPath.row].jokeRating
+                cell.ratingStarsView.rating = sortedJokes[indexPath.row].jokeRating
+            
 
-            (UIApplication.shared.delegate as! AppDelegate).saveContext()
-    //        let indexSection = NSIndexSet(index: self.selectedSection)
-    //        self.allJokesTableView.reloadSections(indexSection as IndexSet, with: .fade)
-        }
-        
+            
+          }
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+
         return cell
     }
     
@@ -214,18 +217,25 @@ class AllJokesTableViewController: UITableViewController {
         
             //check if sorted
         
-        if !isSorted{
+        if !isSorted[indexPath.section]{
             self.jokesFromSection = getJokesFromSection(section: indexPath.section)
             detailView?.selectedJoke = String(describing: jokesFromSection[indexPath.row].jokeDescription!)
             detailView?.selectedCategory = String(describing: jokesFromSection[indexPath.row].jokeCategory!)
             detailView?.getAJoke(withObjectID: jokesFromSection[indexPath.row].objectID)
         }else{
+           // self.jokesFromSection = sortedJokes
+            self.jokesFromSection = getJokesFromSortedSection(section: indexPath.section)
             detailView?.selectedJoke = String(describing: jokesFromSection[indexPath.row].jokeDescription!)
             detailView?.selectedCategory = String(describing: jokesFromSection[indexPath.row].jokeCategory!)
             detailView?.getAJoke(withObjectID: jokesFromSection[indexPath.row].objectID)
+//            detailView?.selectedJoke = String(describing: sortedJokes[indexPath.row].jokeDescription!)
+//            detailView?.selectedCategory = String(describing: sortedJokes[indexPath.row].jokeCategory!)
+//            detailView?.getAJoke(withObjectID: sortedJokes[indexPath.row].objectID)
         }
-        
-        
+        //(UIApplication.shared.delegate as! AppDelegate).saveContext()
+
+//        let indexSection = NSIndexSet(index: indexPath.section)
+//        self.allJokesTableView.reloadSections(indexSection as IndexSet, with: .fade)
         
         navigationController?.pushViewController(detailView!, animated: true)
         
@@ -279,25 +289,41 @@ class AllJokesTableViewController: UITableViewController {
     func getJokesFromSection(section: Int) -> [Joke]{
         var result : [Joke] = [Joke]()
         var finalResult : [Joke] = [Joke]()
-        
         let fecthRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        do {
-            result = try context.fetch(fecthRequest) as! [Joke]
-            
-            for joke in result{
-                if joke.jokeCategory == String(self.categories[section]){
-                    finalResult.append(joke)
+        
+            do {
+                result = try context.fetch(fecthRequest) as! [Joke]
+                
+                for joke in result{
+                    if joke.jokeCategory == String(self.categories[section]){
+                        finalResult.append(joke)
+                    }
                 }
+                
+            } catch  {
+                print("fetched for a category failed")
             }
-            
-        } catch  {
-            print("fetched for a category failed")
-        }
-        
-        
         return finalResult  //all jokes from the section
+    }
+    
+    
+    
+    func getJokesFromSortedSection(section: Int) -> [Joke]{
+        var result : [Joke] = [Joke]()
+        var finalResult : [Joke] = [Joke]()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        result = self.getJokesFromSection(section: section)
+        result = result.sorted(by: {$0.jokeRating > $1.jokeRating})
+        
+        if isSorted[section]{
+            return result
+        }else{
+            return getJokesFromSection(section:section)
+        }
     }
 
     
@@ -324,12 +350,17 @@ class AllJokesTableViewController: UITableViewController {
             result = result.sorted(by: {$0.jokeRating > $1.jokeRating})
                 
                 self.jokesFromSection = result
-                self.isSorted = true
+                self.isSorted[sender.tag] = true
+                self.sortedJokes = result
             
-                let indexSection = NSIndexSet(index: self.selectedSection)
-                self.allJokesTableView.reloadSections(indexSection as IndexSet, with: .fade)
             
             (UIApplication.shared.delegate as! AppDelegate).saveContext()
+
+                let indexSection = NSIndexSet(index: sender.tag)
+                self.allJokesTableView.reloadSections(indexSection as IndexSet, with: .fade)
+
+              //  self.allJokesTableView.reloadData()
+            
 //            } catch  {
 //                print("fetch failed for sorting jokes by rating")
 //            }
