@@ -77,24 +77,6 @@ class AllJokesTableViewController: UITableViewController {
         
     }
     
-    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        var text=""
-        switch UIDevice.current.orientation{
-        case .portrait: //modify here
-            text="Portrait"
-         //   self.dateButton.sizeToFit()
-        case .portraitUpsideDown:
-            text="PortraitUpsideDown"
-        case .landscapeLeft: //modify here
-            text="LandscapeLeft"
-        case .landscapeRight:
-            text="LandscapeRight"
-        default:
-            text="Another"
-        }
-        print(text)
-    }
-    
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let frame : CGRect = tableView.frame
         
@@ -113,18 +95,13 @@ class AllJokesTableViewController: UITableViewController {
         dateButton.setTitle("Date added", for: .normal)
         dateButton.setTitleColor(UIColor.black, for: .normal)
         dateButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
-        dateButton.layer.cornerRadius = 5
+        dateButton.layer.cornerRadius = 3
         dateButton.layer.borderWidth = 2
         dateButton.layer.borderColor = UIColor.black.cgColor
         dateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
         dateButton.addTarget(self, action: #selector(dateButtonPressed(sender:)), for: .touchUpInside)
         dateButton.tag = section
-//        
-//     let horizontalConstraint = NSLayoutConstraint(item: dateButton, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: 100)
-//
-//        NSLayoutConstraint.activate([horizontalConstraint])
-//        
-        
+    
         let ratingButton : UIButton = UIButton(frame: CGRect(x: 240, y: 0, width: 60, height: 20))
         ratingButton.setTitle("Rating",for:.normal)
         ratingButton.setTitleColor(UIColor.black, for: .normal)
@@ -143,7 +120,17 @@ class AllJokesTableViewController: UITableViewController {
         ratingView.addSubview(title)
         ratingView.addSubview(sortBylabel)
         
-        return ratingView
+        dateButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        
+        dateButton.translatesAutoresizingMaskIntoConstraints = false
+        ratingView.addConstraint(NSLayoutConstraint(item: dateButton, attribute: .leadingMargin, relatedBy: .equal, toItem: ratingView, attribute: .leadingMargin, multiplier: 1.0, constant: frame.size.width - dateButton.frame.width))
+    
+        let sortingView = SortingView()               //NEW WAY OF DOING THINGS 
+        return sortingView.loadViewFromNib()
+
+      //  return ratingView
+        
     }
     
     

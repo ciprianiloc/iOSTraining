@@ -49,6 +49,8 @@
 		6688DE6B1F0CD22B00A5484F /* ImagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6685ED201F068F7C003DF190 /* ImagesTableViewController.swift */; };
 		6688DE6C1F0CD22B00A5484F /* ImagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6685ED201F068F7C003DF190 /* ImagesTableViewController.swift */; };
 		66AED1A31F0695A7007A2A2D /* SavedImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AED1A21F0695A7007A2A2D /* SavedImageTableViewCell.swift */; };
+		CA2F7E931F15119F006F332F /* SortingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA2F7E921F15119F006F332F /* SortingView.xib */; };
+		CA2F7E951F1511F3006F332F /* SortingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2F7E941F1511F3006F332F /* SortingView.swift */; };
 		CA3734181EFBD79000AE4408 /* DetailJokeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3734171EFBD79000AE4408 /* DetailJokeViewController.swift */; };
 		CA3734451EFBF2EC00AE4408 /* JokeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3734441EFBF2EC00AE4408 /* JokeCell.swift */; };
 		CA5158491EFA6C6E00C4EDE5 /* AllJokes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA5158481EFA6C6E00C4EDE5 /* AllJokes.storyboard */; };
@@ -122,6 +124,8 @@
 		667594451EFC0CF200E68F9E /* images.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpeg; sourceTree = "<group>"; };
 		6685ED201F068F7C003DF190 /* ImagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesTableViewController.swift; sourceTree = "<group>"; };
 		66AED1A21F0695A7007A2A2D /* SavedImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedImageTableViewCell.swift; sourceTree = "<group>"; };
+		CA2F7E921F15119F006F332F /* SortingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SortingView.xib; sourceTree = "<group>"; };
+		CA2F7E941F1511F3006F332F /* SortingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingView.swift; sourceTree = "<group>"; };
 		CA3734171EFBD79000AE4408 /* DetailJokeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailJokeViewController.swift; sourceTree = "<group>"; };
 		CA3734441EFBF2EC00AE4408 /* JokeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JokeCell.swift; sourceTree = "<group>"; };
 		CA5158481EFA6C6E00C4EDE5 /* AllJokes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AllJokes.storyboard; sourceTree = "<group>"; };
@@ -252,6 +256,8 @@
 				66682CAC1F05008F0030F38A /* AddImageViewController.swift */,
 				6685ED201F068F7C003DF190 /* ImagesTableViewController.swift */,
 				66AED1A21F0695A7007A2A2D /* SavedImageTableViewCell.swift */,
+				CA2F7E921F15119F006F332F /* SortingView.xib */,
+				CA2F7E941F1511F3006F332F /* SortingView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -455,6 +461,7 @@
 				66715F5F1F0E6EFC00FEDDCE /* Icon-iPadPro@2x.png in Resources */,
 				66715F5A1F0E6EFC00FEDDCE /* Icon-72.png in Resources */,
 				66715F661F0E6EFC00FEDDCE /* Icon-Spotlight-40@2x.png in Resources */,
+				CA2F7E931F15119F006F332F /* SortingView.xib in Resources */,
 				66715F5E1F0E6EFC00FEDDCE /* Icon-76@3x.png in Resources */,
 				CA5158491EFA6C6E00C4EDE5 /* AllJokes.storyboard in Resources */,
 				66715F6D1F0E70FB00FEDDCE /* jokes.png in Resources */,
@@ -507,6 +514,7 @@
 				F66BA2711EFA4BAC00463AB6 /* Constants.swift in Sources */,
 				6671B8111F0250BC000BC65B /* CosmosDistrib.swift in Sources */,
 				F6840DDC1EF94B5D0036F317 /* AppDelegate.swift in Sources */,
+				CA2F7E951F1511F3006F332F /* SortingView.swift in Sources */,
 				CA3734181EFBD79000AE4408 /* DetailJokeViewController.swift in Sources */,
 				F66BA2631EFA49F600463AB6 /* SettingsViewController.swift in Sources */,
 			);
