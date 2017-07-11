@@ -161,7 +161,8 @@ class AllJokesTableViewController: UITableViewController {
             }else{
                 self.jokesFromSection = getJokesFromSortedSection(section: indexPath.section)
             }
-        }else{
+        }
+        else{
             if !isSortedByDate[indexPath.section]{
                 self.jokesFromSection = getJokesFromSection(section: indexPath.section)
             }else{
@@ -319,6 +320,8 @@ class AllJokesTableViewController: UITableViewController {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         let indexSection = NSIndexSet(index: sender)
         self.allJokesTableView.reloadSections(indexSection as IndexSet, with: .fade)
+        
+        self.rateButtonPressed = false
 
     }
     
