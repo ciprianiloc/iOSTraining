@@ -119,9 +119,9 @@ class AllJokesTableViewController: UITableViewController {
         dateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
         dateButton.addTarget(self, action: #selector(dateButtonPressed(sender:)), for: .touchUpInside)
         dateButton.tag = section
-        
-//     let horizontalConstraint = NSLayoutConstraint(item: dateButton, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: 100)
 //        
+//     let horizontalConstraint = NSLayoutConstraint(item: dateButton, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: 100)
+//
 //        NSLayoutConstraint.activate([horizontalConstraint])
 //        
         
@@ -322,7 +322,7 @@ class AllJokesTableViewController: UITableViewController {
         let indexSection = NSIndexSet(index: sender)
         self.allJokesTableView.reloadSections(indexSection as IndexSet, with: .fade)
         
-        self.rateButtonPressed = false
+       // self.rateButtonPressed = false
 
     }
     
@@ -351,9 +351,11 @@ class AllJokesTableViewController: UITableViewController {
     func ratingButtonPressed(sender : UIButton){
         self.rateButtonPressed = true
         sortByRating(sender: sender.tag)
+        
     }
     
     func dateButtonPressed(sender : UIButton){
+        self.rateButtonPressed = false
         sortByDate(sender: sender.tag)
     }
     
