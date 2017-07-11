@@ -14,7 +14,7 @@ protocol SettingsDelegate: class {
     
 }
 
-class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIPopoverPresentationControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIPopoverPresentationControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UISearchControllerDelegate {
     
     // Delegate
     var delegate:SettingsDelegate?
@@ -28,6 +28,10 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
     var fontFamilies = UIFont.familyNames
     var fontNames = [String]()
     var fontSizes = [String]()
+    
+    let searchController = UISearchController()
+    
+    
     
     
     //IBOutlets

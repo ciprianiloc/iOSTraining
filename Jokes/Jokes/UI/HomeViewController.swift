@@ -47,21 +47,27 @@ class HomeViewController: UIViewController{
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {didAllow, error in
             
-            if didAllow {
+            // funny message, only once
+            var message = false
+            if didAllow && message == false {
                 
                 let alertView = UIAlertController.init(title: "Chuck Norris is pleased", message: "You just avoided catastrophe", preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                 alertView.addAction(cancelAction)
                 self.present(alertView, animated: true)
+                message = true
                 
-            } else {
+            } else if message == false{
                 let alertView = UIAlertController.init(title: "Chuck Norris is NOT pleased", message: "...", preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                 alertView.addAction(cancelAction)
                 self.present(alertView, animated: true)
+                message = true
             }
+            
         
         })
+        
         
     }
     
