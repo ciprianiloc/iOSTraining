@@ -30,6 +30,9 @@ class HomeViewController: UIViewController{
     var jokes : [Joke] = []
     
     
+   
+    
+    
     
     
     @IBOutlet var homeView: UIView!
@@ -42,31 +45,47 @@ class HomeViewController: UIViewController{
         changeFont()
         changeBackground()
 
+        let defaults = UserDefaults.standard
+        let message = defaults.bool(forKey: "message")
 
         // Local Notification
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .badge, .sound], completionHandler: {didAllow, error in
             
             // funny message, only once
-            var message = false
-            if didAllow && message == false {
+            
+            if didAllow && message != true {
                 
                 let alertView = UIAlertController.init(title: "Chuck Norris is pleased", message: "You just avoided catastrophe", preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                 alertView.addAction(cancelAction)
                 self.present(alertView, animated: true)
-                message = true
+                defaults.set(true, forKey: "message")
                 
-            } else if message == false{
+            } else if message != true {
                 let alertView = UIAlertController.init(title: "Chuck Norris is NOT pleased", message: "...", preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
                 alertView.addAction(cancelAction)
                 self.present(alertView, animated: true)
-                message = true
+                defaults.set(true, forKey: "message")
             }
             
         
         })
+        
+        
+        //Local Notification
+        let content = UNMutableNotificationContent()
+        content.title = "Have you laughed today?"
+        content.subtitle = "Chuck Norris can make you happy. Get your random joke dose for today!"
+        content.body = "It is scientifically proven that laughter can make a person live longer and look younger"
+        content.sound = UNNotificationSound.default()
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3600, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: "OneHour", content: content, trigger: trigger)
+        //let center = UNUserNotificationCenter.current()
+        center.add(request, withCompletionHandler: nil)
+
         
         
     }
@@ -122,17 +141,6 @@ class HomeViewController: UIViewController{
     })
     
         
-        //Local Notification
-        let content = UNMutableNotificationContent()
-        content.title = "Have you laughed today?"
-        content.subtitle = "Chuck Norris can make you happy. Get your random joke dose for today!"
-        content.body = "It is scientifically proven that laughter can make a person live longer and look younger"
-        content.sound = UNNotificationSound.default()
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: "FiveSeconds", content: content, trigger: trigger)
-        let center = UNUserNotificationCenter.current()
-        center.add(request, withCompletionHandler: nil)
         
         
     }
@@ -144,6 +152,7 @@ extension HomeViewController: SettingsDelegate {
         let defaults = UserDefaults.standard
         let font = defaults.string(forKey: "font")
         let fontSize = defaults.integer(forKey: "fontSize")
+        _ = defaults.bool(forKey: "message") // save message for Local Notificationss
         
         
         
