@@ -19,7 +19,20 @@ import UIKit
     */
     
     // Our custom view from the XIB file
+    
+    //MARK: - Xib functions
+    
     var view: UIView!
+    
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var sortLabel: UILabel!
+    @IBOutlet weak var ratingButton: UIButton!
+    @IBOutlet weak var dateAddedButton: UIButton!
+    var sectionFromView : Int = 0
+    var categoryFromAllJokes : String = ""
+    
+  
+   
     
     func xibSetup() {
         view = loadViewFromNib()
@@ -39,6 +52,19 @@ import UIKit
         let nib = UINib(nibName: "SortingView", bundle: bundle)
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         
+        self.dateAddedButton.addTarget(AllJokesTableViewController(), action: #selector(AllJokesTableViewController.dateButtonPressed(sender:)), for: .touchUpInside)
+        
+        self.dateAddedButton.tag = self.sectionFromView
+                
+        self.ratingButton.addTarget(AllJokesTableViewController(), action: #selector(AllJokesTableViewController.ratingButtonPressed(sender:)), for: .touchUpInside)
+        self.ratingButton.tag = self.sectionFromView
+        
+        //let allJokesVC = AllJokesTableViewController()
+        
+        self.categoryLabel.text = self.categoryFromAllJokes
+        
+        
+        
         return view
     }
     
@@ -47,6 +73,7 @@ import UIKit
         
         // 2. call super.init(frame:)
         super.init(frame: frame)
+        
         
         // 3. Setup view from .xib file
         xibSetup()
@@ -60,6 +87,11 @@ import UIKit
         
         // 3. Setup view from .xib file
         xibSetup()
-    } 
+    }
+    
+    
+    //MARK: - Implementations
+    
+   
 
 }

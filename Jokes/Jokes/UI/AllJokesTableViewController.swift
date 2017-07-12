@@ -24,6 +24,8 @@ class AllJokesTableViewController: UITableViewController {
     var sortedJokes : [Joke] = [Joke]()
     var sortedJokesByDate : [Joke] = [Joke]()
     var rateButtonPressed : Bool = false
+    var selectedSection : Int = 0
+    var categoryForSortingView : String = ""
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +34,6 @@ class AllJokesTableViewController: UITableViewController {
         allJokesTableView.dataSource = self
         
         
-       
      
     }
     
@@ -70,69 +71,74 @@ class AllJokesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if categories.count>0{
+            self.categoryForSortingView = self.categories[section]
             return self.categories[section]
         }else{
             return ""
         }
-        
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let frame : CGRect = tableView.frame
+        self.selectedSection = section
+       
+//        let frame : CGRect = tableView.frame
+//        
+//        let title : UILabel = UILabel(frame:CGRect(x: 20, y: 0, width: 100, height: 20))
+//        title.backgroundColor = UIColor.red
+//        title.text = self.categories[section]
+//        title.textColor = UIColor.white
+//        title.textAlignment = .center
+//        
+//        let sortBylabel : UILabel = UILabel(frame: CGRect(x: 160, y: 0, width: 70, height: 20))
+//        sortBylabel.backgroundColor = UIColor.red
+//        sortBylabel.text = "Sort By:"
+//        sortBylabel.textColor = UIColor.white
+//        
+//        let dateButton : UIButton = UIButton(frame: CGRect(x: 310, y: 0, width: 100, height: 20))
+//        dateButton.setTitle("Date added", for: .normal)
+//        dateButton.setTitleColor(UIColor.black, for: .normal)
+//        dateButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
+//        dateButton.layer.cornerRadius = 3
+//        dateButton.layer.borderWidth = 2
+//        dateButton.layer.borderColor = UIColor.black.cgColor
+//        dateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
+//        dateButton.addTarget(self, action: #selector(dateButtonPressed(sender:)), for: .touchUpInside)
+//        dateButton.tag = section
+//    
+//        let ratingButton : UIButton = UIButton(frame: CGRect(x: 240, y: 0, width: 60, height: 20))
+//        ratingButton.setTitle("Rating",for:.normal)
+//        ratingButton.setTitleColor(UIColor.black, for: .normal)
+//        ratingButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
+//        ratingButton.layer.cornerRadius = 5
+//        ratingButton.layer.borderWidth = 2
+//        ratingButton.layer.borderColor = UIColor.black.cgColor
+//        ratingButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
+//        ratingButton.addTarget(self, action: #selector(ratingButtonPressed(sender:)), for: .touchUpInside)
+//        ratingButton.tag = section
+//        
+//        let ratingView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
+//        ratingView.backgroundColor = UIColor.white
+//        ratingView.addSubview(ratingButton)
+//        ratingView.addSubview(dateButton)
+//        ratingView.addSubview(title)
+//        ratingView.addSubview(sortBylabel)
+//        
+//        dateButton.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        
+//        dateButton.translatesAutoresizingMaskIntoConstraints = false
+//        ratingView.addConstraint(NSLayoutConstraint(item: dateButton, attribute: .leadingMargin, relatedBy: .equal, toItem: ratingView, attribute: .leadingMargin, multiplier: 1.0, constant: frame.size.width - dateButton.frame.width))
+       
         
-        let title : UILabel = UILabel(frame:CGRect(x: 20, y: 0, width: 100, height: 20))
-        title.backgroundColor = UIColor.red
-        title.text = self.categories[section]
-        title.textColor = UIColor.white
-        title.textAlignment = .center
-        
-        let sortBylabel : UILabel = UILabel(frame: CGRect(x: 160, y: 0, width: 70, height: 20))
-        sortBylabel.backgroundColor = UIColor.red
-        sortBylabel.text = "Sort By:"
-        sortBylabel.textColor = UIColor.white
-        
-        let dateButton : UIButton = UIButton(frame: CGRect(x: 310, y: 0, width: 100, height: 20))
-        dateButton.setTitle("Date added", for: .normal)
-        dateButton.setTitleColor(UIColor.black, for: .normal)
-        dateButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
-        dateButton.layer.cornerRadius = 3
-        dateButton.layer.borderWidth = 2
-        dateButton.layer.borderColor = UIColor.black.cgColor
-        dateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
-        dateButton.addTarget(self, action: #selector(dateButtonPressed(sender:)), for: .touchUpInside)
-        dateButton.tag = section
-    
-        let ratingButton : UIButton = UIButton(frame: CGRect(x: 240, y: 0, width: 60, height: 20))
-        ratingButton.setTitle("Rating",for:.normal)
-        ratingButton.setTitleColor(UIColor.black, for: .normal)
-        ratingButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
-        ratingButton.layer.cornerRadius = 5
-        ratingButton.layer.borderWidth = 2
-        ratingButton.layer.borderColor = UIColor.black.cgColor
-        ratingButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
-        ratingButton.addTarget(self, action: #selector(ratingButtonPressed(sender:)), for: .touchUpInside)
-        ratingButton.tag = section
-        
-        let ratingView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
-        ratingView.backgroundColor = UIColor.white
-        ratingView.addSubview(ratingButton)
-        ratingView.addSubview(dateButton)
-        ratingView.addSubview(title)
-        ratingView.addSubview(sortBylabel)
-        
-        dateButton.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-        dateButton.translatesAutoresizingMaskIntoConstraints = false
-        ratingView.addConstraint(NSLayoutConstraint(item: dateButton, attribute: .leadingMargin, relatedBy: .equal, toItem: ratingView, attribute: .leadingMargin, multiplier: 1.0, constant: frame.size.width - dateButton.frame.width))
-    
-        let sortingView = SortingView()               //NEW WAY OF DOING THINGS 
-        return sortingView.loadViewFromNib()
-
-      //  return ratingView
-        
+        //NEW WAY OF DOING THINGS
+        let sortingView = SortingView()
+        sortingView.sectionFromView = self.selectedSection
+        sortingView.categoryFromAllJokes = self.categoryForSortingView
+        let sectionView = sortingView.loadViewFromNib()
+        return sectionView
     }
     
+   
     
     // MARK: - tableView cell functions
     

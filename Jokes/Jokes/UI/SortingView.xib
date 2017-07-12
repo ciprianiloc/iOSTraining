@@ -9,41 +9,79 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SortingView" customModule="Jokes" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SortingView" customModule="Jokes" customModuleProvider="target">
+            <connections>
+                <outlet property="categoryLabel" destination="bZC-Po-gkt" id="tVe-1b-N6u"/>
+                <outlet property="dateAddedButton" destination="0xn-Un-dc1" id="BlB-5z-YUf"/>
+                <outlet property="ratingButton" destination="K1n-Z6-F8q" id="jIs-wz-9HF"/>
+                <outlet property="sortLabel" destination="d76-kE-sVT" id="x8c-cp-Xe5"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="346" height="66"/>
+        <view alpha="0.80000000000000004" contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="486" height="119"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAP-ES-FmA">
-                    <rect key="frame" x="13" y="22" width="42" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZC-Po-gkt">
+                    <rect key="frame" x="7" y="49.5" width="91" height="20.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="91" id="bCb-VW-cnw"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQa-o6-D8G">
-                    <rect key="frame" x="97" y="22" width="42" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1n-Z6-F8q">
+                    <rect key="frame" x="300" y="45" width="85" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="85" id="dNh-da-bAK"/>
+                    </constraints>
+                    <state key="normal" title="Rating"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="2"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="ratingButtonPressed:" destination="-1" eventType="touchUpInside" id="8iB-HO-I9w"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xn-Un-dc1">
+                    <rect key="frame" x="397" y="45" width="81" height="30"/>
+                    <state key="normal" title="Date Added"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
+                        <userDefinedRuntimeAttribute type="string" keyPath="layer.borderWidth" value="2"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="dateButtonPressed:" destination="-1" eventType="touchUpInside" id="ttD-eU-QQZ"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d76-kE-sVT">
+                    <rect key="frame" x="204" y="49" width="60.5" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CC4-8f-X9s">
-                    <rect key="frame" x="203" y="18" width="46" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2X-6T-t30">
-                    <rect key="frame" x="280" y="18" width="46" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="Button"/>
-                </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="K1n-Z6-F8q" secondAttribute="trailing" constant="101" id="6Ue-37-XUR"/>
+                <constraint firstItem="bZC-Po-gkt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="7" id="A19-nM-uB5"/>
+                <constraint firstItem="d76-kE-sVT" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="BEg-Ag-s90"/>
+                <constraint firstAttribute="trailing" secondItem="d76-kE-sVT" secondAttribute="trailing" constant="221.5" id="ETi-FY-arX"/>
+                <constraint firstItem="K1n-Z6-F8q" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Ksk-zT-v1C"/>
+                <constraint firstItem="0xn-Un-dc1" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Nxv-uD-Krf"/>
+                <constraint firstAttribute="trailing" secondItem="0xn-Un-dc1" secondAttribute="trailing" constant="8" id="Sls-FN-7vl"/>
+                <constraint firstItem="bZC-Po-gkt" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="eLk-D8-p3L"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-26" y="-46"/>
+            <point key="canvasLocation" x="-61" y="-6.5"/>
         </view>
+        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="jkj-cV-bIW">
+            <rect key="frame" x="0.0" y="0.0" width="446" height="82"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <point key="canvasLocation" x="-73" y="124"/>
+        </imageView>
     </objects>
 </document>
