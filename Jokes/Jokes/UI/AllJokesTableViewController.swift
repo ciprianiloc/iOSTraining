@@ -71,8 +71,7 @@ class AllJokesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if categories.count>0{
-            self.categoryForSortingView = self.categories[section]
-            return self.categories[section]
+                       return self.categories[section]
         }else{
             return ""
         }
@@ -80,6 +79,8 @@ class AllJokesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         self.selectedSection = section
+        self.categoryForSortingView = self.categories[section]
+
        
 //        let frame : CGRect = tableView.frame
 //        
