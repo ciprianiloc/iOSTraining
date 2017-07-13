@@ -49,6 +49,8 @@
 		6688DE6B1F0CD22B00A5484F /* ImagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6685ED201F068F7C003DF190 /* ImagesTableViewController.swift */; };
 		6688DE6C1F0CD22B00A5484F /* ImagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6685ED201F068F7C003DF190 /* ImagesTableViewController.swift */; };
 		66AED1A31F0695A7007A2A2D /* SavedImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AED1A21F0695A7007A2A2D /* SavedImageTableViewCell.swift */; };
+		CA2AB0CD1F17549B00739F14 /* textToSpeech.png in Resources */ = {isa = PBXBuildFile; fileRef = CA2AB0CC1F17549B00739F14 /* textToSpeech.png */; };
+		CA2AB0D01F17553C00739F14 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA2AB0CF1F17553C00739F14 /* AVFoundation.framework */; };
 		CA2F7E931F15119F006F332F /* SortingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA2F7E921F15119F006F332F /* SortingView.xib */; };
 		CA2F7E951F1511F3006F332F /* SortingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2F7E941F1511F3006F332F /* SortingView.swift */; };
 		CA3734181EFBD79000AE4408 /* DetailJokeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3734171EFBD79000AE4408 /* DetailJokeViewController.swift */; };
@@ -124,6 +126,8 @@
 		667594451EFC0CF200E68F9E /* images.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = images.jpeg; sourceTree = "<group>"; };
 		6685ED201F068F7C003DF190 /* ImagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesTableViewController.swift; sourceTree = "<group>"; };
 		66AED1A21F0695A7007A2A2D /* SavedImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedImageTableViewCell.swift; sourceTree = "<group>"; };
+		CA2AB0CC1F17549B00739F14 /* textToSpeech.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textToSpeech.png; sourceTree = "<group>"; };
+		CA2AB0CF1F17553C00739F14 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		CA2F7E921F15119F006F332F /* SortingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SortingView.xib; sourceTree = "<group>"; };
 		CA2F7E941F1511F3006F332F /* SortingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortingView.swift; sourceTree = "<group>"; };
 		CA3734171EFBD79000AE4408 /* DetailJokeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailJokeViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA2AB0D01F17553C00739F14 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +213,14 @@
 			path = Utils/Jokes_icons;
 			sourceTree = "<group>";
 		};
+		CA2AB0CE1F17553C00739F14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CA2AB0CF1F17553C00739F14 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F66BA2571EFA497000463AB6 /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +250,7 @@
 			children = (
 				6671B8101F0250BC000BC65B /* CosmosDistrib.swift */,
 				664BB0101F0FA3D400175ACD /* button-1754905_960_720.png */,
+				CA2AB0CC1F17549B00739F14 /* textToSpeech.png */,
 				664BB00E1F0FA26500175ACD /* the-button-859346_960_720.png */,
 				667594451EFC0CF200E68F9E /* images.jpeg */,
 				664BB0121F0FA84200175ACD /* 1352059221149156423button_blue glass-hi.png */,
@@ -278,6 +292,7 @@
 				F6840DF21EF94B5D0036F317 /* JokesTests */,
 				F6840DFD1EF94B5D0036F317 /* JokesUITests */,
 				F6840DD91EF94B5D0036F317 /* Products */,
+				CA2AB0CE1F17553C00739F14 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -445,6 +460,7 @@
 				66715F591F0E6EFC00FEDDCE /* Icon-60@3x.png in Resources */,
 				66715F5C1F0E6EFC00FEDDCE /* Icon-76.png in Resources */,
 				66715F571F0E6EFC00FEDDCE /* Icon-60.png in Resources */,
+				CA2AB0CD1F17549B00739F14 /* textToSpeech.png in Resources */,
 				667594421EFBEE2900E68F9E /* palette2.png in Resources */,
 				66715F691F0E6EFC00FEDDCE /* Icon@2x.png in Resources */,
 				664BB00F1F0FA26500175ACD /* the-button-859346_960_720.png in Resources */,

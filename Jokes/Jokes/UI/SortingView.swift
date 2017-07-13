@@ -53,45 +53,36 @@ import UIKit
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         
         self.dateAddedButton.addTarget(AllJokesTableViewController(), action: #selector(AllJokesTableViewController.dateButtonPressed(sender:)), for: .touchUpInside)
-        
         self.dateAddedButton.tag = self.sectionFromView
-                
         self.ratingButton.addTarget(AllJokesTableViewController(), action: #selector(AllJokesTableViewController.ratingButtonPressed(sender:)), for: .touchUpInside)
         self.ratingButton.tag = self.sectionFromView
-        
-        //let allJokesVC = AllJokesTableViewController()
-        
         self.categoryLabel.text = self.categoryFromAllJokes
-        
-        
-        
         return view
     }
     
-    override init(frame: CGRect) {
-        // 1. setup any properties here
-        
-        // 2. call super.init(frame:)
-        super.init(frame: frame)
-        
-        
-        // 3. Setup view from .xib file
-        xibSetup()
-    }
+//    override init(frame: CGRect) {
+//        // 1. setup any properties here
+//        
+//        // 2. call super.init(frame:)
+//        super.init(frame: frame)
+//        
+//        
+//        // 3. Setup view from .xib file
+//        xibSetup()
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        // 1. setup any properties here
+//        
+//        // 2. call super.init(coder:)
+//        super.init(coder: aDecoder)
+//        
+//        // 3. Setup view from .xib file
+//        xibSetup()
+//    }
     
-    required init?(coder aDecoder: NSCoder) {
-        // 1. setup any properties here
-        
-        // 2. call super.init(coder:)
-        super.init(coder: aDecoder)
-        
-        // 3. Setup view from .xib file
-        xibSetup()
-    }
     
-    
-    //MARK: - Implementations
-    
+   
    
 
 }

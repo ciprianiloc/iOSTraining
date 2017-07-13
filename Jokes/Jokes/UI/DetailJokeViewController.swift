@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import CoreData
+import AVFoundation
 
 class DetailJokeViewController: UIViewController {
 
@@ -28,6 +29,7 @@ class DetailJokeViewController: UIViewController {
     var selectedRating : Double? = 1
     var jokes: [Joke] = []
     var jokeID : NSManagedObjectID = NSManagedObjectID()
+   
     
     
     override func viewDidLoad() {
@@ -133,6 +135,13 @@ class DetailJokeViewController: UIViewController {
         return rating
     }
   
+    @IBAction func textToSpeech(_ sender: UIButton) {
+        let synth = AVSpeechSynthesizer()
+        var myUtterance = AVSpeechUtterance(string: "")
+        myUtterance = AVSpeechUtterance(string: detailLabel.text!)
+        myUtterance.rate = 0.5
+        synth.speak(myUtterance)
+    }
 
 }
 
