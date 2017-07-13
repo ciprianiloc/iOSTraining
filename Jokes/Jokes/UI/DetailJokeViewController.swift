@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 import CoreData
 import AVFoundation
+import Social
 
 class DetailJokeViewController: UIViewController {
 
@@ -137,11 +138,19 @@ class DetailJokeViewController: UIViewController {
   
     @IBAction func textToSpeech(_ sender: UIButton) {
         let synth = AVSpeechSynthesizer()
-        var myUtterance = AVSpeechUtterance(string: "")
-        myUtterance = AVSpeechUtterance(string: detailLabel.text!)
+        let myUtterance = AVSpeechUtterance(string: detailLabel.text!)
         myUtterance.rate = 0.5
         synth.speak(myUtterance)
     }
+    
+    @IBAction func facebookButtonPressed(_ sender: UIButton) {
+        let vc = SLComposeViewController(forServiceType:SLServiceTypeFacebook)
+        vc?.setInitialText(self.detailLabel.text)
+        self.present(vc!, animated: true, completion: nil)
+    }
+    
+    
+    
 
 }
 
