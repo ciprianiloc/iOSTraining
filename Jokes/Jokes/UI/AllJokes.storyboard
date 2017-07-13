@@ -22,10 +22,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" text="Label" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Mz-6R-VtS">
-                                <rect key="frame" x="10" y="128" width="330" height="107"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" text="Label" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Mz-6R-VtS">
+                                <rect key="frame" x="10" y="128" width="330" height="121"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="107" id="vq9-uV-HiE"/>
+                                    <constraint firstAttribute="height" constant="121" id="vq9-uV-HiE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -144,7 +144,6 @@
                             <constraint firstItem="uyK-WR-72M" firstAttribute="top" secondItem="ZJM-1Y-vyc" secondAttribute="bottom" constant="45" id="nf5-V2-XpH"/>
                             <constraint firstItem="uyK-WR-72M" firstAttribute="leading" secondItem="7g1-p2-LWr" secondAttribute="leading" constant="141" id="oZR-YB-SVZ"/>
                             <constraint firstItem="ZWq-5H-2Lg" firstAttribute="top" secondItem="kiY-No-OUd" secondAttribute="bottom" constant="136" id="ohI-Sm-iS7"/>
-                            <constraint firstItem="U5X-Ie-w6f" firstAttribute="top" secondItem="4Mz-6R-VtS" secondAttribute="bottom" constant="108" id="syA-Ca-bO9"/>
                             <constraint firstItem="4Mz-6R-VtS" firstAttribute="top" secondItem="V6S-8g-4Tb" secondAttribute="bottom" constant="31" id="vnH-qt-3Sl"/>
                         </constraints>
                     </view>
