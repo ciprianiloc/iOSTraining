@@ -21,11 +21,11 @@ class HomeViewController: UIViewController{
 
     let URLApi = "http://api.icndb.com/jokes/random"
     var jokesArray = [Joke]()
-    var jokeCategoryArray = [String]()
+  //  var jokeCategoryArray = [String]()
     @IBOutlet weak var jokeLabel: UILabel!
 
 
-    var alljokesCategory : AllJokesTableViewController = AllJokesTableViewController()
+ //   var alljokesCategory : AllJokesTableViewController = AllJokesTableViewController()
     var selectedJokeLabel : String?
     var jokes : [Joke] = []
     
@@ -90,15 +90,15 @@ class HomeViewController: UIViewController{
         
     }
     
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-       // getFirstJoke()
-      
-       
-        
-    }
-   
+//    
+//    
+//    override func viewWillAppear(_ animated: Bool) {
+//       // getFirstJoke()
+//      
+//       
+//        
+//    }
+//   
    
     
     func getFirstJoke(){

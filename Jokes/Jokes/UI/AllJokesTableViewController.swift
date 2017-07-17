@@ -82,54 +82,6 @@ class AllJokesTableViewController: UITableViewController {
         self.categoryForSortingView = self.categories[section]
 
        
-//        let frame : CGRect = tableView.frame
-//        
-//        let title : UILabel = UILabel(frame:CGRect(x: 20, y: 0, width: 100, height: 20))
-//        title.backgroundColor = UIColor.red
-//        title.text = self.categories[section]
-//        title.textColor = UIColor.white
-//        title.textAlignment = .center
-//        
-//        let sortBylabel : UILabel = UILabel(frame: CGRect(x: 160, y: 0, width: 70, height: 20))
-//        sortBylabel.backgroundColor = UIColor.red
-//        sortBylabel.text = "Sort By:"
-//        sortBylabel.textColor = UIColor.white
-//        
-//        let dateButton : UIButton = UIButton(frame: CGRect(x: 310, y: 0, width: 100, height: 20))
-//        dateButton.setTitle("Date added", for: .normal)
-//        dateButton.setTitleColor(UIColor.black, for: .normal)
-//        dateButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
-//        dateButton.layer.cornerRadius = 3
-//        dateButton.layer.borderWidth = 2
-//        dateButton.layer.borderColor = UIColor.black.cgColor
-//        dateButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
-//        dateButton.addTarget(self, action: #selector(dateButtonPressed(sender:)), for: .touchUpInside)
-//        dateButton.tag = section
-//    
-//        let ratingButton : UIButton = UIButton(frame: CGRect(x: 240, y: 0, width: 60, height: 20))
-//        ratingButton.setTitle("Rating",for:.normal)
-//        ratingButton.setTitleColor(UIColor.black, for: .normal)
-//        ratingButton.backgroundColor = UIColor(red: 79/255, green: 233/255, blue: 83/255, alpha: 0.5)
-//        ratingButton.layer.cornerRadius = 5
-//        ratingButton.layer.borderWidth = 2
-//        ratingButton.layer.borderColor = UIColor.black.cgColor
-//        ratingButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.center
-//        ratingButton.addTarget(self, action: #selector(ratingButtonPressed(sender:)), for: .touchUpInside)
-//        ratingButton.tag = section
-//        
-//        let ratingView : UIView = UIView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height))
-//        ratingView.backgroundColor = UIColor.white
-//        ratingView.addSubview(ratingButton)
-//        ratingView.addSubview(dateButton)
-//        ratingView.addSubview(title)
-//        ratingView.addSubview(sortBylabel)
-//        
-//        dateButton.translatesAutoresizingMaskIntoConstraints = false
-//        
-//        
-//        dateButton.translatesAutoresizingMaskIntoConstraints = false
-//        ratingView.addConstraint(NSLayoutConstraint(item: dateButton, attribute: .leadingMargin, relatedBy: .equal, toItem: ratingView, attribute: .leadingMargin, multiplier: 1.0, constant: frame.size.width - dateButton.frame.width))
-       
         
         //NEW WAY OF DOING THINGS
         let sortingView = SortingView()
@@ -172,6 +124,7 @@ class AllJokesTableViewController: UITableViewController {
 
         return cell
     }
+    
     
     
     
@@ -238,44 +191,80 @@ class AllJokesTableViewController: UITableViewController {
     }
     
     func getNumberOfJokesForCategory(category : String) -> Int{  //count the jokes for a specific category
+
+        var countJokesForCategory = 0
+       
+        jokes = fetchJokes()
+        
+        for joke in jokes{
+            if category == joke.jokeCategory{
+                countJokesForCategory += 1
+            }
+        }
+        
+        return countJokesForCategory
+        
+        
+        //        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
+        //        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//        do {
+//            jokes = try managedContext.fetch(fetchRequest) as! [Joke]
+//            
+//            for joke in jokes{
+//                if category == joke.jokeCategory{
+//                    countJokesForCategory += 1
+//                }
+//            }
+//        } catch  {
+//            print("fetching failed")
+//        }
+   
+    }
+    
+    func fetchJokes() -> [Joke]{
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
         let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        var countJokesForCategory = 0
         
         do {
             jokes = try managedContext.fetch(fetchRequest) as! [Joke]
-            
-            for joke in jokes{
-                if category == joke.jokeCategory{
-                    countJokesForCategory += 1
-                }
-            }
         } catch  {
-            print("fetching failed")
+            print("fetch failed")
         }
-        return countJokesForCategory
+        
+        return jokes
     }
     
     func getJokesFromSection(section: Int) -> [Joke]{
         var result : [Joke] = [Joke]()
         var finalResult : [Joke] = [Joke]()
-        let fecthRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
-        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
         
+        result = fetchJokes()
         
-            do {
-                result = try context.fetch(fecthRequest) as! [Joke]
-                
-                for joke in result{
-                    if joke.jokeCategory == String(self.categories[section]){
-                        finalResult.append(joke)
-                    }
-                }
-                
-            } catch  {
-                print("fetched for a category failed")
+        for joke in result{
+            if joke.jokeCategory == String(self.categories[section]){
+                finalResult.append(joke)
             }
+        }
+        
         return finalResult  //all jokes from the section
+        
+        //        let fecthRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
+        //        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        //
+        //            do {
+        //                result = try context.fetch(fecthRequest) as! [Joke]
+        //
+        //                for joke in result{
+        //                    if joke.jokeCategory == String(self.categories[section]){
+        //                        finalResult.append(joke)
+        //                    }
+        //                }
+        //
+        //            } catch  {
+        //                print("fetched for a category failed")
+        //            }
     }
     
     

@@ -23,7 +23,6 @@ class RequestManager: NSObject {
     
     func getJsonFromUrl(){
         let url = NSURL(string: URLApi)
-   //     var jokeString : String?
         
         
         URLSession.shared.dataTask(with: (url as URL?)!, completionHandler: {(data,response,error) -> Void in
@@ -42,7 +41,6 @@ class RequestManager: NSObject {
                 }
                 
                 let randomNameJokeValue = Int(arc4random_uniform(10))
-              //  print(randomNameJokeValue)
                 
                 if randomNameJokeValue < 5 {
                     jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "Chuck Norris", with: "Cristian Bănărescu")
@@ -54,12 +52,10 @@ class RequestManager: NSObject {
                     jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "himself", with: "herself")
                     jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "His", with: "Her")
                     
-                  //  jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "he", with: " she")
                 }
                 
                 joke.jokeDescription = jokeWithQuoteAndName
-               // jokeString = jokeWithQuoteAndName
-                               
+                
                 if categoryResult == []{
                         joke.jokeCategory = "Unknown"
                 
@@ -90,7 +86,6 @@ class RequestManager: NSObject {
                 
                 joke.jokeDateAdded = calendar.date(from: components)! as NSDate
                 
-               // print(joke.jokeDescription!)
                 
                (UIApplication.shared.delegate as! AppDelegate).saveContext()
                
@@ -102,7 +97,6 @@ class RequestManager: NSObject {
             }
            
         }).resume()
-       // completed()
         
     }
   
