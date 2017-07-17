@@ -131,6 +131,17 @@ class AddImageViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         
+        // text fields - add targets for editingDidBegin func
+        urlTextField.addTarget(self, action: #selector(editingDidBegin(textField:)), for: UIControlEvents.editingDidBegin)
+        imageNameTextField.addTarget(self, action: #selector(editingDidBegin(textField:)), for: UIControlEvents.editingDidBegin)
+        
+    }
+    
+    // editingDidBegin func
+    func editingDidBegin(textField: UITextField)
+    {
+        textField.text = ""
+        textField.textColor = UIColor.black
     }
 
     override func didReceiveMemoryWarning() {

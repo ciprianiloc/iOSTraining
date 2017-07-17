@@ -27,6 +27,7 @@ class ImagesTableViewController: UIViewController {
    
     var imgs = [Pictures]() // array type Pictures entity (CoreData)
     
+   
     
     
     override func viewDidLoad() {
@@ -39,7 +40,11 @@ class ImagesTableViewController: UIViewController {
         imagesTableView.reloadData()
         
         
+        
     }
+    
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         getData()
@@ -72,7 +77,7 @@ class ImagesTableViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
+   
 
     
     
@@ -118,9 +123,10 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
         
         let image = imgs[indexPath.row]
         
-        
         cell.savedImageLabel.text = image.name
-      
+    
+    
+        
         // DOWNLOAD IMAGE FOR ROW
         let url = URL(string: image.url!)!
         
@@ -224,4 +230,5 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
  
     
 }
+
 
