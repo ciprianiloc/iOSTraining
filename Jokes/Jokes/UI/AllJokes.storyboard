@@ -125,7 +125,6 @@
                             <constraint firstItem="HkX-FI-KRg" firstAttribute="leading" secondItem="7g1-p2-LWr" secondAttribute="leadingMargin" constant="50" id="Z1z-zx-hui"/>
                             <constraint firstItem="WXz-00-h18" firstAttribute="height" secondItem="HkX-FI-KRg" secondAttribute="height" id="fYo-Cd-0JT"/>
                             <constraint firstItem="WXz-00-h18" firstAttribute="top" secondItem="ZJM-1Y-vyc" secondAttribute="bottom" constant="67" id="n1e-fw-J7E"/>
-=======
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sAH-KY-GUg">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
