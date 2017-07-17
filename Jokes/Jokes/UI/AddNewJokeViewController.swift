@@ -26,6 +26,16 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
       getAndAddMissingCategories()
         
         
+        // set navigationBar programatically
+        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveAddJoke))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(cancel(_:)))
+        navigationItem.title = "Add new Joke"
+        navigationBar.setItems([navigationItem], animated: true)
+        self.view.addSubview(navigationBar)
+        
+        
     }
     
     func getAndAddMissingCategories(){
@@ -145,6 +155,12 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 
