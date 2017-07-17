@@ -22,17 +22,20 @@
             <rect key="frame" x="0.0" y="0.0" width="486" height="119"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZC-Po-gkt">
-                    <rect key="frame" x="7" y="49" width="91" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bZC-Po-gkt">
+                    <rect key="frame" x="7" y="49" width="70.5" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="91" id="bCb-VW-cnw"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="bCb-VW-cnw"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xn-Un-dc1">
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0xn-Un-dc1">
                     <rect key="frame" x="376" y="44.5" width="110" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="Lef-MD-mmb"/>
+                    </constraints>
                     <state key="normal" title="Date Added"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="7"/>
@@ -42,16 +45,19 @@
                         <action selector="dateButtonPressed:" destination="-1" eventType="touchUpInside" id="ttD-eU-QQZ"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d76-kE-sVT">
-                    <rect key="frame" x="204" y="49" width="61" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="d76-kE-sVT">
+                    <rect key="frame" x="194.5" y="49" width="70.5" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="gl6-tC-sSa"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1n-Z6-F8q">
-                    <rect key="frame" x="277" y="44" width="85" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1n-Z6-F8q">
+                    <rect key="frame" x="270" y="44" width="92" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="85" id="dNh-da-bAK"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="tGT-c9-hK0"/>
                     </constraints>
                     <state key="normal" title="Rating"/>
                     <userDefinedRuntimeAttributes>
@@ -72,8 +78,11 @@
                 <constraint firstAttribute="trailing" secondItem="d76-kE-sVT" secondAttribute="trailing" constant="221.5" id="ETi-FY-arX"/>
                 <constraint firstItem="K1n-Z6-F8q" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Ksk-zT-v1C"/>
                 <constraint firstAttribute="trailing" secondItem="0xn-Un-dc1" secondAttribute="trailing" id="MeW-km-5hA"/>
+                <constraint firstItem="K1n-Z6-F8q" firstAttribute="leading" secondItem="d76-kE-sVT" secondAttribute="trailing" constant="5" id="ZEz-CX-8cN"/>
                 <constraint firstItem="bZC-Po-gkt" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="eLk-D8-p3L"/>
+                <constraint firstItem="bZC-Po-gkt" firstAttribute="width" secondItem="d76-kE-sVT" secondAttribute="width" id="gZn-au-8Qp"/>
                 <constraint firstItem="0xn-Un-dc1" firstAttribute="leading" secondItem="K1n-Z6-F8q" secondAttribute="trailing" constant="14" id="nW9-Jy-RIj"/>
+                <constraint firstItem="d76-kE-sVT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bZC-Po-gkt" secondAttribute="trailing" constant="5" id="tDg-0h-WKp"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

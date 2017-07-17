@@ -45,7 +45,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change font size:" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eyn-y8-97v">
                                         <rect key="frame" x="8" y="246" width="360" height="36"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="ooK-W5-aEC"/>
+                                        <constraint firstAttribute="height" constant="36" id="ooK-W5-aEC"/> 
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
