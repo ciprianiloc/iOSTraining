@@ -23,6 +23,45 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      getAndAddMissingCategories()
+        
+        
+        // set navigationBar programmatically
+        let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveJoke))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(cancel(_:)))
+        navigationItem.title = "Add new Joke"
+        navigationBar.setItems([navigationItem], animated: true)
+        self.view.addSubview(navigationBar)
+        
+        
+    }
+    
+    func getAndAddMissingCategories(){
+        let requestJoke = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
+        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        do {
+            jokes = try managedContext.fetch(requestJoke) as! [Joke]
+            
+            for joke in jokes{
+                if !pickerData.contains(joke.jokeCategory!){
+                    pickerData.append(joke.jokeCategory!)
+                }
+            }
+        }catch  {
+            print("fetch for category failed")
+        }
+    
+        do{
+          try   managedContext.save()
+        }catch {
+            print("failed to save")
+        }
+        
+        
+//        let allJokesVC = storyboard?.instantiateViewController(withIdentifier: "AllJokesTableViewController") as! AllJokesTableViewController
+//        allJokesVC.pickerDataCount = pickerData.count
         getAndAddMissingCategories()
     }
     override func didReceiveMemoryWarning() {
@@ -50,30 +89,8 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
         return 1
     }
     
-    //MARK: - helper methods
     
     
-    func getAndAddMissingCategories(){
-        let requestJoke = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
-        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        do {
-            jokes = try managedContext.fetch(requestJoke) as! [Joke]
-            
-            for joke in jokes{
-                if !pickerData.contains(joke.jokeCategory!){
-                    pickerData.append(joke.jokeCategory!)
-                }
-            }
-        }catch  {
-            print("fetch for category failed")
-        }
-        
-        do{
-            try   managedContext.save()
-        }catch {
-            print("failed to save")
-        }
-    }
     
     //MARK: - buttons
     
@@ -124,6 +141,12 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 
