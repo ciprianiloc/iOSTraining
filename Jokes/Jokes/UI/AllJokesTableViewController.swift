@@ -204,21 +204,7 @@ class AllJokesTableViewController: UITableViewController {
         
         return countJokesForCategory
         
-        
-        //        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
-        //        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//        do {
-//            jokes = try managedContext.fetch(fetchRequest) as! [Joke]
-//            
-//            for joke in jokes{
-//                if category == joke.jokeCategory{
-//                    countJokesForCategory += 1
-//                }
-//            }
-//        } catch  {
-//            print("fetching failed")
-//        }
-   
+       
     }
     
     func fetchJokes() -> [Joke]{
@@ -248,23 +234,6 @@ class AllJokesTableViewController: UITableViewController {
         }
         
         return finalResult  //all jokes from the section
-        
-        //        let fecthRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
-        //        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        
-        //
-        //            do {
-        //                result = try context.fetch(fecthRequest) as! [Joke]
-        //
-        //                for joke in result{
-        //                    if joke.jokeCategory == String(self.categories[section]){
-        //                        finalResult.append(joke)
-        //                    }
-        //                }
-        //
-        //            } catch  {
-        //                print("fetched for a category failed")
-        //            }
     }
     
     
@@ -306,9 +275,6 @@ class AllJokesTableViewController: UITableViewController {
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         let indexSection = NSIndexSet(index: sender)
         self.allJokesTableView.reloadSections(indexSection as IndexSet, with: .fade)
-        
-       // self.rateButtonPressed = false
-
     }
     
     func sortByDate(sender: Int){

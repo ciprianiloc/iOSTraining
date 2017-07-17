@@ -23,10 +23,35 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      getAndAddMissingCategories()
-        
-        
+        getAndAddMissingCategories()
     }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    //MARK: - picker methods
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        return
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        self.selectedRow = row
+        return pickerData[row]
+    }
+    
+    
+    @available(iOS 2.0, *)
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    //MARK: - helper methods
+    
     
     func getAndAddMissingCategories(){
         let requestJoke = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
@@ -42,56 +67,19 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
         }catch  {
             print("fetch for category failed")
         }
-    
+        
         do{
-          try   managedContext.save()
+            try   managedContext.save()
         }catch {
             print("failed to save")
         }
-        
-        
-//        let allJokesVC = storyboard?.instantiateViewController(withIdentifier: "AllJokesTableViewController") as! AllJokesTableViewController
-//        allJokesVC.pickerDataCount = pickerData.count
     }
     
-    
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
+    //MARK: - buttons
     
     @IBAction func cancelAddJoke(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
-    
-    @IBAction func saveAddJoke(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerData.count
-    }
-//    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //print(pickerData[row])
-        return
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        self.selectedRow = row
-        return pickerData[row]
-    }
-    
-    
-    @available(iOS 2.0, *)
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    
-    
-
    
     @IBAction func saveJoke(_ sender: UIBarButtonItem) {
         //save the new category to CoreData
@@ -109,20 +97,11 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
                 if newCategoryTextField.text != ""{
                     joke.jokeCategory = newCategoryTextField.text
                 }else{
-                 //   let row = jokePickerView.selectedRow(inComponent: 0)
                     joke.jokeCategory = pickerData[self.selectedRow]
                     
                 }
-                //will add rating and date added for the joke
+                joke.jokeDateAdded = mainRequest.initializeCalendarForJokeDate().0.date(from: mainRequest.initializeCalendarForJokeDate().1)! as NSDate
                 
-                //adding date to joke
-                let date = Date()
-                var calendar = Calendar.current
-                let components = calendar.dateComponents([.year, .month, .day,.hour,.minute,.second], from: date)
-                calendar.timeZone = NSTimeZone(name: "GMT")! as TimeZone
-                
-                joke.jokeDateAdded = calendar.date(from: components)! as NSDate
-
                 let randomJokeRating = Double(arc4random_uniform(6))
                 
                 if randomJokeRating > 0 {
