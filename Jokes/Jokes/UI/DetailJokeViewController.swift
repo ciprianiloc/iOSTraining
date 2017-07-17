@@ -15,17 +15,14 @@ import Social
 class DetailJokeViewController: UIViewController {
 
     
-    @IBOutlet var detailJokeView: UIView!
     @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var funnyLevelLabel: UILabel!
     @IBOutlet weak var detailLabel: UILabel!
-    @IBOutlet weak var detailImageView: UIImageView!
     @IBOutlet weak var jokeCategoryLabel: UILabel!
     
     
     
     var selectedJoke : String?
-    var selectedImage : UIImage?
     var selectedCategory : String?
     var selectedRating : Double? = 1
     var jokes: [Joke] = []
@@ -38,27 +35,20 @@ class DetailJokeViewController: UIViewController {
         detailLabel.text = selectedJoke
         jokeCategoryLabel.text = selectedCategory
         
-        
         ratingView.didTouchCosmos = { rating in
             self.selectedRating = rating
         }
         
-        
-        
-        
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(DetailJokeViewController.ratingLevelChanged), userInfo: nil, repeats: true)
-       // RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
-        
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveJokeModification))
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-       
     }
+    
+    //MARK: - helper methods
     
     func ratingLevelChanged(){
         getRating(rating: Int(ratingView.rating))
@@ -68,9 +58,6 @@ class DetailJokeViewController: UIViewController {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Joke")
         let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
-        
-        
-        
         do {
             jokes = try managedContext.fetch(fetchRequest) as! [Joke]
             
@@ -79,13 +66,9 @@ class DetailJokeViewController: UIViewController {
                     self.jokeID = id
                 }
             }
-            
-
         } catch  {
             print("fetching failed")
         }
-        
-        
     }
     
     
@@ -126,16 +109,16 @@ class DetailJokeViewController: UIViewController {
         }
         
          (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        
-       
         navigationController?.popViewController(animated: true) //get back to tableViewController
-        
     }
 
     func changeRating(rating : Double) -> Double{
         return rating
     }
   
+    
+    //MARK: - speech and Facebook buttons
+    
     @IBAction func textToSpeech(_ sender: UIButton) {
         let synth = AVSpeechSynthesizer()
         let myUtterance = AVSpeechUtterance(string: detailLabel.text!)

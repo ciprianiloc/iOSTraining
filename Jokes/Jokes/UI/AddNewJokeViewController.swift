@@ -26,10 +26,10 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
       getAndAddMissingCategories()
         
         
-        // set navigationBar programatically
+        // set navigationBar programmatically
         let navigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveAddJoke))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveJoke))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(cancel(_:)))
         navigationItem.title = "Add new Joke"
         navigationBar.setItems([navigationItem], animated: true)
@@ -62,28 +62,18 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
         
 //        let allJokesVC = storyboard?.instantiateViewController(withIdentifier: "AllJokesTableViewController") as! AllJokesTableViewController
 //        allJokesVC.pickerDataCount = pickerData.count
+        getAndAddMissingCategories()
     }
-    
-    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    @IBAction func cancelAddJoke(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func saveAddJoke(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
-    }
+    //MARK: - picker methods
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData.count
     }
-//    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        //print(pickerData[row])
         return
     }
     
@@ -98,10 +88,15 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-
     
     
-
+    
+    
+    //MARK: - buttons
+    
+    @IBAction func cancelAddJoke(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
    
     @IBAction func saveJoke(_ sender: UIBarButtonItem) {
         //save the new category to CoreData
@@ -119,20 +114,11 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
                 if newCategoryTextField.text != ""{
                     joke.jokeCategory = newCategoryTextField.text
                 }else{
-                 //   let row = jokePickerView.selectedRow(inComponent: 0)
                     joke.jokeCategory = pickerData[self.selectedRow]
                     
                 }
-                //will add rating and date added for the joke
+                joke.jokeDateAdded = mainRequest.initializeCalendarForJokeDate().0.date(from: mainRequest.initializeCalendarForJokeDate().1)! as NSDate
                 
-                //adding date to joke
-                let date = Date()
-                var calendar = Calendar.current
-                let components = calendar.dateComponents([.year, .month, .day,.hour,.minute,.second], from: date)
-                calendar.timeZone = NSTimeZone(name: "GMT")! as TimeZone
-                
-                joke.jokeDateAdded = calendar.date(from: components)! as NSDate
-
                 let randomJokeRating = Double(arc4random_uniform(6))
                 
                 if randomJokeRating > 0 {

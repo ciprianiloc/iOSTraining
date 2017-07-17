@@ -59,30 +59,4 @@ import UIKit
         self.categoryLabel.text = self.categoryFromAllJokes
         return view
     }
-    
-//    override init(frame: CGRect) {
-//        // 1. setup any properties here
-//        
-//        // 2. call super.init(frame:)
-//        super.init(frame: frame)
-//        
-//        
-//        // 3. Setup view from .xib file
-//        xibSetup()
-//    }
-//    
-//    required init?(coder aDecoder: NSCoder) {
-//        // 1. setup any properties here
-//        
-//        // 2. call super.init(coder:)
-//        super.init(coder: aDecoder)
-//        
-//        // 3. Setup view from .xib file
-//        xibSetup()
-//    }
-    
-    
-   
-   
-
 }
