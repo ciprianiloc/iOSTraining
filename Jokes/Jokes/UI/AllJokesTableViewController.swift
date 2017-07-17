@@ -139,6 +139,7 @@ class AllJokesTableViewController: UITableViewController {
         return sectionView
     }
     
+    
    
     
     // MARK: - tableView cell functions
