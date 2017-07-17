@@ -11,10 +11,6 @@ import Foundation
 
 
 class DataManager: NSObject {
-    
-    //var jokes : [Joke] = []
-    
-
 }
 
 

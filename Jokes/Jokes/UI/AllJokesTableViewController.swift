@@ -100,12 +100,13 @@ class AllJokesTableViewController: UITableViewController {
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
+        let defaults = UserDefaults.standard
         
         if rateButtonPressed{
             if !isSorted[indexPath.section]{
                 self.jokesFromSection = getJokesFromSection(section: indexPath.section)
             }else{
-                self.jokesFromSection = getJokesFromSortedSection(section: indexPath.section)
+                self.jokesFromSection = defaults.array(forKey: "defaultRatings") as! [Joke]//getJokesFromSortedSection(section: indexPath.section)
             }
         }
         else{
@@ -115,11 +116,22 @@ class AllJokesTableViewController: UITableViewController {
                 self.jokesFromSection = getJokesFromSortedSectionByDate(section: indexPath.section)
             }
         }
+        
         let joke = jokesFromSection[indexPath.row]
-        cell.jokeLabel.text = String(describing: joke.jokeDescription!)
-        cell.ratingStarsView.rating = jokesFromSection[indexPath.row].jokeRating
+        
+       // let joke = defaults.array(forKey: "defaultJokes") as! Joke
+        
+       
 
- 
+        
+        
+        cell.jokeLabel.text = String(describing: joke.jokeDescription!)
+       // cell.ratingStarsView.rating = defaults.array(forKey: "defaultRatings")
+
+        //defaults.string(forKey: "defaultInfo")
+                cell.ratingStarsView.rating = jokesFromSection[indexPath.row].jokeRating
+
+      
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
 
         return cell
@@ -301,6 +313,14 @@ class AllJokesTableViewController: UITableViewController {
     
     func ratingButtonPressed(sender : UIButton){
         self.rateButtonPressed = true
+        
+      //  let defaults = UserDefaults.standard
+        
+//        defaults.set(self.sortedJokes, forKey: "defaultRatings")
+//        defaults.set(joke.jokeDescription, forKey: "defaultInfo")
+//
+//        
+        
         sortByRating(sender: sender.tag)
         
     }
