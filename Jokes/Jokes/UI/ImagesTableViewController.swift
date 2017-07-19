@@ -16,7 +16,7 @@ protocol GetImageFromRowDelegate {
 
 
 
-class ImagesTableViewController: UIViewController {
+class ImagesTableViewController: UIViewController, UISearchBarDelegate {
 
     
     
@@ -25,9 +25,13 @@ class ImagesTableViewController: UIViewController {
     
     @IBOutlet weak var imagesTableView: UITableView! // IBOutlet for TableView
    
-    var imgs = [Pictures]() // array type Pictures entity (CoreData)
+    @IBOutlet weak var imagesSearchBar: UISearchBar!
     
-   
+    var imgs = [Pictures]() // array type Pictures entity (CoreData)
+    var filteredImgs = [Pictures]()
+    
+   var isSearching = false
+    
     
     
     override func viewDidLoad() {
@@ -39,6 +43,8 @@ class ImagesTableViewController: UIViewController {
 
         imagesTableView.reloadData()
         
+        imagesSearchBar.delegate = self
+        imagesSearchBar.returnKeyType = UIReturnKeyType.done
         
         
     }
@@ -77,10 +83,37 @@ class ImagesTableViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-   
+    
+    // MARK: - SearchBar functions
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text == nil || searchBar.text == "" {
+            isSearching = false
+            view.endEditing(true)
+            imagesTableView.reloadData()
+        } else {
+            
+            isSearching = true
+            
+            filteredImgs = imgs.filter({image in
+                if image.name?.lowercased().range(of:searchText.lowercased()) != nil {
+                    return true
+                } else {
+                    return false
+                }
+            })
+            imagesTableView.reloadData()
+            
+            
+        }
+        
+    }
 
+   
     
-    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
     
     // MARK: - function fetching from CoreData
     func getData() {
@@ -111,8 +144,12 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        
+        if isSearching {
+            return filteredImgs.count
+        } else {
         return imgs.count
+        }
     }
     
     // editing cells
@@ -121,29 +158,46 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell", for: indexPath) as! SavedImageTableViewCell
         
-        let image = imgs[indexPath.row]
+        var image = [Pictures]()
         
-        cell.savedImageLabel.text = image.name
-    
-    
-        
-        // DOWNLOAD IMAGE FOR ROW
-        let url = URL(string: image.url!)!
-        
-        getDataFromUrl(url: url) { (data, response, error)  in
-            guard let data = data, error == nil else {
-                print("Getting data failed")
-                return }
-            print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("Download Finished")
+        if isSearching {
+             image = filteredImgs
+            cell.savedImageLabel.text = filteredImgs[indexPath.row].name
+            return cell
+                } else {
+             image = imgs
+             cell.savedImageLabel.text = imgs[indexPath.row].name
             
-            DispatchQueue.main.async() { () -> Void in
-                cell.savedImageView.image = UIImage(data: data)
+                // DOWNLOAD IMAGE FOR ROW
+            let url = URL(string: image[indexPath.row].url!)!
+            
+            getDataFromUrl(url: url) { (data, response, error)  in
+                guard let data = data, error == nil else {
+                    print("Getting data failed")
+                    return }
+                print(response?.suggestedFilename ?? url.lastPathComponent)
+                print("Download Finished")
+                
+                DispatchQueue.main.async() { () -> Void in
+                    cell.savedImageView.image = UIImage(data: data)
+                    
+                }
                 
             }
+
+            
+            return cell
             
         }
-        return cell
+        
+
+        
+        
+        
+        
+        
+       
+        //return cell
     }
 
     
