@@ -23,7 +23,7 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      getAndAddMissingCategories()
+        getAndAddMissingCategories()
         
         
         // set navigationBar programmatically
@@ -60,9 +60,8 @@ class AddNewJokeViewController: UIViewController,UIPickerViewDelegate,UIPickerVi
         }
         
         
-//        let allJokesVC = storyboard?.instantiateViewController(withIdentifier: "AllJokesTableViewController") as! AllJokesTableViewController
-//        allJokesVC.pickerDataCount = pickerData.count
-        getAndAddMissingCategories()
+//       
+       // getAndAddMissingCategories()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

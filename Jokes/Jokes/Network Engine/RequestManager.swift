@@ -33,7 +33,6 @@ class RequestManager: NSObject {
                 let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
                 let joke = Joke(context: context)
                 
-                let defaults = UserDefaults.standard
 
                
                 joke.jokeDescription = self.modifyJSONResult(jsonResult: jsonResult as! String)
@@ -47,17 +46,14 @@ class RequestManager: NSObject {
                     auxCategory = auxCategory.replacingOccurrences(of: "\"", with: "")
                     joke.jokeCategory = String(describing: auxCategory)
                 }
-                //joke.jokeRating =  //assign random rating when making a joke request - jokes from API do not have rating
 
                 let randomJokeRating = Double(arc4random_uniform(6))
                 
                 
                 if randomJokeRating > 0 {
                     joke.jokeRating = randomJokeRating
-                    defaults.set(joke.jokeRating, forKey: "defaultRating")
                 }else{
                     joke.jokeRating = 1
-                    defaults.set(1, forKey: "defaultRating")
                 }
                 
                 joke.jokeDateAdded = self.initializeCalendarForJokeDate().0.date(from: self.initializeCalendarForJokeDate().1)! as NSDate //as! NSDate

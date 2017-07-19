@@ -92,6 +92,7 @@ class AllJokesTableViewController: UITableViewController {
     }
     
     
+    
    
     
     // MARK: - tableView cell functions
@@ -100,13 +101,12 @@ class AllJokesTableViewController: UITableViewController {
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "JokeCell", for: indexPath) as! JokeCell
-        let defaults = UserDefaults.standard
         
         if rateButtonPressed{
             if !isSorted[indexPath.section]{
                 self.jokesFromSection = getJokesFromSection(section: indexPath.section)
             }else{
-                self.jokesFromSection = defaults.array(forKey: "defaultRatings") as! [Joke]//getJokesFromSortedSection(section: indexPath.section)
+                self.jokesFromSection = getJokesFromSortedSection(section: indexPath.section)
             }
         }
         else{
@@ -119,16 +119,15 @@ class AllJokesTableViewController: UITableViewController {
         
         let joke = jokesFromSection[indexPath.row]
         
-       // let joke = defaults.array(forKey: "defaultJokes") as! Joke
         
        
 
         
         
         cell.jokeLabel.text = String(describing: joke.jokeDescription!)
-       // cell.ratingStarsView.rating = defaults.array(forKey: "defaultRatings")
-
-        //defaults.string(forKey: "defaultInfo")
+        
+       
+       
                 cell.ratingStarsView.rating = jokesFromSection[indexPath.row].jokeRating
 
       
@@ -283,6 +282,9 @@ class AllJokesTableViewController: UITableViewController {
         result = result.sorted(by: {$0.jokeRating > $1.jokeRating})
         self.isSorted[sender] = true
         self.sortedJokes = result
+        
+    
+
       
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         let indexSection = NSIndexSet(index: sender)
@@ -313,13 +315,6 @@ class AllJokesTableViewController: UITableViewController {
     
     func ratingButtonPressed(sender : UIButton){
         self.rateButtonPressed = true
-        
-      //  let defaults = UserDefaults.standard
-        
-//        defaults.set(self.sortedJokes, forKey: "defaultRatings")
-//        defaults.set(joke.jokeDescription, forKey: "defaultInfo")
-//
-//        
         
         sortByRating(sender: sender.tag)
         
