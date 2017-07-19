@@ -152,6 +152,8 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
         }
     }
     
+    
+    
     // editing cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -184,22 +186,13 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
                 }
                 
             }
-
-            
             return cell
-            
         }
-        
 
-        
-        
-        
-        
-        
-       
-        //return cell
     }
 
+    
+    
     
     // didSelectRow action
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -207,18 +200,9 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
         // using CellForRow function to get rows
         let cell = tableView.cellForRow(at: indexPath) as! SavedImageTableViewCell
         
-        
-        
 
         // if cell image is not empty
         if (cell.savedImageView.image != nil) {
-            
-            
-            // Saving image to file Manager
-            let imageData = UIImageJPEGRepresentation(cell.savedImageView.image!, 1)
-            do {
-                let path = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("cucubau.jpg")
-                
                 
                 //delegation
                 if (delegate != nil){
@@ -228,20 +212,13 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
                 }else {
                     print("DELEGATE NIL")
                 }
-                
-                //Save image to path
-                try imageData?.write(to: path, options:  .atomic)
-                print("Saved To Root")
-            } catch let error {
-                print(error)
-            }
-            
-            
-            
         }
         self.dismiss(animated: true, completion: nil)
 
     }
+    
+    
+    
     
     // Delete button for rows
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -267,6 +244,7 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
         
     }
     
+    
     // MARK: - Download functions
     
     // Get data from URL
@@ -275,13 +253,8 @@ extension ImagesTableViewController: UITableViewDataSource, UITableViewDelegate{
             (data, response, error) in
             completion(data, response, error)
             }.resume()
-            
     
     }
-   
-    
-    
- 
     
 }
 

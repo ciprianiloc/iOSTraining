@@ -367,7 +367,7 @@ class SettingsViewController: UIViewController, UIPickerViewDelegate, UIPickerVi
 
     
     // MARK: - Navigation
-    // settings ImagesTableViewController as delegate for changing background Image from Saved Images
+    // setting ImagesTableViewController as delegate for changing background Image from Saved Images
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "show" {
             
