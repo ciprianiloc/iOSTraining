@@ -76,17 +76,17 @@ class DetailJokeViewController: UIViewController {
     func getRating(rating: Int){
         switch rating {
         case 1:
-            funnyLevelLabel.text = "1 level Funny"
+            funnyLevelLabel.text = "Very bad"
         case 2:
-            funnyLevelLabel.text = "2 levels Funny"
+            funnyLevelLabel.text = "Bad"
         case 3:
-            funnyLevelLabel.text = "3 levels Funny"
+            funnyLevelLabel.text = "Meh"
         case 4:
-            funnyLevelLabel.text = "4 levels Funny"
+            funnyLevelLabel.text = "Funny"
         case 5:
-            funnyLevelLabel.text = "5 levels Funny"
+            funnyLevelLabel.text = "Super Funny"
         default:
-            funnyLevelLabel.text = "1 level Funny"
+            funnyLevelLabel.text = "Very bad"
         }
     }
     
