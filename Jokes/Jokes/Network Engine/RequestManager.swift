@@ -90,11 +90,15 @@ class RequestManager: NSObject {
             jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "Chuck Norris", with: "Cristian Bănărescu")
         }else{
             jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "Chuck Norris", with: "Irina Țari")
-            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "his", with: "her")
-            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "women", with:"men")
-            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "man", with: "woman")
-            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "himself", with: "herself")
-            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "His", with: "Her")
+            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: " his ", with: " her ")
+            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: " women ", with:" men ")
+            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: " man ", with: " woman ")
+            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: " himself ", with: " herself ")
+            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "His ", with: "Her ")
+            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: " him ", with: " her ")
+            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "He ", with: "She ")
+            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: " he ", with: " she ")
+            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: " beard ", with: " hair ")
         }
     return jokeWithQuoteAndName
     }
