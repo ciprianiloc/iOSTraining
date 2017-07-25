@@ -110,7 +110,11 @@ class HomeViewController: UIViewController{
             print("error while fetching data from CoreData")
         }
         
+        if self.jokeLabel.text == jokes.last?.jokeDescription {
+            getFirstJoke()
+        } else {
         self.jokeLabel.text = jokes.last?.jokeDescription
+        }
     }
   
     override func didReceiveMemoryWarning() {

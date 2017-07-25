@@ -88,6 +88,7 @@ class RequestManager: NSObject {
         
         if randomNameJokeValue < 5 {
             jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "Chuck Norris", with: "Cristian Bănărescu")
+            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: " he?s ", with: " he's ")
         }else{
             jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "Chuck Norris", with: "Irina Țari")
             jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: " his ", with: " her ")
@@ -99,6 +100,7 @@ class RequestManager: NSObject {
             jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: "He ", with: "She ")
             jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: " he ", with: " she ")
             jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: " beard ", with: " hair ")
+            jokeWithQuoteAndName = jokeWithQuoteAndName.replacingOccurrences(of: " he?s ", with: " she's ")
         }
     return jokeWithQuoteAndName
     }
